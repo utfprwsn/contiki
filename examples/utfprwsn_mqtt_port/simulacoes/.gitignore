@@ -1,0 +1,10 @@
+mqtt-sn-pub
+mqtt-sn-sub
+*.o
+*.tar.gz
+oldMakefile
+*.cscope*
+*.layout
+*.cbp
+symbols.*
+

@@ -1,0 +1,92 @@
+.TH "main_core.c" 3 "Domingo, 4 de Setembro de 2016" "Version 1.0" "MQTT-SN_Contiki" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+main_core.c \- 
+Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'contiki\&.h'\fP
+.br
+\fC#include 'lib/random\&.h'\fP
+.br
+\fC#include 'clock\&.h'\fP
+.br
+\fC#include 'sys/ctimer\&.h'\fP
+.br
+\fC#include 'net/ip/uip\&.h'\fP
+.br
+\fC#include 'net/ipv6/uip-ds6\&.h'\fP
+.br
+\fC#include 'mqtt_sn\&.h'\fP
+.br
+\fC#include 'dev/leds\&.h'\fP
+.br
+\fC#include 'net/rime/rime\&.h'\fP
+.br
+\fC#include 'simple-udp\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Funções"
+
+.in +1c
+.ti -1c
+.RI "void \fBmqtt_sn_callback\fP (char *topic, char *message)"
+.br
+.ti -1c
+.RI "void \fBinit_broker\fP (void)"
+.br
+.ti -1c
+.RI "\fBPROCESS\fP (init_system_process,'[Contiki-OS] Iniciando sistema operacional')"
+.br
+.ti -1c
+.RI "\fBPROCESS_THREAD\fP (init_system_process, ev, data)"
+.br
+.in -1c
+.SS "Variáveis"
+
+.in +1c
+.ti -1c
+.RI "\fBmqtt_sn_con_t\fP \fBmqtt_sn_connection\fP"
+.br
+.ti -1c
+.RI "AUTOSTART_PROCESSES & \fBinit_system_process\fP"
+.br
+.in -1c
+.SH "Descrição detalhada"
+.PP 
+Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements\&. 
+
+See the NOTICE file distributed with this work for additional information regarding copyright ownership\&. The ASF licenses this file to you under the Apache License, Version 2\&.0 (the 'License'); you may not use this file except in compliance with the License\&. You may obtain a copy of the License at
+.PP
+http://www.apache.org/licenses/LICENSE-2.0
+.PP
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 'AS IS' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied\&. See the License for the specific language governing permissions and limitations under the License\&.
+.PP
+\fBAutor:\fP
+.RS 4
+Ânderson Ignácio da Silva 
+.RE
+.PP
+\fBData:\fP
+.RS 4
+19 Ago 2016 Arquivo principal do porte do MQTT-SN, utilizado para testar 
+.RE
+.PP
+\fBVeja também:\fP
+.RS 4
+http://www.aignacio.com  Este projeto está sendo liberado pela licença APACHE 2\&.0\&. 
+.RE
+.PP
+
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para MQTT-SN_Contiki a partir do código fonte\&.

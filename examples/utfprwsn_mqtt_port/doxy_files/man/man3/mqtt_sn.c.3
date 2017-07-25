@@ -1,0 +1,1875 @@
+.TH "mqtt_sn.c" 3 "Domingo, 4 de Setembro de 2016" "Version 1.0" "MQTT-SN_Contiki" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mqtt_sn.c \- 
+.PP
+Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'contiki\&.h'\fP
+.br
+\fC#include 'net/ip/uip\&.h'\fP
+.br
+\fC#include 'net/ipv6/uip-ds6\&.h'\fP
+.br
+\fC#include 'simple-udp\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <mqtt_sn\&.h>\fP
+.br
+\fC#include 'sys/timer\&.h'\fP
+.br
+\fC#include 'list\&.h'\fP
+.br
+\fC#include 'sys/ctimer\&.h'\fP
+.br
+\fC#include 'sys/etimer\&.h'\fP
+.br
+\fC#include 'stdint\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Funções"
+
+.in +1c
+.ti -1c
+.RI "\fBPROCESS\fP (mqtt_sn_main,'[MQTT-SN] Processo inicial')"
+.br
+.ti -1c
+.RI "bool \fBunlock_tasks\fP (void)"
+.br
+.RI "\fILibera opção de geração de tarefas\&. \fP"
+.ti -1c
+.RI "void \fBinit_sub\fP (void *ptr)"
+.br
+.RI "\fIInicia o evento de SUBSCRIBE\&. \fP"
+.ti -1c
+.RI "void \fBparse_mqtt_type_string\fP (uint8_t type, char **type_string)"
+.br
+.RI "\fIRetorna a string de status correspondente\&. \fP"
+.ti -1c
+.RI "char * \fBmqtt_sn_check_status_string\fP (void)"
+.br
+.RI "\fICheca o status da conexãoe em String\&. \fP"
+.ti -1c
+.RI "\fBmqtt_sn_status_t\fP \fBmqtt_sn_check_status\fP (void)"
+.br
+.RI "\fICheca o status da conexão MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_check_rc\fP (uint8_t rc)"
+.br
+.RI "\fIEnvia requisição de conexão ao broker MQTT-SN\&. \fP"
+.ti -1c
+.RI "uint8_t \fBmqtt_sn_get_qos_flag\fP (int8_t qos)"
+.br
+.RI "\fIGera a flag de nível QoS\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_sub_wildcard\fP (char *topic, uint8_t qos)"
+.br
+.RI "\fIPrepara tarefa de SUBSCRIBE do tipo WILDCARD\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_sub\fP (char *topic, uint8_t qos)"
+.br
+.RI "\fIPrepara requisição de inscrição ao broker MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_pub\fP (char *topic, char *message, bool retain_flag, uint8_t qos)"
+.br
+.RI "\fIPrepara requisição de publicação ao broker MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBverf_hist_sub\fP (char *topic)"
+.br
+.RI "\fIVerifica se o tópico já foi registrado\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBverf_register\fP (char *topic)"
+.br
+.RI "\fIVerifica pré-registro do tópico\&. \fP"
+.ti -1c
+.RI "void \fBprint_g_topics\fP (void)"
+.br
+.RI "\fIExibe os tópicos registrados\&. \fP"
+.ti -1c
+.RI "void \fBinit_vectors\fP (void)"
+.br
+.RI "\fIInicializa os vetores MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_will_topic_send\fP (void)"
+.br
+.RI "\fIEnvia tópico de LWT\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_will_message_send\fP (void)"
+.br
+.RI "\fIEnvia mensagem de LWT\&. \fP"
+.ti -1c
+.RI "void \fBmqtt_sn_ping_send\fP (void)"
+.br
+.RI "\fIEnvia requisição de ping ao broker\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_con_send\fP (void)"
+.br
+.RI "\fIEnvia requisição de conexão ao broker MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_reg_send\fP (void)"
+.br
+.RI "\fIEnvio de mensagens ao broker do tipo REGISTER\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_regack_send\fP (uint16_t msg_id, uint16_t topic_id)"
+.br
+.RI "\fIEnvia pacote do tipo REGACK ao broker\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_pub_send\fP (char *topic, char *message, bool retain_flag, uint8_t qos)"
+.br
+.RI "\fIEnvia pacote PUBLISH ao broker MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_sub_send\fP (char *topic, uint8_t qos)"
+.br
+.RI "\fIEnvia pacote SUBSCRIBE ao broker MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_sub_send_wildcard\fP (char *topic, uint8_t qos)"
+.br
+.RI "\fIEnvia pacote SUBSCRIBE do tipo WILDCARD ao broker MQTT-SN\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_disconnect\fP (uint16_t duration)"
+.br
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_insert_queue\fP (\fBmqtt_sn_task_t\fP new)"
+.br
+.RI "\fIInsere uma tarefa na fila\&. \fP"
+.ti -1c
+.RI "void \fBmqtt_sn_delete_queue\fP (void)"
+.br
+.RI "\fIRemove o elemento mais próximo de ser processado\&. \fP"
+.ti -1c
+.RI "void \fBmqtt_sn_check_queue\fP (void)"
+.br
+.RI "\fILista as tarefas da fila\&. \fP"
+.ti -1c
+.RI "bool \fBmqtt_sn_check_empty\fP (void)"
+.br
+.RI "\fICheca o status da fila de tarefas MQTT-SN\&. \fP"
+.ti -1c
+.RI "void \fBmqtt_sn_recv_parser\fP (const uint8_t *data)"
+.br
+.RI "\fIRealiza o parsing das mensagens UDP recebidas\&. \fP"
+.ti -1c
+.RI "void \fBmqtt_sn_udp_rec_cb\fP (struct simple_udp_connection *c, const uip_ipaddr_t *sender_addr, uint16_t sender_port, const uip_ipaddr_t *receiver_addr, uint16_t receiver_port, const uint8_t *data, uint16_t datalen)"
+.br
+.RI "\fICallback de recepção UDP\&. \fP"
+.ti -1c
+.RI "\fBresp_con_t\fP \fBmqtt_sn_create_sck\fP (\fBmqtt_sn_con_t\fP mqtt_sn_connection, char *topics[], size_t topic_len, \fBmqtt_sn_cb_f\fP cb_f)"
+.br
+.RI "\fIInicia conexão ao broker UDP\&. \fP"
+.ti -1c
+.RI "void \fBmqtt_sn_init\fP (void)"
+.br
+.RI "\fIInicializa PROCESS_THREAD MQTT-SN\&. \fP"
+.ti -1c
+.RI "void \fBtimeout_con\fP (void *ptr)"
+.br
+.RI "\fIProcessa timeout de pacotes\&. \fP"
+.ti -1c
+.RI "void \fBtimeout_ping_mqtt\fP (void *ptr)"
+.br
+.RI "\fIProcessa timeout de ping\&. \fP"
+.ti -1c
+.RI "\fBPROCESS_THREAD\fP (mqtt_sn_main, ev, data)"
+.br
+.in -1c
+.SH "Descrição detalhada"
+.PP 
+Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements\&. 
+
+See the NOTICE file distributed with this work for additional information regarding copyright ownership\&. The ASF licenses this file to you under the Apache License, Version 2\&.0 (the 'License'); you may not use this file except in compliance with the License\&. You may obtain a copy of the License at
+.PP
+http://www.apache.org/licenses/LICENSE-2.0
+.PP
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 'AS IS' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied\&. See the License for the specific language governing permissions and limitations under the License\&.
+.PP
+Este projeto está sendo liberado pela licença APACHE 2\&.0\&.
+.PP
+\fBAutor:\fP
+.RS 4
+Ânderson Ignácio da Silva 
+.RE
+.PP
+\fBData:\fP
+.RS 4
+19 Ago 2016 Arquivo principal do código fonte do porte do MQTT-SN para o Contiki 
+.RE
+.PP
+\fBVeja também:\fP
+.RS 4
+http://www.aignacio.com
+.RE
+.PP
+[Apontamento n-1]: Descoberta uma característica do contiki, o que ocorre é que se você utiliza algum temporizador de evento (etimer) e ele expira, ele gera um evento o que e esperado, porém se você tiver testando diversas condições de forma sequencial 1) else if(ev == etimer_expired(\&.\&.\&.\&.)) 2) else if(ev == mqtt_event_regack) \&.\&.\&. MESMO após ter gerado o evento de 'expiração', caso a condição 1) esteja antes da 2), e a 2) que gerou um evento, a 1) será executada anteriormente porque compreendesse que o 'timer continua expirado'\&.
+.PP
+[Apontamento n-2]: Como nesta API utiliza-se malloc necessitamos da função do tipo POSIX chamadas 'sbrk' a qual utiliza de chamadas de sistema para realizar a operação de aloca ção de memória\&.Logo, devemos incluir no arquivo principal o arquivo \fBsyscalls\&.c\fP (arquivo disponibilizado pelo contiki - lib/newlib/syscalls\&.c) e também deve- mos incluir as variáveis _heap e _eheap no linker script (cc26xx\&.ld) para a função sbrk saber onde começa e termina a zona heap de memória do mcu\&.
+.PP
+Incluir no linker: \&.\&.\&. _heap = \&.; _eheap = ORIGIN(SRAM) + LENGTH(SRAM); } 
+.SH "Documentação das funções"
+.PP 
+.SS "void init_sub (void *ptr)"
+
+.PP
+Inicia o evento de SUBSCRIBE\&. Inicia as requisições de inscrição através do evento
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna argumento 
+.RE
+.PP
+
+.PP
+.nf
+116                         {
+117   debug_mqtt("INICIANDO SUBSCRIBE");
+118   process_post(&mqtt_sn_main,mqtt_event_run_task,NULL);
+119 }
+.fi
+.SS "void init_vectors (void)"
+
+.PP
+Inicializa os vetores MQTT-SN\&. Deleta tarefas na fila e inicializa o vetor de tópicos setando 0xFF aos identificadores de tópico
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna argumento 
+.RE
+.PP
+
+.PP
+.nf
+349                        {
+350   debug_mqtt("Inicializando vetores\&.\&.\&.");
+351   size_t i;
+352   for (i = 1; i < MAX_TOPIC_USED; i++){
+353     g_topic_bind[i]\&.short_topic_id = 0xFF;
+354     g_topic_bind[i]\&.topic_name = 0;
+355     g_topic_bind[i]\&.subscribed = 0x00;
+356   }
+357 
+358   while (!mqtt_sn_check_empty())
+359       mqtt_sn_delete_queue();
+360   g_task_id = 0;
+361 }
+.fi
+.SS "bool mqtt_sn_check_empty (void)"
+
+.PP
+Checa o status da fila de tarefas MQTT-SN\&. Percorra a lista encadeada de tarefas para verificar se está vazia
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fITRUE\fP Fila vazia 
+.br
+\fIFALSE\fP Há tarefas a serem processadas 
+.RE
+.PP
+
+.PP
+.nf
+709                               {
+710   if (mqtt_queue_first  ==  NULL)
+711     return true;
+712   else
+713     return false;
+714 }
+.fi
+.SS "void mqtt_sn_check_queue ()"
+
+.PP
+Lista as tarefas da fila\&. Percorre os links dos ponteiros listando os elementos a serem processados pela ASM do MQTT-SN
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+.nf
+690                               {
+691   int cnt = 0;
+692   struct node *temp;
+693   char *task_type;
+694 
+695   temp = mqtt_queue_first;
+696 
+697   debug_task("VALOR DO GLOBAL ID g_task_id:%d",g_task_id);
+698 
+699   debug_task("FILA:");
+700   while (temp) {
+701       parse_mqtt_type_string(temp->data\&.msg_type_q,&task_type);
+702       debug_task("[%2\&.0d][%s][%d]",(int)temp->data\&.id_task, task_type,temp->data\&.short_topic);
+703       temp = temp->link;
+704       cnt++;
+705   }
+706   debug_task("Tamanho da fila:[%d]", cnt);
+707 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_check_rc (uint8_trc)"
+
+.PP
+Envia requisição de conexão ao broker MQTT-SN\&. Realiza o envio de mensagens do tipo CONNECT ao broker MQTT-SN
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIrc\fP Código de retorno da requisição MQTT (Return Code)
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha por algum motivo no código de retorno 
+.br
+\fISUCCESS_CON\fP Sucesso no recebimento do código de retorno
+.RE
+.PP
+\fBTarefa\fP
+.RS 4
+Expandir o tipo de falha para tornar mais precisa a depuração futura 
+.RE
+.PP
+
+.PP
+.nf
+192                                        {
+193   switch (rc) {
+194     case ACCEPTED:
+195       return SUCCESS_CON;
+196     break;
+197     case REJECTED_CONGESTION:
+198       return FAIL_CON;
+199     break;
+200     case REJECTED_INVALID_TOPIC_ID:
+201       return FAIL_CON;
+202     break;
+203     case REJECTED_NOT_SUPPORTED:
+204       return FAIL_CON;
+205     break;
+206     default:
+207       return FAIL_CON;
+208     break;
+209   }
+210 }
+.fi
+.SS "\fBmqtt_sn_status_t\fP mqtt_sn_check_status (void)"
+
+.PP
+Checa o status da conexão MQTT-SN\&. Retorna o status da conexão MQTT-SN baseado na estrutura mqtt_sn_status_t
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fImqtt_sn_status_t\fP Estado da conexão 
+.RE
+.PP
+
+.PP
+.nf
+188                                            {
+189   return mqtt_status;
+190 }
+.fi
+.SS "char* mqtt_sn_check_status_string (void)"
+
+.PP
+Checa o status da conexãoe em String\&. Verifica o status da conexão MQTT-SN e retorna uma string com o estado
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fINão\fP recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fISTRING\fP String do estado atual da conexão MQTT-SN 
+.RE
+.PP
+
+.PP
+.nf
+159                                        {
+160   switch (mqtt_status) {
+161     case MQTTSN_DISCONNECTED:
+162       return "DESCONECTADO";
+163     break;
+164     case MQTTSN_WAITING_CONNACK:
+165       return "AGUARDANDO CONNACK";
+166     break;
+167     case MQTTSN_WAITING_REGACK:
+168       return "AGUARDANDO REGACK";
+169     break;
+170     case MQTTSN_CONNECTED:
+171       return "#### CONECTADO ####";
+172     break;
+173     case MQTTSN_TOPIC_REGISTERED:
+174       return "TOPICOS REGISTRADOS";
+175     break;
+176     case MQTTSN_WAITING_WILLTOPICREQ:
+177       return "AGUARDANDO WILL TOPIC";
+178     break;
+179     case MQTTSN_WAITING_WILLMSGREQ:
+180       return "AGUARDANDO WILL MESSAGE";
+181     break;
+182     default:
+183       return "ESTADO NAO DESCRITO";
+184     break;
+185   }
+186 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_con_send (void)"
+
+.PP
+Envia requisição de conexão ao broker MQTT-SN\&. Realiza o envio de mensagens do tipo CONNECT ao broker MQTT-SN
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar o pacote CONNECT 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar o pacote CONNECT 
+.RE
+.PP
+
+.PP
+.nf
+422                                  {
+423   connect_packet_t packet;
+424 
+425   // Criação do pacote CONNECT
+426   packet\&.type = MQTT_SN_TYPE_CONNECT;
+427   packet\&.flags = MQTT_SN_FLAG_CLEAN;
+428   if (g_will)
+429     packet\&.flags += MQTT_SN_FLAG_WILL;
+430   packet\&.protocol_id = MQTT_SN_PROTOCOL_ID;
+431   packet\&.duration = uip_htons(g_mqtt_sn_con\&.keep_alive); //Realiza a conversão para network byte order
+432 
+433   strncpy(packet\&.client_id, g_mqtt_sn_con\&.client_id, strlen(g_mqtt_sn_con\&.client_id));
+434   packet\&.client_id[strlen(g_mqtt_sn_con\&.client_id)] = '\0';
+435   packet\&.length = 0x06 + strlen(packet\&.client_id);
+436 
+437   // debug_mqtt("CLIENT_ID:%s, Tamanho:%d",packet\&.client_id,strlen(packet\&.client_id));
+438   debug_mqtt("Enviando o pacote @CONNECT ");
+439   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+440   // debug_mqtt("enviado!");
+441   return SUCCESS_CON;
+442 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_create_sck (\fBmqtt_sn_con_t\fPmqtt_sn_connection, char *topics[], size_ttopic_len, \fBmqtt_sn_cb_f\fPcb_f)"
+
+.PP
+Inicia conexão ao broker UDP\&. Estabelece a conexão com um servidor MQTT-SN, através da porta 1884 além de iniciar a fila de processos de conexão do protocolo\&.
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fImqtt_sn_connection\fP Estrutura padrão de comunicação MQTT-SN 
+.br
+\fItopics\fP Vetor de tópicos a serem registrados 
+.br
+\fItopic_len\fP Tamanho do vetor de tópicos a serem registrados 
+.br
+\fImqtt_sn_cb_f\fP Ponteiro para função de callback para recebimento das mensagens MQTT-SN
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao alocar conexão UDP 
+.br
+\fISUCCESS_CON\fP Sucesso ao alocar conexão UDP 
+.RE
+.PP
+
+.PP
+.nf
+876                                                                                                                     {
+877   callback_mqtt = cb_f;
+878   /************************************ RECONEXÃO******************************/
+879   topics_len = topic_len;
+880   size_t t = 0;
+881   for (t=0; t < topic_len; t++){
+882     topics_reconnect[t] = topics[t];
+883     // debug_mqtt("Armazenando topico: %s",(char *)topics_reconnect[t]);
+884   }
+885   /************************************ RECONEXÃO******************************/
+886 
+887   static uip_ipaddr_t broker_addr;
+888   static uint8_t con_udp_status = 0;
+889 
+890   g_mqtt_sn_con = mqtt_sn_connection;
+891   uip_ip6addr(&broker_addr, *g_mqtt_sn_con\&.ipv6_broker,
+892                             *(g_mqtt_sn_con\&.ipv6_broker+1),
+893                             *(g_mqtt_sn_con\&.ipv6_broker+2),
+894                             *(g_mqtt_sn_con\&.ipv6_broker+3),
+895                             *(g_mqtt_sn_con\&.ipv6_broker+4),
+896                             *(g_mqtt_sn_con\&.ipv6_broker+5),
+897                             *(g_mqtt_sn_con\&.ipv6_broker+6),
+898                             *(g_mqtt_sn_con\&.ipv6_broker+7));
+899 
+900   if (strlen(g_mqtt_sn_con\&.client_id) > 23){
+901     debug_mqtt("Cli\&. ID SIZE:%d > 23!",strlen(g_mqtt_sn_con\&.client_id));
+902     return FAIL_CON;
+903   }
+904 
+905   debug_mqtt("Endereco do broker IPv6: ");
+906   uip_debug_ipaddr_print(&broker_addr);
+907   debug_mqtt("Endereco da porta:%d ",g_mqtt_sn_con\&.udp_port);
+908   debug_mqtt("Client ID:%s/%d",g_mqtt_sn_con\&.client_id,strlen(g_mqtt_sn_con\&.client_id));
+909 
+910 
+911   if(!g_recon){
+912     con_udp_status = simple_udp_register(&g_mqtt_sn_con\&.udp_con,
+913                                           g_mqtt_sn_con\&.udp_port,
+914                                           &broker_addr,
+915                                           g_mqtt_sn_con\&.udp_port,
+916                                           mqtt_sn_udp_rec_cb);
+917     if(!con_udp_status)
+918       return FAIL_CON;
+919   }
+920 
+921   if (g_mqtt_sn_con\&.will_topic && g_mqtt_sn_con\&.will_message)
+922     g_will = true;
+923 
+924   /****************************************************************************/
+925   // Criando tarefa de [CONNECT]
+926   //
+927   // Inicialmente precisamos enviar a requisição de CONNECT ao broker MQTT-SN pa
+928   // ra que seja possível qualquer outra operação\&.
+929   mqtt_sn_task_t connect_task;
+930 
+931   // debug_mqtt("Criando tarefa de CONNECT");
+932   connect_task\&.msg_type_q = MQTT_SN_TYPE_CONNECT;
+933   mqtt_sn_insert_queue(connect_task);
+934   /****************************************************************************/
+935 
+936   /****************************************************************************/
+937   // Implementação do recurso de [LWT]
+938   // Verificando se o usuário quer utilizar will topic e will message
+939   if (g_mqtt_sn_con\&.will_topic && g_mqtt_sn_con\&.will_message){
+940     mqtt_sn_task_t will_topic_task;
+941     will_topic_task\&.msg_type_q = MQTT_SN_TYPE_WILLTOPIC;
+942     mqtt_sn_insert_queue(will_topic_task);
+943 
+944     mqtt_sn_task_t will_message_task;
+945     will_message_task\&.msg_type_q = MQTT_SN_TYPE_WILLMSG;
+946     mqtt_sn_insert_queue(will_message_task);
+947   }
+948 
+949   /****************************************************************************/
+950   // Criando tarefas de [REGISTER]
+951   //
+952   // Para cada tópico definido pelo usuário no código principal\&.Inicia-se o pro
+953   // cesso de preenchimento de tarefas na fila de serviços MQT-SN\&.
+954   // Primeiro antes de qualquer processo MQTT-SN registra-se todos os tópicos in
+955   // formados pelo usuário, otimizando as funções de inscrição e publicação, o
+956   // broker irá então responder com os respectivos SHORT TOPIC para utilizarmos\&.
+957   mqtt_sn_task_t topic_reg;
+958 
+959   // debug_mqtt("Criando tarefa de REGISTER");
+960   size_t i;
+961   for(i = 0; i < topic_len; i++){
+962     if (g_mqtt_sn_con\&.will_topic && g_mqtt_sn_con\&.will_message)
+963       g_topic_bind[g_task_id-2]\&.topic_name = topics_reconnect[i]; // Antecipa-se 2 no indíce em função das 2 tasks já alocadas para WILL do LWT
+964     else
+965       g_topic_bind[g_task_id]\&.topic_name = topics_reconnect[i];
+966     topic_reg\&.msg_type_q = MQTT_SN_TYPE_REGISTER;
+967     if (!mqtt_sn_insert_queue(topic_reg)) break;
+968   }
+969   /****************************************************************************/
+970 
+971   process_post(&mqtt_sn_main, mqtt_event_run_task, NULL);
+972 
+973   return SUCCESS_CON;
+974 }
+.fi
+.SS "void mqtt_sn_delete_queue ()"
+
+.PP
+Remove o elemento mais próximo de ser processado\&. Realiza a remoção do elemento mais próximo de ser processado, no caso o mais antigo inserido na fila
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada
+.RE
+.PP
+\fBTarefa\fP
+.RS 4
+Adicionar opção de exclusão intermediária 
+.RE
+.PP
+
+.PP
+.nf
+669                                {
+670   struct node *temp;
+671   char *task_type;
+672 
+673   temp = mqtt_queue_first;
+674   if (mqtt_queue_first->link == NULL) {
+675       g_task_id = 0;
+676       parse_mqtt_type_string(mqtt_queue_first->data\&.msg_type_q,&task_type);
+677       debug_task("Task removida:[%2\&.0d][%s]",(int)mqtt_queue_first->data\&.id_task,task_type);
+678       debug_task("Task info: Fila vazia");
+679       mqtt_queue_first = mqtt_queue_last = NULL;
+680   }
+681   else {
+682       g_task_id--;
+683       parse_mqtt_type_string(mqtt_queue_first->data\&.msg_type_q,&task_type);
+684       debug_task("Task removida:[%2\&.0d][%s]",(int)mqtt_queue_first->data\&.id_task,task_type);
+685       mqtt_queue_first = mqtt_queue_first->link;
+686       free(temp);
+687   }
+688 }
+.fi
+.SS "uint8_t mqtt_sn_get_qos_flag (int8_tqos)"
+
+.PP
+Gera a flag de nível QoS\&. Retorna o estado da flag correspondente ao nível QoS enviado
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIqos\fP Nível QoS desejado
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIQoS\fP Retorna a flag do nível QoS desejado 
+.RE
+.PP
+
+.PP
+.nf
+212                                         {
+213     switch (qos) {
+214         case -1:
+215           return MQTT_SN_FLAG_QOS_N1;
+216         case 0:
+217           return MQTT_SN_FLAG_QOS_0;
+218         case 1:
+219           return MQTT_SN_FLAG_QOS_1;
+220         case 2:
+221           return MQTT_SN_FLAG_QOS_2;
+222         default:
+223           return 0;
+224     }
+225 }
+.fi
+.SS "void mqtt_sn_init (void)"
+
+.PP
+Inicializa PROCESS_THREAD MQTT-SN\&. Inicializa a PROCESS_THREAD de MQTT-SN bem como as variáveis utilizadas e a alocaçãod e eventos
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+.nf
+976                        {
+977   process_start(&mqtt_sn_main, NULL);
+978 
+979   // Alocação de número de evento disponível para os eventos do MQTT-SN
+980   mqtt_event_connect         = process_alloc_event();
+981   mqtt_event_connack         = process_alloc_event();
+982   mqtt_event_register        = process_alloc_event();
+983   mqtt_event_regack          = process_alloc_event();
+984   mqtt_event_run_task        = process_alloc_event();
+985   mqtt_event_pub_qos_0       = process_alloc_event();
+986   mqtt_event_ping_timeout    = process_alloc_event();
+987   mqtt_event_suback          = process_alloc_event();
+988   mqtt_event_subscribe       = process_alloc_event();
+989   mqtt_event_connected       = process_alloc_event();
+990   mqtt_event_will_topicreq   = process_alloc_event();
+991   mqtt_event_will_messagereq = process_alloc_event();
+992 
+993   init_vectors();
+994 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_insert_queue (\fBmqtt_sn_task_t\fPnew)"
+
+.PP
+Insere uma tarefa na fila\&. Insere uma nova tarefa na fila de requisições a serem processadas\&.
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fInew\fP Nova tarefa a ser processada pela ASM do MQTT-SN
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Não foi possível alocar uma nova tarefa a fila 
+.br
+\fISUCCESS_CON\fP Foi possível alocar uma nova tarefa a fila
+.RE
+.PP
+\fBTarefa\fP
+.RS 4
+Melhorar alocação dinâmica de memória 
+.RE
+.PP
+
+.PP
+.nf
+630                                                    {
+631   struct node *temp,*temp2;
+632 
+633   temp2 = mqtt_queue_first;
+634   int cnt = 0;
+635   while (temp2) {
+636       temp2 = temp2->link;
+637       cnt++;
+638   }
+639 
+640   //Limita o número máximo de tarefas alocadas na fila
+641   if (cnt > MAX_QUEUE_MQTT_SN)
+642     return FAIL_CON;
+643 
+644   temp = (struct node *)malloc(sizeof(struct node));
+645   temp->data\&.msg_type_q  = new\&.msg_type_q;
+646   temp->data\&.short_topic = new\&.short_topic;
+647   temp->data\&.retain      = new\&.retain;
+648   temp->data\&.qos_level   = new\&.qos_level;
+649   temp->data\&.id_task     = g_task_id;
+650   g_task_id++;
+651 
+652   temp->link = NULL;
+653   if (mqtt_queue_last  ==  NULL) {
+654       mqtt_queue_first = mqtt_queue_last = temp;
+655   }
+656   else {
+657       mqtt_queue_last->link = temp;
+658       mqtt_queue_last = temp;
+659   }
+660 
+661   char *task_type;
+662   //parse_mqtt_type_string(mqtt_queue_first->data\&.msg_type_q,&task_type_2);
+663   //debug_task("Task principal:[%2\&.0d][%s]",(int)mqtt_queue_first->data\&.id_task,task_type_2);
+664   parse_mqtt_type_string(temp->data\&.msg_type_q,&task_type);
+665   debug_task("Task adicionada:[%2\&.0d][%s]",(int)temp->data\&.id_task, task_type);
+666   return SUCCESS_CON;
+667 }
+.fi
+.SS "void mqtt_sn_ping_send (void)"
+
+.PP
+Envia requisição de ping ao broker\&. Envia requisição de ping ao broker diretamente por mensagens PING REQ
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+.nf
+410                             {
+411   ping_req_t ping_request;
+412 
+413   ping_request\&.msg_type = MQTT_SN_TYPE_PINGREQ;
+414   strncpy(ping_request\&.client_id, g_mqtt_sn_con\&.client_id, strlen(g_mqtt_sn_con\&.client_id));
+415   ping_request\&.client_id[strlen(g_mqtt_sn_con\&.client_id)] = '\0';
+416   //debug_mqtt("Client ID PING:%s",ping_request\&.client_id);
+417   ping_request\&.length = 0x02 + strlen(ping_request\&.client_id);
+418   //debug_mqtt("Enviando @PINGREQ");
+419   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&ping_request, ping_request\&.length);
+420 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_pub (char *topic, char *message, boolretain_flag, uint8_tqos)"
+
+.PP
+Prepara requisição de publicação ao broker MQTT-SN\&. Formata e gera a tarefa na fila para publicação no tópico pré-registrado
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser publicado 
+.br
+\fImessage\fP Mensagem a ser publicada 
+.br
+\fIretain_flag\fP Identificador de mensagem retentiva 
+.br
+\fIqos\fP Nível de QoS da publicação
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao gerar a tarefa de publicação 
+.br
+\fISUCCESS_CON\fP Sucesso ao gerar a tarefa de publicação 
+.RE
+.PP
+
+.PP
+.nf
+280                                                                                 {
+281   // Caso haja tópicos para registrar, não habilita a publicação
+282   // evitando que prejudique alguma transação, ou seja, tasks
+283   // tem prioridade sobre publicações diretas
+284   if (!unlock_tasks())
+285     return FAIL_CON;
+286 
+287   // Analisamos o buffer de tópicos registrados para ver se já foi registrado o tópico
+288   if (!verf_register(topic))
+289     return FAIL_CON;
+290 
+291   mqtt_sn_pub_send(topic,message,retain_flag,qos);
+292   return SUCCESS_CON;
+293 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_pub_send (char *topic, char *message, boolretain_flag, uint8_tqos)"
+
+.PP
+Envia pacote PUBLISH ao broker MQTT-SN\&. Monta o pacote e envia ao broker a mensagem de publicação
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser publicado 
+.br
+\fImessage\fP Mensagem a ser publicada 
+.br
+\fIqos\fP Nível de QoS da publicação
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar a publicação 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar a publicação 
+.RE
+.PP
+
+.PP
+.nf
+501                                                                                      {
+502   publish_packet_t packet;
+503   uint16_t stopic = 0x0000;
+504   uint8_t data_len = strlen(message);
+505 
+506   // if (mqtt_queue_first->data\&.msg_type_q != MQTT_SN_TYPE_PUBLISH) {
+507   //   debug_mqtt("Erro: Pacote a processar nao e do tipo PUBLISH");
+508   //   return FAIL_CON;
+509   // }
+510   size_t i = 0;
+511   for (i=0; i < MAX_TOPIC_USED; i++)
+512     if (strcmp(g_topic_bind[i]\&.topic_name,topic) == 0) {
+513       stopic = g_topic_bind[i]\&.short_topic_id;
+514       break;
+515     }
+516 
+517   if (data_len > sizeof(packet\&.data)) {
+518       printf("Erro: Payload e muito grande!\n");
+519       return FAIL_CON;
+520   }
+521 
+522   packet\&.type  = MQTT_SN_TYPE_PUBLISH;
+523   packet\&.flags = 0x00;
+524 
+525   if (retain_flag)
+526     packet\&.flags += MQTT_SN_FLAG_RETAIN;
+527 
+528   packet\&.flags += mqtt_sn_get_qos_flag(qos);
+529 
+530   // Segundo a especificação:
+531   // TopicIdType: indicates whether the field TopicId or TopicName included in this message contains a normal
+532   // topic id (set to “0b00”), a pre-defined topic id (set to “0b01”), or a short topic name (set to “0b10”)\&. The
+533   // value “0b11” is reserved\&. Refer to sections 3 and 6\&.7 for the definition of the various types of topic ids\&.
+534   packet\&.flags += MQTT_SN_TOPIC_TYPE_NORMAL; //Utiliza-se o topic id já registrado
+535 
+536   packet\&.topic_id = uip_htons(stopic);
+537   packet\&.message_id = uip_htons(0x00); //Relevante somente se QoS > 0
+538   strncpy(packet\&.data, message, data_len+1);
+539   //
+540   //  Pacote PUBLISH
+541   //  _________________ ______________________ ___________ ________________ ______________ ________________
+542   // | Comprimento - 0 | Tipo de mensagem - 1 | Flags - 2 | Topic ID - 3,4 | Msg ID - 5,6 | Dado - 7,n \&.\&.\&.\&.|
+543   // |_________________|______________________|___________ ________________|______________|________________|
+544   //
+545   packet\&.length = 0x07 + (data_len+1);
+546 
+547   debug_mqtt("Enviando o pacote @PUBLISH");
+548   // debug_mqtt("Enviando o pacote @PUBLISH - Task:[%d]",(int)mqtt_queue_first->data\&.id_task);
+549   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+550   return SUCCESS_CON;
+551 }
+.fi
+.SS "void mqtt_sn_recv_parser (const uint8_t *data)"
+
+.PP
+Realiza o parsing das mensagens UDP recebidas\&. Realiza o parsing das mensagens UDP recebidas de acordo com o protocolo MQTT-SN, alterando o status da conexão geral com o broker\&.
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIdata\fP Ponteiro para o conteúdo UDP recebido
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+\fBTarefa\fP
+.RS 4
+Rever o short topic para adequar bytes [2][3] juntos\&.\&. 
+.RE
+.PP
+.PP
+\fBTarefa\fP
+.RS 4
+Rever o short topic para adequar bytes [2][3] juntos\&.\&.\&. 
+.RE
+.PP
+
+.PP
+.nf
+717                                              {
+718     uint8_t msg_type = data[1],
+719             return_code = 0xFF,
+720             short_topic;
+721     size_t i = 0;
+722     // Como o MsgType não se altera de posição, testamos primeiro ele antes do
+723     // returning code, já que este pode variar
+724     switch (msg_type) {
+725       case MQTT_SN_TYPE_CONNACK:
+726         return_code = data[2]; //No caso do CONNACK - RC[2]
+727         if (mqtt_sn_check_rc(return_code)){
+728           if (mqtt_status == MQTTSN_WAITING_CONNACK)
+729             process_post(&mqtt_sn_main, mqtt_event_connack, NULL);
+730           else
+731             debug_mqtt("Recebido CONNAC sem requisicao!");
+732         }
+733       break;
+734       case MQTT_SN_TYPE_REGACK:
+735         return_code = data[6]; //No caso do REGACK - RC[6]
+736         short_topic = data[3];
+737         // Na verdade os bytes de short topic são o [2] e [3], porém
+738         // só estamos usa-se o [3] porque não consideramos mais do que
+739         // 15 tópicos
+741         if (mqtt_sn_check_rc(return_code)){
+742           for (i = 0;i < MAX_TOPIC_USED; i++) { //Compara o byte menor do MSG ID para atribuir o short topic a requisição REGISTER correta
+743             if (i == data[5]){
+744               g_topic_bind[i]\&.short_topic_id = short_topic;
+745             }
+746           }
+747           if (mqtt_queue_first->data\&.msg_type_q == MQTT_SN_TYPE_REGISTER &&
+748               mqtt_status == MQTTSN_WAITING_REGACK)
+749             process_post(&mqtt_sn_main, mqtt_event_regack, NULL);
+750           else
+751             debug_mqtt("Recebido REGACK sem requisicao!");
+752         }
+753       break;
+754       case MQTT_SN_TYPE_PUBACK:
+755         // return_code = data[6]; //No caso do PUBACK - RC[6]
+756         // short_topic = data[3];
+757         // // Na verdade os bytes de short topic são o [2] e [3], porém
+758         // // só estamos usa-se o [3] porque não consideramos mais do que
+759         // // 15 tópicos
+760         // /// @todo Rever o short topic para adequar bytes [2][3] juntos
+761         //
+762         // /// @TODO Implementar verificação de message ID e short topic ID para melhorar a confiança do recebimento
+763         // if (mqtt_sn_check_rc(return_code))
+764         //   if (mqtt_queue_first->data\&.msg_type_q == MQTT_SN_TYPE_PUBLISH)
+765         //     process_post(&mqtt_sn_main, mqtt_event_puback, NULL);
+766       break;
+767       case MQTT_SN_TYPE_SUBACK:
+768         return_code = data[7]; //No caso do SUBACK - RC[7]
+769         short_topic = data[4];
+770         // Na verdade os bytes de short topic são o [2] e [3], porém
+771         // só estamos usa-se o [3] porque não consideramos mais do que
+772         // 15 tópicos
+774         debug_mqtt("Recebido SUBACK");
+775 
+776         if (mqtt_sn_check_rc(return_code))
+777           if (short_topic != 0x00) {
+778             debug_mqtt("Reconhecimento de inscricao:[%s]",g_topic_bind[short_topic]\&.topic_name);
+779             g_topic_bind[short_topic]\&.subscribed = 0x02;
+780             if (mqtt_queue_first->data\&.msg_type_q == MQTT_SN_TYPE_SUBSCRIBE &&
+781                 mqtt_status == MQTTSN_WAITING_SUBACK)
+782               process_post(&mqtt_sn_main, mqtt_event_suback, NULL);
+783             else
+784               debug_mqtt("Recebido SUBACK sem requisicao!");
+785           }
+786           else{
+787             debug_mqtt("Recebido SUBACK de WILDCARD");
+788             if (mqtt_queue_first->data\&.msg_type_q == MQTT_SN_TYPE_SUB_WILDCARD){
+789               mqtt_status = MQTTSN_TOPIC_REGISTERED;
+790               mqtt_sn_delete_queue();
+791             }
+792           }
+793         else
+794           debug_mqtt("Erro: Codigo de retorno invalido");
+795       break;
+796       case MQTT_SN_TYPE_PINGRESP:
+797         g_ping_flag_resp = true;
+798         //debug_mqtt("Ping respondido");
+799       break;
+800       case MQTT_SN_TYPE_PINGREQ:
+801         mqtt_sn_ping_send();
+802       break;
+803       case MQTT_SN_TYPE_PUBLISH:
+804         debug_mqtt("Recebida publicacao:");
+805         uint8_t message_length = data[0]-7;
+806         //uint8_t msg_id = data[6];
+807         short_topic = data[4];
+808         char message[MQTT_SN_MAX_PACKET_LENGTH];
+809         // debug_mqtt("[Msg_ID][%d]/[Topic ID][%d]",msg_id,short_topic);
+810 
+811         size_t i;
+812         for (i = 0; i < (message_length); i++)
+813           message[i] = data[i+7];
+814         message[i] = '\0';
+815         // debug_mqtt("Topico:%s",g_topic_bind[short_topic]\&.topic_name);
+816         // debug_mqtt("Mensagem:%s",message);
+817         // debug_mqtt("\n");
+818         (*callback_mqtt)(g_topic_bind[short_topic]\&.topic_name, message);
+819       break;
+820       case MQTT_SN_TYPE_REGISTER:
+821         debug_mqtt("Recebido registro de topico novo:");
+822         uint8_t msg_id_reg = data[5];
+823         uint8_t message_length_buf = data[0]-6;
+824         size_t j,t;
+825         char buff[MQTT_SN_MAX_TOPIC_LENGTH];
+826 
+827         short_topic = data[3];
+828 
+829         for (t = 0; t < message_length_buf; t++)
+830           buff[t] = data[t+6];
+831         buff[t] = '\0';
+832 
+833         for (j = 0; j < MAX_TOPIC_USED; j++)
+834           if (g_topic_bind[j]\&.short_topic_id == 0xFF)
+835             break;
+836 
+837         // Apesar de a variável ser local (buff) precisamos alocar dinamicamente
+838         // memória para o ponteiro s para que consigamos fornecer um novo endereço
+839         // de memória para a estrutura g_topic_bind\&.\&.\&.
+840         char *s;
+841         s = (char *)malloc(strlen(buff)+1);
+842         strcpy(s,buff);
+843         g_topic_bind[j]\&.short_topic_id = short_topic;
+844         g_topic_bind[j]\&.subscribed = true;
+845         g_topic_bind[j]\&.topic_name = s;
+846 
+847         debug_mqtt("Topico registrado![%s]",g_topic_bind[j]\&.topic_name);
+848         mqtt_sn_regack_send((uint16_t)msg_id_reg,(uint16_t)short_topic);
+849       break;
+850       case MQTT_SN_TYPE_WILLTOPICREQ:
+851         // debug_mqtt("Recebido um pacote WILL TOPIC REQ");
+852         if (mqtt_status == MQTTSN_WAITING_WILLTOPICREQ)
+853           process_post(&mqtt_sn_main,mqtt_event_will_topicreq,NULL);
+854       break;
+855       case MQTT_SN_TYPE_WILLMSGREQ:
+856         if (mqtt_status == MQTTSN_WAITING_WILLMSGREQ)
+857           process_post(&mqtt_sn_main,mqtt_event_will_messagereq,NULL);
+858       break;
+859       default:
+860         debug_mqtt("Recebida mensagem porem nao identificada!");
+861       break;
+862     }
+863 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_reg_send (void)"
+
+.PP
+Envio de mensagens ao broker do tipo REGISTER\&. Envia ao broker mensagens do tipo REGISTER com o topic name informado conforme a tarefa primeira na fila
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe parâmetro
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar o pacote REGISTER 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar o pacote REGISTER 
+.RE
+.PP
+
+.PP
+.nf
+444                                  {
+445   register_packet_t packet;
+446 
+447   size_t i = 0;
+448   for (i=1; i < MAX_TOPIC_USED; i++)
+449     if (g_topic_bind[i]\&.short_topic_id == 0xFF)
+450       break;
+451 
+452   uint16_t task_id = i;
+453   // Leak of memory
+454   //size_t topic_name_len = strlen(mqtt_queue_first->data\&.long_topic); //Pega o primeiro da fila aguardando
+455   size_t topic_name_len = strlen(g_topic_bind[task_id]\&.topic_name);
+456 
+457   if (topic_name_len > MQTT_SN_MAX_TOPIC_LENGTH) {
+458     debug_mqtt("Erro: Nome do topico excede o limite maximo");
+459     return FAIL_CON;
+460   }
+461 
+462   if (mqtt_queue_first->data\&.msg_type_q != MQTT_SN_TYPE_REGISTER) {
+463     debug_mqtt("Erro: Pacote a processar nao e do tipo REGISTER");
+464     return FAIL_CON;
+465   }
+466 
+467   packet\&.type = MQTT_SN_TYPE_REGISTER;
+468   packet\&.topic_id = 0x0000;
+469 
+470   // Quando o broker responder com o short topic ID,
+471   // ele utilizará como message id, o identificador único da task na
+472   // queue de serviços do MQTT-SN, logo se torna fácil saber como montar
+473   // a relação (short_topic/long_topic) no vetor global g_topic_bind[]
+474   packet\&.message_id = uip_htons(task_id);
+475 
+476   strncpy(packet\&.topic_name, g_topic_bind[task_id]\&.topic_name, topic_name_len);
+477   packet\&.length = 0x06 + topic_name_len;
+478   packet\&.topic_name[topic_name_len] = '\0';
+479 
+480   debug_mqtt("Topico a registrar:%s [%d][MSG_ID:%d]",packet\&.topic_name,strlen(packet\&.topic_name),(int)mqtt_queue_first->data\&.id_task);
+481   debug_mqtt("Enviando o pacote @REGISTER");
+482   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+483 
+484   return SUCCESS_CON;
+485 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_regack_send (uint16_tmsg_id, uint16_ttopic_id)"
+
+.PP
+Envia pacote do tipo REGACK ao broker\&. Envia ao broker MQTT-SN a mensagem do tipo REGACK quando receber algum tópico via Wildcad
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fImsg_id\fP Message id correspondente do envio 
+.br
+\fItopic_id\fP Topic ID enviado pelo broker para registrar no vetor de tópicos o tópico novo
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar a regack 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar a regack 
+.RE
+.PP
+
+.PP
+.nf
+487                                                                   {
+488   regack_packet_t packet;
+489 
+490   packet\&.type = MQTT_SN_TYPE_REGACK;
+491   packet\&.topic_id = uip_htons(topic_id);
+492   packet\&.message_id = uip_htons(msg_id);
+493   packet\&.return_code = 0x00;
+494   packet\&.length = 0x07;
+495 
+496   debug_mqtt("Enviando o pacote @REGACK");
+497   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+498   return SUCCESS_CON;
+499 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_sub (char *topic, uint8_tqos)"
+
+.PP
+Prepara requisição de inscrição ao broker MQTT-SN\&. Formata e gera a tarefa na fila para inscrição no tópico pré-registrado
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser inscrito 
+.br
+\fIqos\fP Nível de QoS da inscrição
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao gerar a tarefa de inscrição 
+.br
+\fISUCCESS_CON\fP Sucesso ao gerar a tarefa de inscrição 
+.RE
+.PP
+
+.PP
+.nf
+239                                                 {
+240   // Caso haja tópicos para registrar, não habilita a inscrição
+241   // evitando que prejudique alguma transação, ou seja, tasks
+242   // tem prioridade sobre inscrições diretas
+243   // if (!unlock_tasks())
+244   // return FAIL_CON;
+245 
+246   if(strstr(topic,"#") || strstr(topic,"+")){
+247     mqtt_sn_sub_wildcard(topic,qos);
+248     return SUCCESS_CON;
+249   }
+250 
+251   if (!verf_register(topic))
+252   return FAIL_CON;
+253 
+254   if(verf_hist_sub(topic)){
+255     mqtt_sn_task_t subscribe_task;
+256     size_t i;
+257     for (i=0; i < MAX_TOPIC_USED; i++)
+258       if(strcmp(g_topic_bind[i]\&.topic_name,topic) == 0) // Tópico novo ou existe?
+259         break;
+260 
+261     subscribe_task\&.msg_type_q      = MQTT_SN_TYPE_SUBSCRIBE;
+262     subscribe_task\&.qos_level       = qos;
+263     subscribe_task\&.short_topic     = i;
+264 
+265     // Comentadas as duas linhas abaixo porque consideraremos que o usuário irá registrar os
+266     // topicos no começo do programa não sendo necessário gerar o evento de run_task
+267     //if (mqtt_sn_check_empty())
+268     //  ctimer_set(&mqtt_time_subscribe, 3*MQTT_SN_TIMEOUT, init_sub, NULL);
+269 
+270     if (!mqtt_sn_insert_queue(subscribe_task))
+271      debug_task("ERRO AO ADICIONAR NA FILA");
+272 
+273     return SUCCESS_CON;
+274   }
+275   else
+276     return FAIL_CON;
+277 
+278 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_sub_send (char *topic, uint8_tqos)"
+
+.PP
+Envia pacote SUBSCRIBE ao broker MQTT-SN\&. Monta o pacote e envia ao broker a mensagem de inscrição
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser inscrito (deve estar pré-listado e passado como argumento em mqtt_sn_create_sck) 
+.br
+\fIqos\fP Nível de QoS da publicação
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar a inscrição 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar a inscrição 
+.RE
+.PP
+
+.PP
+.nf
+553                                                      {
+554   subscribe_packet_t packet;
+555   uint16_t stopic = 0x0000;
+556 
+557   // if (mqtt_queue_first->data\&.msg_type_q != MQTT_SN_TYPE_PUBLISH) {
+558   //   debug_mqtt("Erro: Pacote a processar nao e do tipo PUBLISH");
+559   //   return FAIL_CON;
+560   // }
+561   size_t i = 0;
+562   for (i=0; i < MAX_TOPIC_USED; i++)
+563     if (strcmp(g_topic_bind[i]\&.topic_name,topic) == 0) {
+564       stopic = g_topic_bind[i]\&.short_topic_id;
+565       break;
+566     }
+567 
+568   packet\&.type  = MQTT_SN_TYPE_SUBSCRIBE;
+569   packet\&.flags = 0x00;
+570 
+571   packet\&.flags += mqtt_sn_get_qos_flag(0);
+572   packet\&.message_id = uip_htons(stopic);
+573   packet\&.topic_id =  uip_htons(stopic);
+574   packet\&.flags += MQTT_SN_TOPIC_TYPE_PREDEFINED; //Utiliza-se o topic id já registrado
+575   packet\&.length = 0x07;
+576   //
+577   //  Pacote SUBSCRIBE
+578   //  _________________ ______________________ ___________ ________________ _____________________________________
+579   // | Comprimento - 0 | Tipo de mensagem - 1 | Flags - 2 | Msg ID - 3,4  | Topic ID - 5,6 ou Topic name 5,n \&.\&.\&.\&.|
+580   // |_________________|______________________|___________|_______________|______________________________________|
+581   //
+582   debug_mqtt("Enviando o pacote @SUBSCRIBE");
+583   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+584   return SUCCESS_CON;
+585 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_sub_send_wildcard (char *topic, uint8_tqos)"
+
+.PP
+Envia pacote SUBSCRIBE do tipo WILDCARD ao broker MQTT-SN\&. Monta o pacote e envia ao broker a mensagem de inscrição do tipo Wildcard (#,+)
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser inscrito (deve estar pré-listado e passado como argumento em mqtt_sn_create_sck) 
+.br
+\fIqos\fP Nível de QoS da publicação
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar a inscrição 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar a inscrição 
+.RE
+.PP
+
+.PP
+.nf
+587                                                               {
+588   subscribe_wildcard_packet_t packet;
+589 
+590   // Analisamos o buffer de tópicos registrados para ver se já foi registrado o tópico
+591   size_t i = 0;
+592   for (i=0; i < MAX_TOPIC_USED; i++){
+593     if (g_topic_bind[i]\&.short_topic_id == 0xFF)
+594       break;
+595   }
+596 
+597   packet\&.type  = MQTT_SN_TYPE_SUBSCRIBE;
+598   packet\&.flags = 0x00;
+599 
+600   packet\&.flags += mqtt_sn_get_qos_flag(0);
+601   packet\&.message_id = uip_htons(i);
+602   strncpy(packet\&.topic_name,topic,strlen(topic));
+603   packet\&.flags += MQTT_SN_TOPIC_TYPE_NORMAL;
+604   packet\&.length = 0x05+strlen(topic);
+605 
+606   //
+607   //  Pacote SUBSCRIBE
+608   //  _________________ ______________________ ___________ ________________ _____________________________________
+609   // | Comprimento - 0 | Tipo de mensagem - 1 | Flags - 2 | Msg ID - 3,4  | Topic ID - 5,6 ou Topic name 5,n \&.\&.\&.\&.|
+610   // |_________________|______________________|___________|_______________|______________________________________|
+611   //
+612   debug_mqtt("Enviando o pacote @SUBSCRIBE(Wildcard)");
+613   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+614   return SUCCESS_CON;
+615 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_sub_wildcard (char *topic, uint8_tqos)"
+
+.PP
+Prepara tarefa de SUBSCRIBE do tipo WILDCARD\&. Gera tarefa de inscrição com Wildcard ao broker MQTT-SN
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser inscrito (deve estar pré-listado e passado como argumento em mqtt_sn_create_sck) 
+.br
+\fIqos\fP Nível de QoS da publicação
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar a inscrição 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar a inscrição 
+.RE
+.PP
+
+.PP
+.nf
+227                                                          {
+228   mqtt_sn_task_t subscribe_task;
+229 
+230   subscribe_task\&.msg_type_q      = MQTT_SN_TYPE_SUB_WILDCARD;
+231   subscribe_task\&.qos_level       = qos;
+232   topic_temp_wildcard            = topic;
+233   if (!mqtt_sn_insert_queue(subscribe_task))
+234    debug_task("ERRO AO ADICIONAR NA FILA");
+235 
+236   return SUCCESS_CON;
+237 }
+.fi
+.SS "void mqtt_sn_udp_rec_cb (struct simple_udp_connection *c, const uip_ipaddr_t *sender_addr, uint16_tsender_port, const uip_ipaddr_t *receiver_addr, uint16_treceiver_port, const uint8_t *data, uint16_tdatalen)"
+
+.PP
+Callback de recepção UDP\&. Recebe dados da conexão UDP com o broker
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIsimple_udp_connection\fP Handle da conexão UDP 
+.br
+\fIsender_addr\fP Endereço IP do broker 
+.br
+\fIsender_port\fP Porta de envio 
+.br
+\fIreceiver_addr\fP Endereço IP de recepção 
+.br
+\fIreceiver_port\fP Porta de recepção 
+.br
+\fIdata\fP Dado recebido 
+.br
+\fIdatalen\fP Tamanho do dado recebido
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna parâmetro 
+.RE
+.PP
+
+.PP
+.nf
+871                                               {
+872   debug_udp("##########RECEBIDO ALGO VIA UDP!##########");
+873   mqtt_sn_recv_parser(data);
+874 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_will_message_send (void)"
+
+.PP
+Envia mensagem de LWT\&. Envia mensagem a ser publicada quando o tópico se desconectar
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar a mensagem Will MSG 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar a mensagem Will MSG 
+.RE
+.PP
+
+.PP
+.nf
+388                                           {
+389   willmessage_packet_t packet;
+390 
+391   size_t message_name_len = strlen(g_mqtt_sn_con\&.will_message);
+392 
+393   if (message_name_len > MQTT_SN_MAX_TOPIC_LENGTH) {
+394     debug_mqtt("Erro: Nome da mensagem WILL excede o limite maximo");
+395     return FAIL_CON;
+396   }
+397 
+398   packet\&.type = MQTT_SN_TYPE_WILLMSG;
+399 
+400   strncpy(packet\&.will_message, g_mqtt_sn_con\&.will_message, message_name_len);
+401   packet\&.length = 0x02 + message_name_len;
+402   packet\&.will_message[message_name_len] = '\0';
+403 
+404   debug_mqtt("Enviando o pacote @WILL MESSAGE");
+405   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+406 
+407   return SUCCESS_CON;
+408 }
+.fi
+.SS "\fBresp_con_t\fP mqtt_sn_will_topic_send (void)"
+
+.PP
+Envia tópico de LWT\&. Envia tópico utilizado quando o dispositivo se desconectar
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Falha ao enviar a mensagem Will MSG 
+.br
+\fISUCCESS_CON\fP Sucesso ao enviar a mensagem Will MSG 
+.RE
+.PP
+
+.PP
+.nf
+364                                         {
+365   willtopic_packet_t packet;
+366 
+367   size_t topic_name_len = strlen(g_mqtt_sn_con\&.will_topic);
+368 
+369   if (topic_name_len > MQTT_SN_MAX_TOPIC_LENGTH) {
+370     debug_mqtt("Erro: Nome do topico WILL excede o limite maximo");
+371     return FAIL_CON;
+372   }
+373 
+374   packet\&.flags = MQTT_SN_FLAG_RETAIN;
+375 
+376   packet\&.type = MQTT_SN_TYPE_WILLTOPIC;
+377 
+378   strncpy(packet\&.will_topic, g_mqtt_sn_con\&.will_topic, topic_name_len);
+379   packet\&.length = 0x03 + topic_name_len;
+380   packet\&.will_topic[topic_name_len] = '\0';
+381 
+382   debug_mqtt("Enviando o pacote @WILL TOPIC");
+383   simple_udp_send(&g_mqtt_sn_con\&.udp_con,&packet, packet\&.length);
+384 
+385   return SUCCESS_CON;
+386 }
+.fi
+.SS "void parse_mqtt_type_string (uint8_ttype, char **type_string)"
+
+.PP
+Retorna a string de status correspondente\&. Realiza o parsing do estado da conexão MQTT-SN traduzindo de typedef enum para estado em string
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItype\fP Não recebe argumento 
+.br
+\fItype_string\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+.nf
+121                                                              {
+122   switch (type) {
+123     case MQTT_SN_TYPE_CONNECT:
+124       *type_string = "CONNECT";
+125     break;
+126     case MQTT_SN_TYPE_REGISTER:
+127       *type_string = "REGISTER";
+128     break;
+129     case MQTT_SN_TYPE_SUB_WILDCARD:
+130       *type_string = "SUBSCRIBE_WILDCARD";
+131     break;
+132     case MQTT_SN_TYPE_PUBLISH:
+133       *type_string = "PUBLISH";
+134     break;
+135     case MQTT_SN_TYPE_SUBSCRIBE:
+136       *type_string = "SUBSCRIBE";
+137     break;
+138     case MQTT_SN_TYPE_PINGREQ:
+139       *type_string = "PINGREQ";
+140     break;
+141     case MQTT_SN_TYPE_PINGRESP:
+142       *type_string = "PINGRESP";
+143     break;
+144     case MQTT_SN_TYPE_DISCONNECT:
+145       *type_string = "DISCONNECT";
+146     break;
+147     case MQTT_SN_TYPE_WILLTOPIC:
+148       *type_string = "WILL_TOPIC";
+149     break;
+150     case MQTT_SN_TYPE_WILLMSG:
+151       *type_string = "WILL_MESSAGE";
+152     break;
+153     default:
+154       *type_string = "Estado nao definido nas opcoes";
+155     break;
+156   }
+157 }
+.fi
+.SS "void print_g_topics (void)"
+
+.PP
+Exibe os tópicos registrados\&. Exibe a lista de tópicos registrados no broker
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+.nf
+341                          {
+342   size_t i;
+343   debug_mqtt("Vetor de topicos");
+344   for(i = 0 ; g_topic_bind[i]\&.short_topic_id != 0xFF; i++) {
+345     debug_mqtt("[i=%d][%d][%s]",i,g_topic_bind[i]\&.short_topic_id,g_topic_bind[i]\&.topic_name);
+346   }
+347 }
+.fi
+.SS "void timeout_con (void *ptr)"
+
+.PP
+Processa timeout de pacotes\&. Processa toda e qualquer requisição de expiração de tempo por timeout de envio de mensagens (SUBSCRIBE, PUBLISH, REGISTER)
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+.nf
+996                            {
+997   switch (mqtt_status) {
+998     case MQTTSN_WAITING_CONNACK:
+999       if (g_tries_send >= MQTT_SN_RETRY) {
+1000         g_tries_send = 0;
+1001         process_post(&mqtt_sn_main,mqtt_event_ping_timeout,NULL);
+1002         debug_mqtt("Limite maximo de pacotes CONNECT");
+1003       }
+1004       else{
+1005         debug_mqtt("Expirou tempo de CONNECT");
+1006         mqtt_sn_con_send();
+1007         mqtt_status = MQTTSN_WAITING_CONNACK;
+1008         ctimer_reset(&mqtt_time_connect);
+1009         g_tries_send++;
+1010       }
+1011     break;
+1012     case MQTTSN_WAITING_REGACK:
+1013       if (g_tries_send >= MQTT_SN_RETRY) {
+1014         g_tries_send = 0;
+1015         process_post(&mqtt_sn_main,mqtt_event_ping_timeout,NULL);
+1016         debug_mqtt("Limite maximo de pacotes REGISTER");
+1017       }
+1018       else{
+1019         debug_mqtt("Expirou tempo de REGISTER");
+1020         mqtt_sn_reg_send();
+1021         mqtt_status = MQTTSN_WAITING_REGACK;
+1022         ctimer_reset(&mqtt_time_register);
+1023         g_tries_send++;
+1024       }
+1025     break;
+1026     case MQTTSN_WAITING_SUBACK:
+1027       if (g_tries_send >= MQTT_SN_RETRY) {
+1028         g_tries_send = 0;
+1029         process_post(&mqtt_sn_main,mqtt_event_ping_timeout,NULL);
+1030         debug_mqtt("Limite maximo de pacotes SUBSCRIBE");
+1031       }
+1032       else{
+1033         debug_mqtt("Expirou tempo de SUBSCRIBE");
+1034         mqtt_sn_sub_send(g_topic_bind[mqtt_queue_first->data\&.short_topic]\&.topic_name, mqtt_queue_first->data\&.qos_level);
+1035         mqtt_status = MQTTSN_WAITING_SUBACK;
+1036         ctimer_reset(&mqtt_time_subscribe);
+1037         g_tries_send++;
+1038       }
+1039     break;
+1040     case MQTTSN_WAITING_WILLTOPICREQ:
+1041       if (g_tries_send >= MQTT_SN_RETRY) {
+1042         g_tries_send = 0;
+1043         process_post(&mqtt_sn_main,mqtt_event_ping_timeout,NULL);
+1044         debug_mqtt("Limite maximo de pacotes CONNECT para WILL TOPIC");
+1045       }
+1046       else{
+1047         debug_mqtt("Expirou tempo de CONNECT para WILL TOPIC");
+1048         mqtt_sn_con_send();
+1049         mqtt_status = MQTTSN_WAITING_WILLTOPICREQ;
+1050         ctimer_reset(&mqtt_time_connect);
+1051         g_tries_send++;
+1052       }
+1053     break;
+1054     case MQTTSN_CONNECTED:
+1055       //process_post(&mqtt_sn_main, mqtt_event_run_task, NULL);
+1056     break;
+1057     default:
+1058       debug_mqtt("Expirou tempo de estado desconhecido");
+1059     break;
+1060   }
+1061 }
+.fi
+.SS "void timeout_ping_mqtt (void *ptr)"
+
+.PP
+Processa timeout de ping\&. Processa toda expiração de tempo por timeout de envio de mensagens PINGREQ
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fI0\fP Não retorna nada 
+.RE
+.PP
+
+.PP
+.nf
+1063                                  {
+1064   //debug_mqtt("\nTentativas PING:%d",g_tries_ping);
+1065   if (g_ping_flag_resp) {
+1066     g_ping_flag_resp = false;
+1067     g_tries_ping = 0;
+1068     //debug_mqtt("Enviando PING REQUEST");
+1069     mqtt_sn_ping_send();
+1070   }
+1071   else{
+1072     if (g_tries_ping >= MQTT_SN_RETRY_PING) {
+1073       g_tries_ping = 0;
+1074       ctimer_stop(&mqtt_time_ping);
+1075       if (mqtt_status != MQTTSN_DISCONNECTED)
+1076         process_post(&mqtt_sn_main,mqtt_event_ping_timeout,NULL);
+1077       debug_mqtt("Limite tentativas de PING RESPONSE");
+1078     }
+1079     else{
+1080       debug_mqtt("INCREMENTANDO PING");
+1081       mqtt_sn_ping_send();
+1082       g_tries_ping++;
+1083     }
+1084   }
+1085   ctimer_reset(&mqtt_time_ping);
+1086 }
+.fi
+.SS "bool unlock_tasks (void)"
+
+.PP
+Libera opção de geração de tarefas\&. Habilita a geração de tarefas na fila conforma o estado da conexão MQTT-SN
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fI0\fP Não recebe argumento
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fITRUE\fP Pode-se gerar tarefa na fila 
+.br
+\fIFALSE\fP Estado da conexão MQTT-SN impossibilita geração de tarefas na fila 
+.RE
+.PP
+
+.PP
+.nf
+110                         {
+111   if (mqtt_status == MQTTSN_TOPIC_REGISTERED)
+112     return true;
+113   return false;
+114 }
+.fi
+.SS "\fBresp_con_t\fP verf_hist_sub (char *topic)"
+
+.PP
+Verifica se o tópico já foi registrado\&. Verifica se o tópico em análise já foi previamente registrado ou está em processo de registro
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser inscrito (deve estar pré-listado e passado como argumento em mqtt_sn_create_sck)
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Tópico já foi registrado ou está em andamento 
+.br
+\fISUCCESS_CON\fP Tópico liberado para inscrição 
+.RE
+.PP
+
+.PP
+.nf
+295                                      {
+296   size_t i;
+297   //
+298   // for (i=0; i < MAX_TOPIC_USED; i++)
+299   //   if(strcmp(g_topic_bind[i]\&.topic_name,topic) == 0) // Tópico novo ou existe?
+300   //     break;
+301   //
+302   // if (g_topic_bind[i]\&.short_topic_id == 0xFF) {
+303   //   debug_mqtt("Topico nao registrado!")
+304   //   return FAIL_CON;
+305   // }
+306 
+307   for (i=0; i < MAX_TOPIC_USED; i++)
+308     if(strcmp(g_topic_bind[i]\&.topic_name,topic) == 0)
+309       break;
+310 
+311   if (g_topic_bind[i]\&.subscribed == 0x01){  // Na fila para inscrever? 0x01?
+312     debug_mqtt("Inscricao do topico em andamento:[%s]",g_topic_bind[i]\&.topic_name);
+313     return FAIL_CON;
+314   }
+315   else if (g_topic_bind[i]\&.subscribed == 0x02) {  // Já inscrito? 0x02?
+316     debug_mqtt("Topico inscrito:[%s]",g_topic_bind[i]\&.topic_name);
+317     return FAIL_CON;
+318   }
+319   else if (g_topic_bind[i]\&.subscribed == 0x00){  // Caso g_topic_bind[i]\&.subscribed == 0x00 vamos preparar o topico para ser inscrito
+320     g_topic_bind[i]\&.subscribed = 0x01;
+321     debug_mqtt("Preparando para inscricao:[%s]",g_topic_bind[i]\&.topic_name);
+322     return SUCCESS_CON;
+323   }
+324   else{
+325     debug_mqtt("Topico com valor estranho no SUBSCRIBED:%d",g_topic_bind[i]\&.subscribed);
+326     return FAIL_CON;
+327   }
+328 
+329 }
+.fi
+.SS "\fBresp_con_t\fP verf_register (char *topic)"
+
+.PP
+Verifica pré-registro do tópico\&. Verifica se o tópico já foi pré-registrado antes de iniciar qualquer operação
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fItopic\fP Tópico a ser verificado
+.RE
+.PP
+\fBValores retornados:\fP
+.RS 4
+\fIFAIL_CON\fP Tópico não foi pré-registrado 
+.br
+\fISUCCESS_CON\fP Tópico registrado no vetor de tópicos 
+.RE
+.PP
+
+.PP
+.nf
+331                                      {
+332   size_t i;
+333   for (i=0; i < MAX_TOPIC_USED; i++)
+334     if(strcmp(g_topic_bind[i]\&.topic_name,topic) == 0)  // Tópico novo ou existe?
+335       return SUCCESS_CON;
+336 
+337   debug_mqtt("Topico nao registrado!");
+338   return FAIL_CON;
+339 }
+.fi
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para MQTT-SN_Contiki a partir do código fonte\&.

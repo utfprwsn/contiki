@@ -1,0 +1,43 @@
+.TH "mqtt_sn_t" 3 "Sexta, 26 de Agosto de 2016" "Version 1.0" "HomeStark" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mqtt_sn_t \- 
+.PP
+Estrutura de conexão ao broker MQTT-SN\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mqtt_sn\&.h>\fP
+.SS "Campos de Dados"
+
+.in +1c
+.ti -1c
+.RI "struct simple_udp_connection \fBudp_con\fP"
+.br
+.ti -1c
+.RI "uint16_t \fBudp_port\fP"
+.br
+.RI "\fIPorta UDP de conexão com o broker (default:1884) \fP"
+.ti -1c
+.RI "uint16_t * \fBipv6_broker\fP"
+.br
+.RI "\fIEndereço IPv6 do broker UDP\&. \fP"
+.ti -1c
+.RI "uint8_t \fBkeep_alive\fP"
+.br
+.RI "\fITempo de requisição Keep Alive para PINGREQ e PINGRESP\&. \fP"
+.ti -1c
+.RI "const char * \fBclient_id\fP"
+.br
+.RI "\fIIdentificador de cliente para conexão com o broker MQTT-SN\&. \fP"
+.in -1c
+.SH "Descrição detalhada"
+.PP 
+Estrutura de conexão ao broker MQTT-SN\&. 
+
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para HomeStark a partir do código fonte\&.

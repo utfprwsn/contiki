@@ -96,6 +96,7 @@ PROCESS_THREAD(udp_server_process, ev, data)
 
 #if RESOLV_CONF_SUPPORTS_MDNS
   resolv_set_hostname("contiki-udp-server");
+  PRINTF("Setting hostname to contiki-udp-server\n");
 #endif
 
 #if UIP_CONF_ROUTER

@@ -1,0 +1,87 @@
+.TH "Generic Newlib customizations" 3 "Domingo, 4 de Setembro de 2016" "Version 1.0" "MQTT-SN_Contiki" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Generic Newlib customizations \- 
+.PP
+Library providing generic implementations of Newlib features for Contiki\&.  
+
+.SS "Ficheiros"
+
+.in +1c
+.ti -1c
+.RI "ficheiro \fBsyscalls\&.c\fP"
+.br
+.RI "\fISystem calls\&. \fP"
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEBUG\fP   0"
+.br
+.ti -1c
+.RI "#define \fBPRINTF\fP(\&.\&.\&.)"
+.br
+.in -1c
+.SS "Funções"
+
+.in +1c
+.ti -1c
+.RI "caddr_t \fB_sbrk\fP (int incr)"
+.br
+.RI "\fIEnlarges the allocated heap space\&. \fP"
+.in -1c
+.SH "Descrição detalhada"
+.PP 
+Library providing generic implementations of Newlib features for Contiki\&. 
+
+
+.SH "Documentação das funções"
+.PP 
+.SS "caddr_t _sbrk (intincr)"
+
+.PP
+Enlarges the allocated heap space\&. 
+.PP
+\fBParâmetros:\fP
+.RS 4
+\fIincr\fP Number of bytes by which to increase the heap space 
+.RE
+.PP
+\fBRetorna:\fP
+.RS 4
+The previous end of heap on success (which is also a pointer to the start of the newly allocated memory if \fCincr\fP is positive), or \fC(caddr_t)-1\fP with \fCerrno\fP set to \fCENOMEM\fP on error 
+.RE
+.PP
+
+.PP
+.nf
+64 {
+65   /*
+66    * Newlib's _sbrk_r() assumes that this global errno variable is used here,
+67    * which is different from the errno definition provided by <errno\&.h>\&.
+68    */
+69 #undef errno
+70   extern int errno;
+71 
+72   /* Heap boundaries from linker script\&. */
+73   extern uint8_t _heap;
+74   extern uint8_t _eheap;
+75 
+76   static uint8_t *heap_end = &_heap;
+77   uint8_t *prev_heap_end = heap_end;
+78 
+79   if(heap_end + incr > &_eheap) {
+80     PRINTF("Out of heap space!\n");
+81     errno = ENOMEM;
+82     return (caddr_t)-1;
+83   }
+84 
+85   heap_end += incr;
+86   return (caddr_t)prev_heap_end;
+87 }
+.fi
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para MQTT-SN_Contiki a partir do código fonte\&.

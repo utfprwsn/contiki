@@ -47,7 +47,7 @@
 #include "dev/button-sensor.h"
 #endif
 
-#define DEBUG 0
+#define DEBUG 1
 #if DEBUG
 #include <stdio.h>
 #define PRINTF(...) printf(__VA_ARGS__)
@@ -71,7 +71,8 @@ extern resource_t
   res_push,
   res_event,
   res_sub,
-  res_b1_sep_b2;
+  res_b1_sep_b2,
+  res_utfprwsn;
 #if PLATFORM_HAS_LEDS
 extern resource_t res_leds, res_toggle;
 #endif
@@ -132,6 +133,7 @@ PROCESS_THREAD(er_example_server, ev, data)
    * All static variables are the same for each URI path.
    */
   rest_activate_resource(&res_hello, "test/hello");
+  rest_activate_resource(&res_utfprwsn, "utfprwsn/echo");
 /*  rest_activate_resource(&res_mirror, "debug/mirror"); */
 /*  rest_activate_resource(&res_chunks, "test/chunks"); */
 /*  rest_activate_resource(&res_separate, "test/separate"); */

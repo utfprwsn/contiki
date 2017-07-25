@@ -1,0 +1,44 @@
+.TH "mqtt_sn_callbacks" 3 "Sábado, 20 de Agosto de 2016" "Version 1.0" "HomeStark" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mqtt_sn_callbacks \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Campos de Dados"
+
+.in +1c
+.ti -1c
+.RI "void(* \fBpub_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.RI "\fICalled when a packet has been received by the mqtt_sn module or other event needs handled\&. \fP"
+.ti -1c
+.RI "void(* \fBpingreq_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.ti -1c
+.RI "void(* \fBpingresp_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.ti -1c
+.RI "void(* \fBconnack_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.ti -1c
+.RI "void(* \fBregack_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.ti -1c
+.RI "void(* \fBpuback_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.ti -1c
+.RI "void(* \fBsuback_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.ti -1c
+.RI "void(* \fBdisconnect_recv\fP )(struct \fBmqtt_sn_connection\fP *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)"
+.br
+.ti -1c
+.RI "void(* \fBkeepalive_timeout\fP )(struct \fBmqtt_sn_connection\fP *mqc)"
+.br
+.in -1c
+
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para HomeStark a partir do código fonte\&.

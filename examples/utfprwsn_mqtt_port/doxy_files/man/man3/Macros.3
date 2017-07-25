@@ -1,0 +1,50 @@
+.TH "de controle" 3 "Sexta, 2 de Setembro de 2016" "Version 1.0" "HomeStark" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+de controle \- 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBss\fP(x)   sizeof(x)/sizeof(*x)"
+.br
+.RI "\fIDefine se o dispositivo deve se auto conectar de tempos em tempos\&. \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_AUTO_RECONNECT\fP"
+.br
+.RI "\fIDefine se o dispositivo deve se auto conectar de tempos em tempos\&. \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_RETRY_PING\fP   5"
+.br
+.RI "\fINúmero de tentativas de envio de PING REQUEST antes de desconectar nó <-> broker\&. \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_TIMEOUT_CONNECT\fP   9*CLOCK_SECOND"
+.br
+.RI "\fITempo base para comunicação MQTT-SN broker <-> nó \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_TIMEOUT\fP   CLOCK_SECOND"
+.br
+.RI "\fITempo base para comunicação MQTT-SN broker <-> nó \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_RETRY\fP   5"
+.br
+.RI "\fINúmero de tentativas de enviar qualquer pacote ao broker antes de desconectar\&. \fP"
+.ti -1c
+.RI "#define \fBMAX_QUEUE_MQTT_SN\fP   100"
+.br
+.ti -1c
+.RI "#define \fBMAX_TOPIC_USED\fP   100"
+.br
+.RI "\fINúmero máximo de tópicos que o usuário pode registrar, a API cria um conjunto de estruturas para o bind de topic e short topic id\&. \fP"
+.in -1c
+.SH "Descrição detalhada"
+.PP 
+Macros de controle utilizadas para o MQTT-SN 
+.SH "Documentação das macros"
+.PP 
+.SS "#define MAX_QUEUE_MQTT_SN   100"
+úmero máximo de tarefas a serem inseridas alocadas dinamicamente MQTT-SN 
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para HomeStark a partir do código fonte\&.

@@ -1,0 +1,43 @@
+.TH "mqtt_sn_task_t" 3 "Domingo, 4 de Setembro de 2016" "Version 1.0" "MQTT-SN_Contiki" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mqtt_sn_task_t \- 
+.PP
+Estrutura de tarefa de fila MQTT-SN\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mqtt_sn\&.h>\fP
+.SS "Campos de Dados"
+
+.in +1c
+.ti -1c
+.RI "uint8_t \fBmsg_type_q\fP"
+.br
+.RI "\fITipo de mensagem a ser alocada\&. \fP"
+.ti -1c
+.RI "uint8_t \fBshort_topic\fP"
+.br
+.RI "\fITópico curto ou topic id a ser publicado/inscrito\&. \fP"
+.ti -1c
+.RI "uint16_t \fBid_task\fP"
+.br
+.RI "\fIIdentificador da tarefa\&. \fP"
+.ti -1c
+.RI "uint8_t \fBqos_level\fP"
+.br
+.RI "\fINível QoS da tarefa a ser alocada na pilha\&. \fP"
+.ti -1c
+.RI "uint8_t \fBretain\fP"
+.br
+.in -1c
+.SH "Descrição detalhada"
+.PP 
+Estrutura de tarefa de fila MQTT-SN\&. 
+
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para MQTT-SN_Contiki a partir do código fonte\&.

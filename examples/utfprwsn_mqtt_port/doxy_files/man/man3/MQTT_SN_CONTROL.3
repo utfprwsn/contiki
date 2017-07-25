@@ -1,0 +1,196 @@
+.TH "MQTT_SN_CONTROL" 3 "Domingo, 4 de Setembro de 2016" "Version 1.0" "MQTT-SN_Contiki" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MQTT_SN_CONTROL \- 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMQTT_SN_MAX_PACKET_LENGTH\fP   (255)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_MAX_TOPIC_LENGTH\fP   (MQTT_SN_MAX_PACKET_LENGTH-6)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_ADVERTISE\fP   (0x00)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_SEARCHGW\fP   (0x01)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_GWINFO\fP   (0x02)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_CONNECT\fP   (0x04)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_CONNACK\fP   (0x05)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLTOPICREQ\fP   (0x06)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLTOPIC\fP   (0x07)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLMSGREQ\fP   (0x08)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLMSG\fP   (0x09)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_REGISTER\fP   (0x0A)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_REGACK\fP   (0x0B)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_PUBLISH\fP   (0x0C)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_PUBACK\fP   (0x0D)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_PUBCOMP\fP   (0x0E)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_PUBREC\fP   (0x0F)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_PUBREL\fP   (0x10)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_SUBSCRIBE\fP   (0x12)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_SUBACK\fP   (0x13)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_UNSUBSCRIBE\fP   (0x14)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_UNSUBACK\fP   (0x15)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_PINGREQ\fP   (0x16)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_PINGRESP\fP   (0x17)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_DISCONNECT\fP   (0x18)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLTOPICUPD\fP   (0x1A)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLTOPICRESP\fP   (0x1B)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLMSGUPD\fP   (0x1C)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_WILLMSGRESP\fP   (0x1D)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TYPE_SUB_WILDCARD\fP   (0x1E)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TOPIC_TYPE_NORMAL\fP   (0x00)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TOPIC_TYPE_NORMAL\fP   (0x00)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TOPIC_TYPE_PREDEFINED\fP   (0x01)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TOPIC_TYPE_PREDEFINED\fP   (0x01)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TOPIC_TYPE_SHORT\fP   (0x02)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_TOPIC_TYPE_SHORT\fP   (0x02)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_DUP\fP   (0x1 << 7)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_QOS_0\fP   (0x0 << 5)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_QOS_1\fP   (0x1 << 5)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_QOS_2\fP   (0x2 << 5)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_QOS_N1\fP   (0x3 << 5)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_RETAIN\fP   (0x1 << 4)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_WILL\fP   (0x1 << 3)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_FLAG_CLEAN\fP   (0x1 << 2)"
+.br
+.ti -1c
+.RI "#define \fBMQTT_SN_PROTOCOL_ID\fP   (0x01)"
+.br
+.ti -1c
+.RI "#define \fBACCEPTED\fP   0x00"
+.br
+.ti -1c
+.RI "#define \fBREJECTED_CONGESTION\fP   0x01"
+.br
+.ti -1c
+.RI "#define \fBREJECTED_INVALID_TOPIC_ID\fP   0x02"
+.br
+.ti -1c
+.RI "#define \fBREJECTED_NOT_SUPPORTED\fP   0x03"
+.br
+.ti -1c
+.RI "#define \fBss\fP(x)   sizeof(x)/sizeof(*x)"
+.br
+.RI "\fIComputa o tamanho de um vetor de ponteiros\&. \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_AUTO_RECONNECT\fP"
+.br
+.RI "\fIDefine se o dispositivo deve se auto conectar de tempos em tempos\&. \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_RETRY_PING\fP   5"
+.br
+.RI "\fINúmero de tentativas de envio de PING REQUEST antes de desconectar nó <-> broker\&. \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_TIMEOUT_CONNECT\fP   9*CLOCK_SECOND"
+.br
+.RI "\fITempo base para comunicação MQTT-SN broker <-> nó \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_TIMEOUT\fP   CLOCK_SECOND"
+.br
+.RI "\fITempo base para comunicação MQTT-SN broker <-> nó \fP"
+.ti -1c
+.RI "#define \fBMQTT_SN_RETRY\fP   5"
+.br
+.RI "\fINúmero de tentativas de enviar qualquer pacote ao broker antes de desconectar\&. \fP"
+.ti -1c
+.RI "#define \fBMAX_QUEUE_MQTT_SN\fP   100"
+.br
+.RI "\fINúmero máximo de tarefas a serem inseridas alocadas dinamicamente MQTT-SN\&. \fP"
+.ti -1c
+.RI "#define \fBMAX_TOPIC_USED\fP   100"
+.br
+.RI "\fINúmero máximo de tópicos que o usuário pode registrar, a API cria um conjunto de estruturas para o bind de topic e short topic id\&. \fP"
+.in -1c
+.SH "Descrição detalhada"
+.PP 
+Macros de protocolos utilizadas para o MQTT-SN
+.PP
+Macros de controle utilizadas para o MQTT-SN 
+.SH "Autor"
+.PP 
+Gerado automaticamente por Doxygen para MQTT-SN_Contiki a partir do código fonte\&.

@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>MQTT-SN_Contiki: Código-Fonte de mqtt_sn.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_symbol.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MQTT-SN_Contiki
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Porte do MQTT-SN para o sistema operacional Contiki-OS</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="annotated.html"><span>Estruturas&#160;de&#160;dados</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Globais</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Estruturas de dados</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Grupos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Páginas</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">mqtt_sn.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="mqtt__sn_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#ifndef MQTT__SN_H</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define MQTT__SN_H</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;simple-udp.h&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;clock.h&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;etimer.h&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;ctimer.h&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;list.h&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;net/ip/uip-debug.h&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;sys/ctimer.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//#define DEBUG_MQTT_SN</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="group__MQTT__SN__DEBUG.html#ga7871b41b94f3b5aac9e79ad353903ae7">   52</a></span>&#160;<span class="comment"></span><span class="preprocessor">#define DEBUG_OS</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="group__MQTT__SN__DEBUG.html#gac3a54f3a6ca71cb643dc99df536f503c">   56</a></span>&#160;<span class="preprocessor">#define DEBUG_TASK</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">//#define DEBUG_UDP</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span><span class="preprocessor">#ifdef DEBUG_TASK</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#define debug_task(fmt, args...) printf(&quot;\n[Tarefa] &quot;fmt, ##args)</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define debug_task(fmt, ...)</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#ifdef DEBUG_OS</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#define debug_os(fmt, args...) printf(&quot;\n[DEMO] &quot;fmt, ##args)</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define debug_os(fmt, ...)</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#ifdef DEBUG_MQTT_SN</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#define debug_mqtt(fmt, args...) printf(&quot;\n[MQTT-SN] &quot;fmt, ##args)</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#define debug_mqtt(fmt, ...)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#ifdef DEBUG_UDP</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#define debug_udp(fmt, args...) printf(&quot;\n[UDP] &quot;fmt, ##args)</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#define debug_udp(fmt, ...)</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#define MQTT_SN_MAX_PACKET_LENGTH  (255)</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#define MQTT_SN_MAX_TOPIC_LENGTH   (MQTT_SN_MAX_PACKET_LENGTH-6)</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_ADVERTISE     (0x00)</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_SEARCHGW      (0x01)</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_GWINFO        (0x02)</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_CONNECT       (0x04)</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_CONNACK       (0x05)</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLTOPICREQ  (0x06)</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLTOPIC     (0x07)</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLMSGREQ    (0x08)</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLMSG       (0x09)</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_REGISTER      (0x0A)</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_REGACK        (0x0B)</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_PUBLISH       (0x0C)</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_PUBACK        (0x0D)</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_PUBCOMP       (0x0E)</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_PUBREC        (0x0F)</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_PUBREL        (0x10)</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_SUBSCRIBE     (0x12)</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_SUBACK        (0x13)</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_UNSUBSCRIBE   (0x14)</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_UNSUBACK      (0x15)</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_PINGREQ       (0x16)</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_PINGRESP      (0x17)</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_DISCONNECT    (0x18)</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLTOPICUPD  (0x1A)</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLTOPICRESP (0x1B)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLMSGUPD    (0x1C)</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_WILLMSGRESP   (0x1D)</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#define MQTT_SN_TYPE_SUB_WILDCARD  (0x1E)</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#define MQTT_SN_TOPIC_TYPE_NORMAL     (0x00)</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#define MQTT_SN_TOPIC_TYPE_PREDEFINED (0x01)</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#define MQTT_SN_TOPIC_TYPE_SHORT      (0x02)</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_DUP     (0x1 &lt;&lt; 7)</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_QOS_0   (0x0 &lt;&lt; 5)</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_QOS_1   (0x1 &lt;&lt; 5)</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_QOS_2   (0x2 &lt;&lt; 5)</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_QOS_N1  (0x3 &lt;&lt; 5)</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_RETAIN  (0x1 &lt;&lt; 4)</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_WILL    (0x1 &lt;&lt; 3)</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#define MQTT_SN_FLAG_CLEAN   (0x1 &lt;&lt; 2)</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#define MQTT_SN_PROTOCOL_ID  (0x01)</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#define ACCEPTED                    0x00</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#define REJECTED_CONGESTION         0x01</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">#define REJECTED_INVALID_TOPIC_ID   0x02</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">#define REJECTED_NOT_SUPPORTED      0x03</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#define MQTT_SN_TOPIC_TYPE_NORMAL     (0x00)</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">#define MQTT_SN_TOPIC_TYPE_PREDEFINED (0x01)</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">#define MQTT_SN_TOPIC_TYPE_SHORT      (0x02)</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#ga34bf6ae7cc029057c70910ae26a3335f">  149</a></span>&#160;<span class="preprocessor">#define ss(x) sizeof(x)/sizeof(*x)               </span></div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#ga8d316cee94174b8c2d16e328fdf1e607">  150</a></span>&#160;<span class="preprocessor">#define MQTT_SN_AUTO_RECONNECT                   </span></div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#ga180af20d177732dc470c147452feb30f">  151</a></span>&#160;<span class="preprocessor">#define MQTT_SN_RETRY_PING        5              </span></div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#ga7533efb537d4d4eebf1b6d3d5256cb0b">  152</a></span>&#160;<span class="preprocessor">#define MQTT_SN_TIMEOUT_CONNECT   9*CLOCK_SECOND </span></div>
+<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#ga47da8d46176b160b0db00fe221725d4c">  153</a></span>&#160;<span class="preprocessor">#define MQTT_SN_TIMEOUT           CLOCK_SECOND   </span></div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#gaad5ac7de3008d8fa37447193aebc31e2">  154</a></span>&#160;<span class="preprocessor">#define MQTT_SN_RETRY             5              </span></div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#ga45ab5881e190d570f3784e50be2cce65">  155</a></span>&#160;<span class="preprocessor">#define MAX_QUEUE_MQTT_SN         100            </span></div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="group__MQTT__SN__CONTROL.html#ga5ed98e8fc00194886ebc14d25540f81b">  156</a></span>&#160;<span class="preprocessor">#define MAX_TOPIC_USED            100            </span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">typedef struct __attribute__((packed)){</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  uint8_t  msg_type;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  uint16_t duration;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;} <a class="code" href="structdisconnect__packet__t.html">disconnect_packet_t</a>;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)){</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  uint8_t  msg_type;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keywordtype">char</span> client_id[23];</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;} <a class="code" href="structping__req__t.html">ping_req_t</a>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)){</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  uint8_t flags;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  uint16_t topic_id;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  uint16_t message_id;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keywordtype">char</span> data[MQTT_SN_MAX_PACKET_LENGTH-7];</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;} <a class="code" href="structpublish__packet__t.html">publish_packet_t</a>;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)) {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  uint8_t flags;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  uint16_t message_id;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <span class="keywordtype">char</span> topic_name[MQTT_SN_MAX_TOPIC_LENGTH];</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;} <a class="code" href="structsubscribe__wildcard__packet__t.html">subscribe_wildcard_packet_t</a>;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)) {</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  uint8_t flags;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  uint16_t message_id;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  uint16_t topic_id;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;} <a class="code" href="structsubscribe__packet__t.html">subscribe_packet_t</a>;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)) {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  uint8_t flags;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  uint8_t protocol_id;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  uint16_t duration;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="keywordtype">char</span> client_id[23];</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;} <a class="code" href="structconnect__packet__t.html">connect_packet_t</a>;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)){</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  uint16_t topic_id;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  uint16_t message_id;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  <span class="keywordtype">char</span> topic_name[MQTT_SN_MAX_TOPIC_LENGTH];</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;} <a class="code" href="structregister__packet__t.html">register_packet_t</a>;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)){</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;  uint8_t flags;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  <span class="keywordtype">char</span> will_topic[MQTT_SN_MAX_TOPIC_LENGTH];</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;} <a class="code" href="structwilltopic__packet__t.html">willtopic_packet_t</a>;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)){</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  <span class="keywordtype">char</span> will_message[MQTT_SN_MAX_PACKET_LENGTH];</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;} <a class="code" href="structwillmessage__packet__t.html">willmessage_packet_t</a>;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>__attribute__((packed)){</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  uint8_t length;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  uint8_t type;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  uint16_t topic_id;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  uint16_t message_id;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  uint8_t return_code;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;} <a class="code" href="structregack__packet__t.html">regack_packet_t</a>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno"><a class="line" href="mqtt__sn_8h.html#a679e4bebc7798d960960760150bdc5a7">  362</a></span>&#160;<span class="keyword">typedef</span> void (*<a class="code" href="mqtt__sn_8h.html#a679e4bebc7798d960960760150bdc5a7">mqtt_sn_cb_f</a>)(<span class="keywordtype">char</span> *,<span class="keywordtype">char</span> *);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;</div>
+<div class="line"><a name="l00375"></a><span class="lineno"><a class="line" href="structmqtt__sn__task__t.html">  375</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="structmqtt__sn__task__t.html#afb14d280d486f10af744fb1ac7f145eb">  376</a></span>&#160;  uint8_t  <a class="code" href="structmqtt__sn__task__t.html#afb14d280d486f10af744fb1ac7f145eb">msg_type_q</a>;</div>
+<div class="line"><a name="l00377"></a><span class="lineno"><a class="line" href="structmqtt__sn__task__t.html#a25bc8ea535927589bca3720e0e838958">  377</a></span>&#160;  uint8_t  <a class="code" href="structmqtt__sn__task__t.html#a25bc8ea535927589bca3720e0e838958">short_topic</a>;</div>
+<div class="line"><a name="l00378"></a><span class="lineno"><a class="line" href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">  378</a></span>&#160;  uint16_t <a class="code" href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">id_task</a>;</div>
+<div class="line"><a name="l00379"></a><span class="lineno"><a class="line" href="structmqtt__sn__task__t.html#a5ce109928f26d01872230443c75c91f8">  379</a></span>&#160;  uint8_t  <a class="code" href="structmqtt__sn__task__t.html#a5ce109928f26d01872230443c75c91f8">qos_level</a>;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  uint8_t  retain;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;} <a class="code" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a>;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
+<div class="line"><a name="l00390"></a><span class="lineno"><a class="line" href="structnode.html">  390</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structnode.html">node</a> {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <a class="code" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a> data;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keyword">struct </span><a class="code" href="structnode.html">node</a> *link;</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;}*mqtt_queue_first, *mqtt_queue_last;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;</div>
+<div class="line"><a name="l00403"></a><span class="lineno"><a class="line" href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98">  403</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <a class="code" href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98">resp_con</a>{</div>
+<div class="line"><a name="l00404"></a><span class="lineno"><a class="line" href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">  404</a></span>&#160;   <a class="code" href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>,</div>
+<div class="line"><a name="l00405"></a><span class="lineno"><a class="line" href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f">  405</a></span>&#160;   <a class="code" href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f">SUCCESS_CON</a>,</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;} <a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;</div>
+<div class="line"><a name="l00411"></a><span class="lineno"><a class="line" href="structshort__topics__t.html">  411</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;   <span class="keywordtype">char</span> *topic_name;</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;   uint8_t short_topic_id;</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;   uint8_t subscribed;</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;} <a class="code" href="structshort__topics__t.html">short_topics_t</a>;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;</div>
+<div class="line"><a name="l00420"></a><span class="lineno"><a class="line" href="mqtt__sn_8h.html#aab2bca192b63f37bf4847be3686bca75">  420</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;  MQTTSN_CONNECTION_FAILED,</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;  MQTTSN_DISCONNECTED,</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;  MQTTSN_WAITING_CONNACK,</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;  MQTTSN_WAITING_WILLTOPICREQ,</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;  MQTTSN_WAITING_WILLMSGREQ,</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;  MQTTSN_WAITING_REGACK,</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  MQTTSN_CONNECTED,</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;  MQTTSN_TOPIC_REGISTERED,</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;  MQTTSN_TOPIC_SUBSCRIBING,</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;  MQTTSN_WAITING_PUBACK,</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;  MQTTSN_WAITING_SUBACK,</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  MQTTSN_PUB_REQ,</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;  MQTTSN_SUB_REQ,</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;  MQTTSN_REG_REQ</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;} <a class="code" href="mqtt__sn_8h.html#aab2bca192b63f37bf4847be3686bca75">mqtt_sn_status_t</a>;</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
+<div class="line"><a name="l00450"></a><span class="lineno"><a class="line" href="structmqtt__sn__con__t.html">  450</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;  <span class="keyword">struct </span>simple_udp_connection udp_con;</div>
+<div class="line"><a name="l00452"></a><span class="lineno"><a class="line" href="structmqtt__sn__con__t.html#ae3c6408a5f3fb41bcddcf7e8266f41a6">  452</a></span>&#160;  uint16_t <a class="code" href="structmqtt__sn__con__t.html#ae3c6408a5f3fb41bcddcf7e8266f41a6">udp_port</a>;</div>
+<div class="line"><a name="l00453"></a><span class="lineno"><a class="line" href="structmqtt__sn__con__t.html#a058796ada31936dced646e5da3eb329a">  453</a></span>&#160;  uint16_t *<a class="code" href="structmqtt__sn__con__t.html#a058796ada31936dced646e5da3eb329a">ipv6_broker</a>;</div>
+<div class="line"><a name="l00454"></a><span class="lineno"><a class="line" href="structmqtt__sn__con__t.html#a276b967ec5d6e3305ee4695488e4472b">  454</a></span>&#160;  uint8_t  <a class="code" href="structmqtt__sn__con__t.html#a276b967ec5d6e3305ee4695488e4472b">keep_alive</a>;</div>
+<div class="line"><a name="l00455"></a><span class="lineno"><a class="line" href="structmqtt__sn__con__t.html#a3880622ca383fee22fbbac18442bae32">  455</a></span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="structmqtt__sn__con__t.html#a3880622ca383fee22fbbac18442bae32">client_id</a>;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;  <span class="keywordtype">char</span> *will_topic;</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;  <span class="keywordtype">char</span> *will_message;</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;} <a class="code" href="structmqtt__sn__con__t.html">mqtt_sn_con_t</a>;</div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a575514d0f0fd3b6c5c4a2c75e604bf79">mqtt_sn_insert_queue</a>(<a class="code" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a> <span class="keyword">new</span>);</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#ad0a729c99366dad086be6be954e71f2c">mqtt_sn_delete_queue</a>();</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#a71004d5b7e8b1add14024102d8d62042">mqtt_sn_check_queue</a>();</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a172afa34fe10ad1ee4ffc0d226b35b4d">mqtt_sn_check_rc</a>(uint8_t rc);</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#af9146fa082fe2bc6612fb13dbb20ed36">mqtt_sn_recv_parser</a>(<span class="keyword">const</span> uint8_t *data);</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a8771e78d9d8d5379ff27fba1feefe37c">mqtt_sn_create_sck</a>(<a class="code" href="structmqtt__sn__con__t.html">mqtt_sn_con_t</a> mqtt_sn_connection, <span class="keywordtype">char</span> *topics[],<span class="keywordtype">size_t</span> topic_len, <a class="code" href="mqtt__sn_8h.html#a679e4bebc7798d960960760150bdc5a7">mqtt_sn_cb_f</a> cb_f);</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#ae17664af7f894e29743fafdf8bf98f89">mqtt_sn_reg_send</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;<a class="code" href="mqtt__sn_8h.html#aab2bca192b63f37bf4847be3686bca75">mqtt_sn_status_t</a> <a class="code" href="mqtt__sn_8h.html#a200e89a8fd400c652431bd505de6f827">mqtt_sn_check_status</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a1b8eb51076a2923f2c036f1ff925c168">mqtt_sn_con_send</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="mqtt__sn_8h.html#afb698c97e10afa31e2c11351f6ce9388">mqtt_sn_check_empty</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;</div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#ac598f98e844bfd5bbdb577099ddf06d1">parse_mqtt_type_string</a>(uint8_t type, <span class="keywordtype">char</span> **type_string);</div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#a46fe607d1db728d41ed6aec6fee3fc77">mqtt_sn_init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a550856b818c23fce9e4d5b253c3e7547">mqtt_sn_pub_send</a>(<span class="keywordtype">char</span> *topic,<span class="keywordtype">char</span> *message, <span class="keywordtype">bool</span> retain_flag, uint8_t qos);</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="mqtt__sn_8h.html#a9bd6d4e9304d00d28861751c22b146e4">mqtt_sn_check_status_string</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;uint8_t <a class="code" href="mqtt__sn_8h.html#adba0283cc8fadf24f2f04246c76e8cde">mqtt_sn_get_qos_flag</a>(int8_t qos);</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;</div>
+<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#ab8c0f238b41b373afb8b21e0f594b79d">mqtt_sn_pub</a>(<span class="keywordtype">char</span> *topic,<span class="keywordtype">char</span> *message, <span class="keywordtype">bool</span> retain_flag, uint8_t qos);</div>
+<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#a6674e1ecf45890d3a15ab667fe4a4f58">print_g_topics</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;</div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#ac9614aca44158215c43b8810e052939d">timeout_con</a>(<span class="keywordtype">void</span> *ptr);</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#a35dbd49b5fdc1d6e3dfe2b2d7255cf3e">timeout_ping_mqtt</a>(<span class="keywordtype">void</span> *ptr);</div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#af09083ea59a182fdf109b6e3fa213bec">mqtt_sn_ping_send</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="mqtt__sn_8h.html#a2620f37584b501fde35e71806a78b35a">unlock_tasks</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#aab8d5db0224c9b083af9f18094053795">mqtt_sn_sub</a>(<span class="keywordtype">char</span> *topic, uint8_t qos);</div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a105b8d440266b4a582f2d627e57be14a">mqtt_sn_sub_send</a>(<span class="keywordtype">char</span> *topic, uint8_t qos);</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a831d03a2cd7fbc884cec2013c2ebc823">mqtt_sn_sub_send_wildcard</a>(<span class="keywordtype">char</span> *topic, uint8_t qos);</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#af60c0aa848adffbfe41a2e655a279f9d">verf_hist_sub</a>(<span class="keywordtype">char</span> *topic);</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;</div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#ad826ee5a40e60c891b4f009ccaa4d5fa">mqtt_sn_disconnect_send</a>(uint16_t duration);</div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#ada3c457ee81d0b29892742401845d918">init_vectors</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#ae0cb1cb4ad61ca752d66b286f839d72b">init_sub</a>(<span class="keywordtype">void</span> *ptr);</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;</div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#ac81a0d1e0daa51cdb8495a52e317e140">verf_register</a>(<span class="keywordtype">char</span> *topic);</div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;</div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#a6718f310e6635c018a7126c5b1311e50">mqtt_sn_will_message_send</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;</div>
+<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#adfb1174ee7cff21df2d0afbb6fe2db30">mqtt_sn_will_topic_send</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160;</div>
+<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mqtt__sn_8h.html#ab6fc2a07c15881877943348bef786cd8">mqtt_sn_udp_rec_cb</a>(<span class="keyword">struct</span> simple_udp_connection *c,</div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;                            <span class="keyword">const</span> uip_ipaddr_t *sender_addr,</div>
+<div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;                            uint16_t sender_port,</div>
+<div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;                            <span class="keyword">const</span> uip_ipaddr_t *receiver_addr,</div>
+<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;                            uint16_t receiver_port,</div>
+<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;                            <span class="keyword">const</span> uint8_t *data,</div>
+<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;                            uint16_t datalen);</div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;</div>
+<div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#ac5fde757ae886c8827b853125f7458bd">mqtt_sn_sub_wildcard</a>(<span class="keywordtype">char</span> *topic, uint8_t qos);</div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;</div>
+<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;<a class="code" href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> <a class="code" href="mqtt__sn_8h.html#aa6e0e9b8d7769407ab35fec5443e3896">mqtt_sn_regack_send</a>(uint16_t msg_id, uint16_t topic_id);</div>
+<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;</div>
+<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="structnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">Estrutura de fila MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:390</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a200e89a8fd400c652431bd505de6f827"><div class="ttname"><a href="mqtt__sn_8h.html#a200e89a8fd400c652431bd505de6f827">mqtt_sn_check_status</a></div><div class="ttdeci">mqtt_sn_status_t mqtt_sn_check_status(void)</div><div class="ttdoc">Checa o status da conexão MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:188</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ac5fde757ae886c8827b853125f7458bd"><div class="ttname"><a href="mqtt__sn_8h.html#ac5fde757ae886c8827b853125f7458bd">mqtt_sn_sub_wildcard</a></div><div class="ttdeci">resp_con_t mqtt_sn_sub_wildcard(char *topic, uint8_t qos)</div><div class="ttdoc">Prepara tarefa de SUBSCRIBE do tipo WILDCARD. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:227</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html_a3880622ca383fee22fbbac18442bae32"><div class="ttname"><a href="structmqtt__sn__con__t.html#a3880622ca383fee22fbbac18442bae32">mqtt_sn_con_t::client_id</a></div><div class="ttdeci">const char * client_id</div><div class="ttdoc">Identificador de cliente para conexão com o broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:455</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a46fe607d1db728d41ed6aec6fee3fc77"><div class="ttname"><a href="mqtt__sn_8h.html#a46fe607d1db728d41ed6aec6fee3fc77">mqtt_sn_init</a></div><div class="ttdeci">void mqtt_sn_init(void)</div><div class="ttdoc">Inicializa PROCESS_THREAD MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:976</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_add91ba4199db8665b9b9fc56fc6783a6"><div class="ttname"><a href="mqtt__sn_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a></div><div class="ttdeci">enum resp_con resp_con_t</div><div class="ttdoc">Tipo de erros de funções. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_af60c0aa848adffbfe41a2e655a279f9d"><div class="ttname"><a href="mqtt__sn_8h.html#af60c0aa848adffbfe41a2e655a279f9d">verf_hist_sub</a></div><div class="ttdeci">resp_con_t verf_hist_sub(char *topic)</div><div class="ttdoc">Verifica se o tópico já foi registrado. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:295</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html"><div class="ttname"><a href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a></div><div class="ttdoc">Estrutura de tarefa de fila MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:375</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a6718f310e6635c018a7126c5b1311e50"><div class="ttname"><a href="mqtt__sn_8h.html#a6718f310e6635c018a7126c5b1311e50">mqtt_sn_will_message_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_will_message_send(void)</div><div class="ttdoc">Envia mensagem de LWT. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:388</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_adfb1174ee7cff21df2d0afbb6fe2db30"><div class="ttname"><a href="mqtt__sn_8h.html#adfb1174ee7cff21df2d0afbb6fe2db30">mqtt_sn_will_topic_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_will_topic_send(void)</div><div class="ttdoc">Envia tópico de LWT. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:364</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a754c1055b4431040415cf01b39caaa98"><div class="ttname"><a href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98">resp_con</a></div><div class="ttdeci">resp_con</div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:403</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_af09083ea59a182fdf109b6e3fa213bec"><div class="ttname"><a href="mqtt__sn_8h.html#af09083ea59a182fdf109b6e3fa213bec">mqtt_sn_ping_send</a></div><div class="ttdeci">void mqtt_sn_ping_send(void)</div><div class="ttdoc">Envia requisição de ping ao broker. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:410</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a1dba79ab8685a56d3ae57d84aca21ce8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">mqtt_sn_task_t::id_task</a></div><div class="ttdeci">uint16_t id_task</div><div class="ttdoc">Identificador da tarefa. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:378</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_aa6e0e9b8d7769407ab35fec5443e3896"><div class="ttname"><a href="mqtt__sn_8h.html#aa6e0e9b8d7769407ab35fec5443e3896">mqtt_sn_regack_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_regack_send(uint16_t msg_id, uint16_t topic_id)</div><div class="ttdoc">Envia pacote do tipo REGACK ao broker. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:487</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a8771e78d9d8d5379ff27fba1feefe37c"><div class="ttname"><a href="mqtt__sn_8h.html#a8771e78d9d8d5379ff27fba1feefe37c">mqtt_sn_create_sck</a></div><div class="ttdeci">resp_con_t mqtt_sn_create_sck(mqtt_sn_con_t mqtt_sn_connection, char *topics[], size_t topic_len, mqtt_sn_cb_f cb_f)</div><div class="ttdoc">Inicia conexão ao broker UDP. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:876</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html_ae3c6408a5f3fb41bcddcf7e8266f41a6"><div class="ttname"><a href="structmqtt__sn__con__t.html#ae3c6408a5f3fb41bcddcf7e8266f41a6">mqtt_sn_con_t::udp_port</a></div><div class="ttdeci">uint16_t udp_port</div><div class="ttdoc">Porta UDP de conexão com o broker (default:1884) </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:452</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a679e4bebc7798d960960760150bdc5a7"><div class="ttname"><a href="mqtt__sn_8h.html#a679e4bebc7798d960960760150bdc5a7">mqtt_sn_cb_f</a></div><div class="ttdeci">void(* mqtt_sn_cb_f)(char *, char *)</div><div class="ttdoc">Tipo de função de callback que deve ser repassada ao broker. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:362</div></div>
+<div class="ttc" id="structsubscribe__wildcard__packet__t_html"><div class="ttname"><a href="structsubscribe__wildcard__packet__t.html">subscribe_wildcard_packet_t</a></div><div class="ttdoc">Estrutura de pacote de inscrição do tipo Wildcard MQTT-SN. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_aab2bca192b63f37bf4847be3686bca75"><div class="ttname"><a href="mqtt__sn_8h.html#aab2bca192b63f37bf4847be3686bca75">mqtt_sn_status_t</a></div><div class="ttdeci">mqtt_sn_status_t</div><div class="ttdoc">Estados da ASM do MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:420</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_afb14d280d486f10af744fb1ac7f145eb"><div class="ttname"><a href="structmqtt__sn__task__t.html#afb14d280d486f10af744fb1ac7f145eb">mqtt_sn_task_t::msg_type_q</a></div><div class="ttdeci">uint8_t msg_type_q</div><div class="ttdoc">Tipo de mensagem a ser alocada. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:376</div></div>
+<div class="ttc" id="structping__req__t_html"><div class="ttname"><a href="structping__req__t.html">ping_req_t</a></div><div class="ttdoc">Estrutura de pacote de desconexão do broker MQTT-SN. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ad0a729c99366dad086be6be954e71f2c"><div class="ttname"><a href="mqtt__sn_8h.html#ad0a729c99366dad086be6be954e71f2c">mqtt_sn_delete_queue</a></div><div class="ttdeci">void mqtt_sn_delete_queue()</div><div class="ttdoc">Remove o elemento mais próximo de ser processado. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:669</div></div>
+<div class="ttc" id="structpublish__packet__t_html"><div class="ttname"><a href="structpublish__packet__t.html">publish_packet_t</a></div><div class="ttdoc">Estrutura de pacote de publicação MQTT-SN. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a831d03a2cd7fbc884cec2013c2ebc823"><div class="ttname"><a href="mqtt__sn_8h.html#a831d03a2cd7fbc884cec2013c2ebc823">mqtt_sn_sub_send_wildcard</a></div><div class="ttdeci">resp_con_t mqtt_sn_sub_send_wildcard(char *topic, uint8_t qos)</div><div class="ttdoc">Envia pacote SUBSCRIBE do tipo WILDCARD ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:587</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ae17664af7f894e29743fafdf8bf98f89"><div class="ttname"><a href="mqtt__sn_8h.html#ae17664af7f894e29743fafdf8bf98f89">mqtt_sn_reg_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_reg_send(void)</div><div class="ttdoc">Envio de mensagens ao broker do tipo REGISTER. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:444</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ac9614aca44158215c43b8810e052939d"><div class="ttname"><a href="mqtt__sn_8h.html#ac9614aca44158215c43b8810e052939d">timeout_con</a></div><div class="ttdeci">void timeout_con(void *ptr)</div><div class="ttdoc">Processa timeout de pacotes. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:996</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a35dbd49b5fdc1d6e3dfe2b2d7255cf3e"><div class="ttname"><a href="mqtt__sn_8h.html#a35dbd49b5fdc1d6e3dfe2b2d7255cf3e">timeout_ping_mqtt</a></div><div class="ttdeci">void timeout_ping_mqtt(void *ptr)</div><div class="ttdoc">Processa timeout de ping. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:1063</div></div>
+<div class="ttc" id="structconnect__packet__t_html"><div class="ttname"><a href="structconnect__packet__t.html">connect_packet_t</a></div><div class="ttdoc">Estrutura de pacotes MQTT-SN do tipo CONNECT. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da"><div class="ttname"><a href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a></div><div class="ttdoc">Erro ao processar algo. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:404</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html_a058796ada31936dced646e5da3eb329a"><div class="ttname"><a href="structmqtt__sn__con__t.html#a058796ada31936dced646e5da3eb329a">mqtt_sn_con_t::ipv6_broker</a></div><div class="ttdeci">uint16_t * ipv6_broker</div><div class="ttdoc">Endereço IPv6 do broker UDP. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:453</div></div>
+<div class="ttc" id="structwilltopic__packet__t_html"><div class="ttname"><a href="structwilltopic__packet__t.html">willtopic_packet_t</a></div><div class="ttdoc">Estrutura de pacotes MQTT-SN do tipo WILL TOPIC. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a2620f37584b501fde35e71806a78b35a"><div class="ttname"><a href="mqtt__sn_8h.html#a2620f37584b501fde35e71806a78b35a">unlock_tasks</a></div><div class="ttdeci">bool unlock_tasks(void)</div><div class="ttdoc">Libera opção de geração de tarefas. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:110</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_adba0283cc8fadf24f2f04246c76e8cde"><div class="ttname"><a href="mqtt__sn_8h.html#adba0283cc8fadf24f2f04246c76e8cde">mqtt_sn_get_qos_flag</a></div><div class="ttdeci">uint8_t mqtt_sn_get_qos_flag(int8_t qos)</div><div class="ttdoc">Gera a flag de nível QoS. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:212</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f"><div class="ttname"><a href="mqtt__sn_8h.html#a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f">SUCCESS_CON</a></div><div class="ttdoc">Sucesso ao processar algo. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:405</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a575514d0f0fd3b6c5c4a2c75e604bf79"><div class="ttname"><a href="mqtt__sn_8h.html#a575514d0f0fd3b6c5c4a2c75e604bf79">mqtt_sn_insert_queue</a></div><div class="ttdeci">resp_con_t mqtt_sn_insert_queue(mqtt_sn_task_t new)</div><div class="ttdoc">Insere uma tarefa na fila. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:630</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ada3c457ee81d0b29892742401845d918"><div class="ttname"><a href="mqtt__sn_8h.html#ada3c457ee81d0b29892742401845d918">init_vectors</a></div><div class="ttdeci">void init_vectors(void)</div><div class="ttdoc">Inicializa os vetores MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:349</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a71004d5b7e8b1add14024102d8d62042"><div class="ttname"><a href="mqtt__sn_8h.html#a71004d5b7e8b1add14024102d8d62042">mqtt_sn_check_queue</a></div><div class="ttdeci">void mqtt_sn_check_queue()</div><div class="ttdoc">Lista as tarefas da fila. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:690</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a550856b818c23fce9e4d5b253c3e7547"><div class="ttname"><a href="mqtt__sn_8h.html#a550856b818c23fce9e4d5b253c3e7547">mqtt_sn_pub_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_pub_send(char *topic, char *message, bool retain_flag, uint8_t qos)</div><div class="ttdoc">Envia pacote PUBLISH ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:501</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ab6fc2a07c15881877943348bef786cd8"><div class="ttname"><a href="mqtt__sn_8h.html#ab6fc2a07c15881877943348bef786cd8">mqtt_sn_udp_rec_cb</a></div><div class="ttdeci">void mqtt_sn_udp_rec_cb(struct simple_udp_connection *c, const uip_ipaddr_t *sender_addr, uint16_t sender_port, const uip_ipaddr_t *receiver_addr, uint16_t receiver_port, const uint8_t *data, uint16_t datalen)</div><div class="ttdoc">Callback de recepção UDP. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:865</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a5ce109928f26d01872230443c75c91f8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a5ce109928f26d01872230443c75c91f8">mqtt_sn_task_t::qos_level</a></div><div class="ttdeci">uint8_t qos_level</div><div class="ttdoc">Nível QoS da tarefa a ser alocada na pilha. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:379</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a1b8eb51076a2923f2c036f1ff925c168"><div class="ttname"><a href="mqtt__sn_8h.html#a1b8eb51076a2923f2c036f1ff925c168">mqtt_sn_con_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_con_send(void)</div><div class="ttdoc">Envia requisição de conexão ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:422</div></div>
+<div class="ttc" id="structwillmessage__packet__t_html"><div class="ttname"><a href="structwillmessage__packet__t.html">willmessage_packet_t</a></div><div class="ttdoc">Estrutura de pacotes MQTT-SN do tipo WILL MESSAGE. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a6674e1ecf45890d3a15ab667fe4a4f58"><div class="ttname"><a href="mqtt__sn_8h.html#a6674e1ecf45890d3a15ab667fe4a4f58">print_g_topics</a></div><div class="ttdeci">void print_g_topics(void)</div><div class="ttdoc">Exibe os tópicos registrados. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:341</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a25bc8ea535927589bca3720e0e838958"><div class="ttname"><a href="structmqtt__sn__task__t.html#a25bc8ea535927589bca3720e0e838958">mqtt_sn_task_t::short_topic</a></div><div class="ttdeci">uint8_t short_topic</div><div class="ttdoc">Tópico curto ou topic id a ser publicado/inscrito. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:377</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html"><div class="ttname"><a href="structmqtt__sn__con__t.html">mqtt_sn_con_t</a></div><div class="ttdoc">Estrutura de conexão ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:450</div></div>
+<div class="ttc" id="structregister__packet__t_html"><div class="ttname"><a href="structregister__packet__t.html">register_packet_t</a></div><div class="ttdoc">Estrutura de pacotes MQTT-SN do tipo REGISTER. </div></div>
+<div class="ttc" id="structdisconnect__packet__t_html"><div class="ttname"><a href="structdisconnect__packet__t.html">disconnect_packet_t</a></div><div class="ttdoc">Estrutura de pacote de desconexão do broker MQTT-SN. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_af9146fa082fe2bc6612fb13dbb20ed36"><div class="ttname"><a href="mqtt__sn_8h.html#af9146fa082fe2bc6612fb13dbb20ed36">mqtt_sn_recv_parser</a></div><div class="ttdeci">void mqtt_sn_recv_parser(const uint8_t *data)</div><div class="ttdoc">Realiza o parsing das mensagens UDP recebidas. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:717</div></div>
+<div class="ttc" id="structsubscribe__packet__t_html"><div class="ttname"><a href="structsubscribe__packet__t.html">subscribe_packet_t</a></div><div class="ttdoc">Estrutura de pacote MQTT-SN do tipo SUBSCRIBE. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ac81a0d1e0daa51cdb8495a52e317e140"><div class="ttname"><a href="mqtt__sn_8h.html#ac81a0d1e0daa51cdb8495a52e317e140">verf_register</a></div><div class="ttdeci">resp_con_t verf_register(char *topic)</div><div class="ttdoc">Verifica pré-registro do tópico. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:331</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_afb698c97e10afa31e2c11351f6ce9388"><div class="ttname"><a href="mqtt__sn_8h.html#afb698c97e10afa31e2c11351f6ce9388">mqtt_sn_check_empty</a></div><div class="ttdeci">bool mqtt_sn_check_empty(void)</div><div class="ttdoc">Checa o status da fila de tarefas MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:709</div></div>
+<div class="ttc" id="structregack__packet__t_html"><div class="ttname"><a href="structregack__packet__t.html">regack_packet_t</a></div><div class="ttdoc">Estrutura de pacotes MQTT-SN do tipo REGACK. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ae0cb1cb4ad61ca752d66b286f839d72b"><div class="ttname"><a href="mqtt__sn_8h.html#ae0cb1cb4ad61ca752d66b286f839d72b">init_sub</a></div><div class="ttdeci">void init_sub(void *ptr)</div><div class="ttdoc">Inicia o evento de SUBSCRIBE. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:116</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html_a276b967ec5d6e3305ee4695488e4472b"><div class="ttname"><a href="structmqtt__sn__con__t.html#a276b967ec5d6e3305ee4695488e4472b">mqtt_sn_con_t::keep_alive</a></div><div class="ttdeci">uint8_t keep_alive</div><div class="ttdoc">Tempo de requisição Keep Alive para PINGREQ e PINGRESP. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:454</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a9bd6d4e9304d00d28861751c22b146e4"><div class="ttname"><a href="mqtt__sn_8h.html#a9bd6d4e9304d00d28861751c22b146e4">mqtt_sn_check_status_string</a></div><div class="ttdeci">char * mqtt_sn_check_status_string(void)</div><div class="ttdoc">Checa o status da conexãoe em String. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:159</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ab8c0f238b41b373afb8b21e0f594b79d"><div class="ttname"><a href="mqtt__sn_8h.html#ab8c0f238b41b373afb8b21e0f594b79d">mqtt_sn_pub</a></div><div class="ttdeci">resp_con_t mqtt_sn_pub(char *topic, char *message, bool retain_flag, uint8_t qos)</div><div class="ttdoc">Prepara requisição de publicação ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:280</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a172afa34fe10ad1ee4ffc0d226b35b4d"><div class="ttname"><a href="mqtt__sn_8h.html#a172afa34fe10ad1ee4ffc0d226b35b4d">mqtt_sn_check_rc</a></div><div class="ttdeci">resp_con_t mqtt_sn_check_rc(uint8_t rc)</div><div class="ttdoc">Envia requisição de conexão ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:192</div></div>
+<div class="ttc" id="structshort__topics__t_html"><div class="ttname"><a href="structshort__topics__t.html">short_topics_t</a></div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:411</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_a105b8d440266b4a582f2d627e57be14a"><div class="ttname"><a href="mqtt__sn_8h.html#a105b8d440266b4a582f2d627e57be14a">mqtt_sn_sub_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_sub_send(char *topic, uint8_t qos)</div><div class="ttdoc">Envia pacote SUBSCRIBE ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:553</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ac598f98e844bfd5bbdb577099ddf06d1"><div class="ttname"><a href="mqtt__sn_8h.html#ac598f98e844bfd5bbdb577099ddf06d1">parse_mqtt_type_string</a></div><div class="ttdeci">void parse_mqtt_type_string(uint8_t type, char **type_string)</div><div class="ttdoc">Retorna a string de status correspondente. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:121</div></div>
+<div class="ttc" id="mqtt__sn_8h_html_ad826ee5a40e60c891b4f009ccaa4d5fa"><div class="ttname"><a href="mqtt__sn_8h.html#ad826ee5a40e60c891b4f009ccaa4d5fa">mqtt_sn_disconnect_send</a></div><div class="ttdeci">resp_con_t mqtt_sn_disconnect_send(uint16_t duration)</div><div class="ttdoc">Envia pacote DISCONNECT ao broker MQTT-SN. </div></div>
+<div class="ttc" id="mqtt__sn_8h_html_aab8d5db0224c9b083af9f18094053795"><div class="ttname"><a href="mqtt__sn_8h.html#aab8d5db0224c9b083af9f18094053795">mqtt_sn_sub</a></div><div class="ttdeci">resp_con_t mqtt_sn_sub(char *topic, uint8_t qos)</div><div class="ttdoc">Prepara requisição de inscrição ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.c:239</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado em Domingo, 4 de Setembro de 2016 20:34:38 para MQTT-SN_Contiki por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

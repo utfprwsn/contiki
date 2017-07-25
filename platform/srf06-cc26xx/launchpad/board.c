@@ -42,6 +42,7 @@
 #include "ti-lib.h"
 #include "board-peripherals.h"
 #include "rf-core/rf-switch.h"
+#include "board-i2c.h"
 
 #include <stdint.h>
 #include <string.h>
@@ -92,6 +93,9 @@ board_init()
   /* Apply settings and wait for them to take effect */
   ti_lib_prcm_load_set();
   while(!ti_lib_prcm_load_get());
+
+  /* I2C controller */
+  board_i2c_wakeup();
 
   /* Make sure the external flash is in the lower power mode */
   ext_flash_init();

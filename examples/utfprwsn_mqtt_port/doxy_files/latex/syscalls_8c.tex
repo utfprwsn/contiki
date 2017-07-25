@@ -1,0 +1,38 @@
+\hypertarget{syscalls_8c}{\section{Referência ao ficheiro tools/syscalls.c}
+\label{syscalls_8c}\index{tools/syscalls.\+c@{tools/syscalls.\+c}}
+}
+
+
+System calls.  
+
+
+{\ttfamily \#include $<$sys/types.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+Diagrama de dependências de inclusão para syscalls.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{syscalls_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group__newlib_gad72dbcf6d0153db1b8d8a58001feed83}{\#define {\bfseries D\+E\+B\+U\+G}~0}\label{group__newlib_gad72dbcf6d0153db1b8d8a58001feed83}
+
+\item 
+\hypertarget{group__newlib_ga1f464e950a4fa11e8821b5c725921a15}{\#define {\bfseries P\+R\+I\+N\+T\+F}(...)}\label{group__newlib_ga1f464e950a4fa11e8821b5c725921a15}
+
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+caddr\+\_\+t \hyperlink{group__newlib_gaae54d7b9578ba1fc171ce6f30f4c68a3}{\+\_\+sbrk} (int incr)
+\begin{DoxyCompactList}\small\item\em Enlarges the allocated heap space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição detalhada}
+System calls. 
+

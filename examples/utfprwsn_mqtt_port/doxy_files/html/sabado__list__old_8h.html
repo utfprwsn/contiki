@@ -1,0 +1,1020 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>MQTT-SNContiki: Referência ao ficheiro aux_tools/sabado_list_old.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo_symbol.png"/></td>
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">MQTT-SNContiki
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Port do MQTT-SN para o sistema operacional Contiki-OS</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Localizar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="modules.html"><span>Módulos</span></a></li>
+      <li><a href="annotated.html"><span>Estruturas&#160;de&#160;dados</span></a></li>
+      <li class="current"><a href="files.html"><span>Ficheiros</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Localizar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;ficheiros</span></a></li>
+      <li><a href="globals.html"><span>Globais</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tudo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Estruturas de dados</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Ficheiros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funções</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variáveis</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Definições de tipos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerações</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Valores da enumeração</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Grupos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Páginas</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b5b05072f5c4b7a0cdd160663a7e05b5.html">aux_tools</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Estruturas de Dados</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Definições de tipos</a> &#124;
+<a href="#enum-members">Enumerações</a> &#124;
+<a href="#func-members">Funções</a> &#124;
+<a href="#var-members">Variáveis</a>  </div>
+  <div class="headertitle">
+<div class="title">Referência ao ficheiro sabado_list_old.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><pre class="fragment">    Conjunto de protótipos e definiçoes do protocolo MQTT-SN
+</pre>  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &quot;simple-udp.h&quot;</code><br />
+<code>#include &quot;clock.h&quot;</code><br />
+<code>#include &quot;etimer.h&quot;</code><br />
+<code>#include &quot;ctimer.h&quot;</code><br />
+<code>#include &quot;list.h&quot;</code><br />
+<code>#include &quot;net/ip/uip-debug.h&quot;</code><br />
+<code>#include &quot;sys/ctimer.h&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Diagrama de dependências de inclusão para sabado_list_old.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="sabado__list__old_8h__incl.png" border="0" usemap="#aux__tools_2sabado__list__old_8h" alt=""/></div>
+</div>
+</div>
+<p><a href="sabado__list__old_8h_source.html">Ir para o código fonte deste ficheiro.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Estruturas de Dados</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">estruturas para o bind de topic e short topic id  <a href="structmqtt__sn__task__t.html#details">Mais...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__sn__list__task.html">mqtt_sn_list_task</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structconnect__packet__t.html">connect_packet_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura de pacotes MQTT-SN do tipo CONNECT.  <a href="structconnect__packet__t.html#details">Mais...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structregister__packet__t.html">register_packet_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura de pacotes MQTT-SN do tipo REGISTER.  <a href="structregister__packet__t.html#details">Mais...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structshort__topics__t.html">short_topics_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmqtt__sn__con__t.html">mqtt_sn_con_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estrutura de conexão ao broker MQTT-SN.  <a href="structmqtt__sn__con__t.html#details">Mais...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a2949e816367fa801d4015f596cf2925a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2949e816367fa801d4015f596cf2925a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_MQTT_SN</b></td></tr>
+<tr class="separator:a2949e816367fa801d4015f596cf2925a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7871b41b94f3b5aac9e79ad353903ae7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7871b41b94f3b5aac9e79ad353903ae7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_OS</b></td></tr>
+<tr class="separator:a7871b41b94f3b5aac9e79ad353903ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2308ff2469d9ca327d83e76ddc5e4b9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2308ff2469d9ca327d83e76ddc5e4b9f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>debug_logic</b>(fmt,...)</td></tr>
+<tr class="separator:a2308ff2469d9ca327d83e76ddc5e4b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4414818dcd874c17a091c7a4d9f9ed37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4414818dcd874c17a091c7a4d9f9ed37"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>debug_os</b>(fmt, args...)&#160;&#160;&#160;printf(&quot;\n[HOMESTARK] &quot;fmt, ##args)</td></tr>
+<tr class="separator:a4414818dcd874c17a091c7a4d9f9ed37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e2de92bfa1195fcee6b320e7445986"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3e2de92bfa1195fcee6b320e7445986"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>debug_mqtt</b>(fmt, args...)&#160;&#160;&#160;printf(&quot;\n[MQTT-SN] &quot;fmt, ##args)</td></tr>
+<tr class="separator:ae3e2de92bfa1195fcee6b320e7445986"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5347618ab59b9090d2d4dfcaf37395"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d5347618ab59b9090d2d4dfcaf37395"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>debug_udp</b>(fmt,...)</td></tr>
+<tr class="separator:a0d5347618ab59b9090d2d4dfcaf37395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6620fe642df6fedae5da980e3cc1685"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6620fe642df6fedae5da980e3cc1685"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_MAX_PACKET_LENGTH</b>&#160;&#160;&#160;(255)</td></tr>
+<tr class="separator:ac6620fe642df6fedae5da980e3cc1685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dccee9ebffc9265d5c3cd3107ca601b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3dccee9ebffc9265d5c3cd3107ca601b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_MAX_TOPIC_LENGTH</b>&#160;&#160;&#160;(MQTT_SN_MAX_PACKET_LENGTH-6)</td></tr>
+<tr class="separator:a3dccee9ebffc9265d5c3cd3107ca601b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a064185df38354c8d31cba8f173a8b39f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a064185df38354c8d31cba8f173a8b39f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_ADVERTISE</b>&#160;&#160;&#160;(0x00)</td></tr>
+<tr class="separator:a064185df38354c8d31cba8f173a8b39f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8170ee7211bec9249606010e8af4765d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8170ee7211bec9249606010e8af4765d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_SEARCHGW</b>&#160;&#160;&#160;(0x01)</td></tr>
+<tr class="separator:a8170ee7211bec9249606010e8af4765d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5be35929c3e372b4a2fed0e133be0e92"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5be35929c3e372b4a2fed0e133be0e92"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_GWINFO</b>&#160;&#160;&#160;(0x02)</td></tr>
+<tr class="separator:a5be35929c3e372b4a2fed0e133be0e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad512804838d2ba709e82ffb010d991"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ad512804838d2ba709e82ffb010d991"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_CONNECT</b>&#160;&#160;&#160;(0x04)</td></tr>
+<tr class="separator:a0ad512804838d2ba709e82ffb010d991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4469be7c31731176bfa8c5bd38f3a58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4469be7c31731176bfa8c5bd38f3a58"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_CONNACK</b>&#160;&#160;&#160;(0x05)</td></tr>
+<tr class="separator:ac4469be7c31731176bfa8c5bd38f3a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a914fff9b2b9e7c08d6b732599f0cf348"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a914fff9b2b9e7c08d6b732599f0cf348"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLTOPICREQ</b>&#160;&#160;&#160;(0x06)</td></tr>
+<tr class="separator:a914fff9b2b9e7c08d6b732599f0cf348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c657f75f0f02a093b8623a50dc0af8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95c657f75f0f02a093b8623a50dc0af8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLTOPIC</b>&#160;&#160;&#160;(0x07)</td></tr>
+<tr class="separator:a95c657f75f0f02a093b8623a50dc0af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefa36203de4d9ff51372abd51fa6521a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefa36203de4d9ff51372abd51fa6521a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLMSGREQ</b>&#160;&#160;&#160;(0x08)</td></tr>
+<tr class="separator:aefa36203de4d9ff51372abd51fa6521a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ab12c9559a2419e1c88080fa3c594c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ab12c9559a2419e1c88080fa3c594c0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLMSG</b>&#160;&#160;&#160;(0x09)</td></tr>
+<tr class="separator:a0ab12c9559a2419e1c88080fa3c594c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a742472508835bbeab8a22d6294f34e8f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a742472508835bbeab8a22d6294f34e8f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_REGISTER</b>&#160;&#160;&#160;(0x0A)</td></tr>
+<tr class="separator:a742472508835bbeab8a22d6294f34e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab600be8ae75c06a49cc89d0f7255ac12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab600be8ae75c06a49cc89d0f7255ac12"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_REGACK</b>&#160;&#160;&#160;(0x0B)</td></tr>
+<tr class="separator:ab600be8ae75c06a49cc89d0f7255ac12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c34c285be401165ca3b9ef1c9180354"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c34c285be401165ca3b9ef1c9180354"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_PUBLISH</b>&#160;&#160;&#160;(0x0C)</td></tr>
+<tr class="separator:a1c34c285be401165ca3b9ef1c9180354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bc44c53d2905a5242a3b72d44c125b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bc44c53d2905a5242a3b72d44c125b2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_PUBACK</b>&#160;&#160;&#160;(0x0D)</td></tr>
+<tr class="separator:a5bc44c53d2905a5242a3b72d44c125b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef39c4b8c3dd36ed4caf90f6a716585"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acef39c4b8c3dd36ed4caf90f6a716585"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_PUBCOMP</b>&#160;&#160;&#160;(0x0E)</td></tr>
+<tr class="separator:acef39c4b8c3dd36ed4caf90f6a716585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4953c83079abc9804fce7dca7b0a648"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4953c83079abc9804fce7dca7b0a648"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_PUBREC</b>&#160;&#160;&#160;(0x0F)</td></tr>
+<tr class="separator:ac4953c83079abc9804fce7dca7b0a648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74daeb038d5cf996c680fc34b187dfba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74daeb038d5cf996c680fc34b187dfba"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_PUBREL</b>&#160;&#160;&#160;(0x10)</td></tr>
+<tr class="separator:a74daeb038d5cf996c680fc34b187dfba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4f5d7bc584d5ffcda760303ab76904"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e4f5d7bc584d5ffcda760303ab76904"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_SUBSCRIBE</b>&#160;&#160;&#160;(0x12)</td></tr>
+<tr class="separator:a1e4f5d7bc584d5ffcda760303ab76904"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6db4e874ad63924de121a89d4bcd559d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6db4e874ad63924de121a89d4bcd559d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_SUBACK</b>&#160;&#160;&#160;(0x13)</td></tr>
+<tr class="separator:a6db4e874ad63924de121a89d4bcd559d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aaddbe1b0ebd1ece45ada17e618e560"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0aaddbe1b0ebd1ece45ada17e618e560"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_UNSUBSCRIBE</b>&#160;&#160;&#160;(0x14)</td></tr>
+<tr class="separator:a0aaddbe1b0ebd1ece45ada17e618e560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a494ee75d7c290823f3738a4d77beea97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a494ee75d7c290823f3738a4d77beea97"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_UNSUBACK</b>&#160;&#160;&#160;(0x15)</td></tr>
+<tr class="separator:a494ee75d7c290823f3738a4d77beea97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24c4412f26f5db3dabc57c8511690a7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a24c4412f26f5db3dabc57c8511690a7b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_PINGREQ</b>&#160;&#160;&#160;(0x16)</td></tr>
+<tr class="separator:a24c4412f26f5db3dabc57c8511690a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a104849c06dad11e57805341ca6394513"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a104849c06dad11e57805341ca6394513"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_PINGRESP</b>&#160;&#160;&#160;(0x17)</td></tr>
+<tr class="separator:a104849c06dad11e57805341ca6394513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb18a759d020c1443a602636204c6fdd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb18a759d020c1443a602636204c6fdd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_DISCONNECT</b>&#160;&#160;&#160;(0x18)</td></tr>
+<tr class="separator:aeb18a759d020c1443a602636204c6fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae34bbdc05e79d37cc1f2060a885c3e05"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae34bbdc05e79d37cc1f2060a885c3e05"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLTOPICUPD</b>&#160;&#160;&#160;(0x1A)</td></tr>
+<tr class="separator:ae34bbdc05e79d37cc1f2060a885c3e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3181a18a9d476f1ca97a1bc935c8b712"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3181a18a9d476f1ca97a1bc935c8b712"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLTOPICRESP</b>&#160;&#160;&#160;(0x1B)</td></tr>
+<tr class="separator:a3181a18a9d476f1ca97a1bc935c8b712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c970e654cb17f2a30294a719b11b71"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63c970e654cb17f2a30294a719b11b71"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLMSGUPD</b>&#160;&#160;&#160;(0x1C)</td></tr>
+<tr class="separator:a63c970e654cb17f2a30294a719b11b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a855273768c5808acc67a07b8c4b6f5fa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a855273768c5808acc67a07b8c4b6f5fa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TYPE_WILLMSGRESP</b>&#160;&#160;&#160;(0x1D)</td></tr>
+<tr class="separator:a855273768c5808acc67a07b8c4b6f5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a206c51c6b01cdf9347809ebfc03caaef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a206c51c6b01cdf9347809ebfc03caaef"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TOPIC_TYPE_NORMAL</b>&#160;&#160;&#160;(0x00)</td></tr>
+<tr class="separator:a206c51c6b01cdf9347809ebfc03caaef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a655ae15e8e7734cedf42fab6eb3610b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a655ae15e8e7734cedf42fab6eb3610b5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TOPIC_TYPE_PREDEFINED</b>&#160;&#160;&#160;(0x01)</td></tr>
+<tr class="separator:a655ae15e8e7734cedf42fab6eb3610b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa17c2076a81b61d2719199521563d1c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa17c2076a81b61d2719199521563d1c5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TOPIC_TYPE_SHORT</b>&#160;&#160;&#160;(0x02)</td></tr>
+<tr class="separator:aa17c2076a81b61d2719199521563d1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d49bf6469a7864f24a537f059ee0612"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d49bf6469a7864f24a537f059ee0612"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_DUP</b>&#160;&#160;&#160;(0x1 &lt;&lt; 7)</td></tr>
+<tr class="separator:a2d49bf6469a7864f24a537f059ee0612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37b57822f47fbb4ba1639e5be988c437"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37b57822f47fbb4ba1639e5be988c437"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_QOS_0</b>&#160;&#160;&#160;(0x0 &lt;&lt; 5)</td></tr>
+<tr class="separator:a37b57822f47fbb4ba1639e5be988c437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d04b90ba54b58e08caa593a84105f21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d04b90ba54b58e08caa593a84105f21"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_QOS_1</b>&#160;&#160;&#160;(0x1 &lt;&lt; 5)</td></tr>
+<tr class="separator:a6d04b90ba54b58e08caa593a84105f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a953eaf715ee6055e9f119950be8d7399"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a953eaf715ee6055e9f119950be8d7399"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_QOS_2</b>&#160;&#160;&#160;(0x2 &lt;&lt; 5)</td></tr>
+<tr class="separator:a953eaf715ee6055e9f119950be8d7399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8095eefa31299b606b4ba8bbbcb00195"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8095eefa31299b606b4ba8bbbcb00195"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_QOS_N1</b>&#160;&#160;&#160;(0x3 &lt;&lt; 5)</td></tr>
+<tr class="separator:a8095eefa31299b606b4ba8bbbcb00195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45271b87fd548295bc4c86c225fc648e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45271b87fd548295bc4c86c225fc648e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_RETAIN</b>&#160;&#160;&#160;(0x1 &lt;&lt; 4)</td></tr>
+<tr class="separator:a45271b87fd548295bc4c86c225fc648e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3f7578e0fef59224e365cef8613f8e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e3f7578e0fef59224e365cef8613f8e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_WILL</b>&#160;&#160;&#160;(0x1 &lt;&lt; 3)</td></tr>
+<tr class="separator:a8e3f7578e0fef59224e365cef8613f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a842ab1c7124c0b63f62ed3283dafbe06"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a842ab1c7124c0b63f62ed3283dafbe06"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_FLAG_CLEAN</b>&#160;&#160;&#160;(0x1 &lt;&lt; 2)</td></tr>
+<tr class="separator:a842ab1c7124c0b63f62ed3283dafbe06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0066dd4afeef507b2e8f5ac01f71ea37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0066dd4afeef507b2e8f5ac01f71ea37"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_PROTOCOL_ID</b>&#160;&#160;&#160;(0x01)</td></tr>
+<tr class="separator:a0066dd4afeef507b2e8f5ac01f71ea37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43005b6b1934800f67a6d169c779c92b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43005b6b1934800f67a6d169c779c92b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ACCEPTED</b>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:a43005b6b1934800f67a6d169c779c92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b2b214d1ddb0f617efdd26ccc91def4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b2b214d1ddb0f617efdd26ccc91def4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>REJECTED_CONGESTION</b>&#160;&#160;&#160;0x01</td></tr>
+<tr class="separator:a9b2b214d1ddb0f617efdd26ccc91def4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b548f6c60530b07c9b9f5ef5b1ac8b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b548f6c60530b07c9b9f5ef5b1ac8b9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>REJECTED_INVALID_TOPIC_ID</b>&#160;&#160;&#160;0x02</td></tr>
+<tr class="separator:a9b548f6c60530b07c9b9f5ef5b1ac8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93af4e6b658c4823ae9603b86bb7c64a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a93af4e6b658c4823ae9603b86bb7c64a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>REJECTED_NOT_SUPPORTED</b>&#160;&#160;&#160;0x03</td></tr>
+<tr class="separator:a93af4e6b658c4823ae9603b86bb7c64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a206c51c6b01cdf9347809ebfc03caaef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a206c51c6b01cdf9347809ebfc03caaef"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TOPIC_TYPE_NORMAL</b>&#160;&#160;&#160;(0x00)</td></tr>
+<tr class="separator:a206c51c6b01cdf9347809ebfc03caaef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a655ae15e8e7734cedf42fab6eb3610b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a655ae15e8e7734cedf42fab6eb3610b5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TOPIC_TYPE_PREDEFINED</b>&#160;&#160;&#160;(0x01)</td></tr>
+<tr class="separator:a655ae15e8e7734cedf42fab6eb3610b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa17c2076a81b61d2719199521563d1c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa17c2076a81b61d2719199521563d1c5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TOPIC_TYPE_SHORT</b>&#160;&#160;&#160;(0x02)</td></tr>
+<tr class="separator:aa17c2076a81b61d2719199521563d1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47da8d46176b160b0db00fe221725d4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47da8d46176b160b0db00fe221725d4c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_TIMEOUT</b>&#160;&#160;&#160;CLOCK_SECOND</td></tr>
+<tr class="separator:a47da8d46176b160b0db00fe221725d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad5ac7de3008d8fa37447193aebc31e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad5ac7de3008d8fa37447193aebc31e2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MQTT_SN_RETRY</b>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:aad5ac7de3008d8fa37447193aebc31e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45ab5881e190d570f3784e50be2cce65"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45ab5881e190d570f3784e50be2cce65"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_QUEUE_MQTT_SN</b>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:a45ab5881e190d570f3784e50be2cce65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ed98e8fc00194886ebc14d25540f81b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ed98e8fc00194886ebc14d25540f81b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_TOPIC_USED</b>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:a5ed98e8fc00194886ebc14d25540f81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Definições de tipos</h2></td></tr>
+<tr class="memitem:add91ba4199db8665b9b9fc56fc6783a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add91ba4199db8665b9b9fc56fc6783a6"></a>
+typedef enum <a class="el" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98">resp_con</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a></td></tr>
+<tr class="memdesc:add91ba4199db8665b9b9fc56fc6783a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tipo de erros de funções. <br /></td></tr>
+<tr class="separator:add91ba4199db8665b9b9fc56fc6783a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerações</h2></td></tr>
+<tr class="memitem:a754c1055b4431040415cf01b39caaa98"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98">resp_con</a> { <a class="el" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>, 
+<b>SUCCESS_CON</b>, 
+<b>FAIL_CON</b>, 
+<b>SUCCESS_CON</b>
+ }</td></tr>
+<tr class="separator:a754c1055b4431040415cf01b39caaa98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab2bca192b63f37bf4847be3686bca75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab2bca192b63f37bf4847be3686bca75"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#aab2bca192b63f37bf4847be3686bca75">mqtt_sn_status_t</a> { <br />
+&#160;&#160;<b>MQTTSN_CONNECTION_FAILED</b>, 
+<b>MQTTSN_DISCONNECTED</b>, 
+<b>MQTTSN_WAITING_CONNACK</b>, 
+<b>MQTTSN_WAITING_REGACK</b>, 
+<br />
+&#160;&#160;<b>MQTTSN_CONNECTED</b>, 
+<b>MQTTSN_IDDLE</b>, 
+<b>MQTTSN_WAITING_PUBACK</b>, 
+<b>MQTTSN_WAITING_SUBACK</b>, 
+<br />
+&#160;&#160;<b>MQTTSN_PUB_REQ</b>, 
+<b>MQTTSN_SUB_REQ</b>, 
+<b>MQTTSN_REG_REQ</b>, 
+<b>MQTTSN_CONNECTION_FAILED</b>, 
+<br />
+&#160;&#160;<b>MQTTSN_DISCONNECTED</b>, 
+<b>MQTTSN_WAITING_CONNACK</b>, 
+<b>MQTTSN_WAITING_WILLTOPICREQ</b>, 
+<b>MQTTSN_WAITING_WILLMSGREQ</b>, 
+<br />
+&#160;&#160;<b>MQTTSN_WAITING_REGACK</b>, 
+<b>MQTTSN_CONNECTED</b>, 
+<b>MQTTSN_TOPIC_REGISTERED</b>, 
+<b>MQTTSN_TOPIC_SUBSCRIBING</b>, 
+<br />
+&#160;&#160;<b>MQTTSN_WAITING_PUBACK</b>, 
+<b>MQTTSN_WAITING_SUBACK</b>, 
+<b>MQTTSN_PUB_REQ</b>, 
+<b>MQTTSN_SUB_REQ</b>, 
+<br />
+&#160;&#160;<b>MQTTSN_REG_REQ</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:aab2bca192b63f37bf4847be3686bca75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estados da ASM do MQTT-SN. <br /></td></tr>
+<tr class="separator:aab2bca192b63f37bf4847be3686bca75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:gab898071398b359603a35c202e9c65f3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gab898071398b359603a35c202e9c65f3b"></a>
+struct&#160;</td><td class="memItemRight" valign="bottom"><b>__attribute__</b> ((packed))</td></tr>
+<tr class="separator:gab898071398b359603a35c202e9c65f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a575514d0f0fd3b6c5c4a2c75e604bf79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#a575514d0f0fd3b6c5c4a2c75e604bf79">mqtt_sn_insert_queue</a> (<a class="el" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a> new)</td></tr>
+<tr class="memdesc:a575514d0f0fd3b6c5c4a2c75e604bf79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insere uma tarefa na fila.  <a href="#a575514d0f0fd3b6c5c4a2c75e604bf79">Mais...</a><br /></td></tr>
+<tr class="separator:a575514d0f0fd3b6c5c4a2c75e604bf79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0a729c99366dad086be6be954e71f2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#ad0a729c99366dad086be6be954e71f2c">mqtt_sn_delete_queue</a> ()</td></tr>
+<tr class="memdesc:ad0a729c99366dad086be6be954e71f2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove o elemento mais próximo de ser processado.  <a href="#ad0a729c99366dad086be6be954e71f2c">Mais...</a><br /></td></tr>
+<tr class="separator:ad0a729c99366dad086be6be954e71f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71004d5b7e8b1add14024102d8d62042"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#a71004d5b7e8b1add14024102d8d62042">mqtt_sn_check_queue</a> ()</td></tr>
+<tr class="memdesc:a71004d5b7e8b1add14024102d8d62042"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lista as tarefas da fila.  <a href="#a71004d5b7e8b1add14024102d8d62042">Mais...</a><br /></td></tr>
+<tr class="separator:a71004d5b7e8b1add14024102d8d62042"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172afa34fe10ad1ee4ffc0d226b35b4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#a172afa34fe10ad1ee4ffc0d226b35b4d">mqtt_sn_check_rc</a> (uint8_t rc)</td></tr>
+<tr class="memdesc:a172afa34fe10ad1ee4ffc0d226b35b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envia requisição de conexão ao broker MQTT-SN.  <a href="#a172afa34fe10ad1ee4ffc0d226b35b4d">Mais...</a><br /></td></tr>
+<tr class="separator:a172afa34fe10ad1ee4ffc0d226b35b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9146fa082fe2bc6612fb13dbb20ed36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#af9146fa082fe2bc6612fb13dbb20ed36">mqtt_sn_recv_parser</a> (const uint8_t *data)</td></tr>
+<tr class="memdesc:af9146fa082fe2bc6612fb13dbb20ed36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controla o estado da conexão MQTT-SN.  <a href="#af9146fa082fe2bc6612fb13dbb20ed36">Mais...</a><br /></td></tr>
+<tr class="separator:af9146fa082fe2bc6612fb13dbb20ed36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba04d5c2d485ddfe6a26a1b6d08c539"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#a4ba04d5c2d485ddfe6a26a1b6d08c539">mqtt_sn_create_sck</a> (<a class="el" href="structmqtt__sn__con__t.html">mqtt_sn_con_t</a> mqtt_sn_connection, char *topics[], size_t topic_len)</td></tr>
+<tr class="memdesc:a4ba04d5c2d485ddfe6a26a1b6d08c539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia conexão ao broker UDP.  <a href="#a4ba04d5c2d485ddfe6a26a1b6d08c539">Mais...</a><br /></td></tr>
+<tr class="separator:a4ba04d5c2d485ddfe6a26a1b6d08c539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae17664af7f894e29743fafdf8bf98f89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#ae17664af7f894e29743fafdf8bf98f89">mqtt_sn_reg_send</a> (void)</td></tr>
+<tr class="memdesc:ae17664af7f894e29743fafdf8bf98f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envio de mensagens ao broker do tipo REGISTER.  <a href="#ae17664af7f894e29743fafdf8bf98f89">Mais...</a><br /></td></tr>
+<tr class="separator:ae17664af7f894e29743fafdf8bf98f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200e89a8fd400c652431bd505de6f827"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sabado__list__old_8h.html#aab2bca192b63f37bf4847be3686bca75">mqtt_sn_status_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sabado__list__old_8h.html#a200e89a8fd400c652431bd505de6f827">mqtt_sn_check_status</a> (void)</td></tr>
+<tr class="memdesc:a200e89a8fd400c652431bd505de6f827"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envia requisição de conexão ao broker MQTT-SN.  <a href="#a200e89a8fd400c652431bd505de6f827">Mais...</a><br /></td></tr>
+<tr class="separator:a200e89a8fd400c652431bd505de6f827"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8eb51076a2923f2c036f1ff925c168"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b8eb51076a2923f2c036f1ff925c168"></a>
+<a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mqtt_sn_con_send</b> (void)</td></tr>
+<tr class="separator:a1b8eb51076a2923f2c036f1ff925c168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3671caffd72e14314e5061068a886f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3671caffd72e14314e5061068a886f5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>mqtt_sn_pub</b> (char *topic, char *message, bool retain_flag, uint8_t qos_level)</td></tr>
+<tr class="separator:aa3671caffd72e14314e5061068a886f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb698c97e10afa31e2c11351f6ce9388"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb698c97e10afa31e2c11351f6ce9388"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>mqtt_sn_check_empty</b> (void)</td></tr>
+<tr class="separator:afb698c97e10afa31e2c11351f6ce9388"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac598f98e844bfd5bbdb577099ddf06d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac598f98e844bfd5bbdb577099ddf06d1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>parse_mqtt_type_string</b> (uint8_t type, char **type_string)</td></tr>
+<tr class="separator:ac598f98e844bfd5bbdb577099ddf06d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46fe607d1db728d41ed6aec6fee3fc77"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46fe607d1db728d41ed6aec6fee3fc77"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>mqtt_sn_init</b> (void)</td></tr>
+<tr class="separator:a46fe607d1db728d41ed6aec6fee3fc77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d09aac94304e52b348d62bfc9568ff2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d09aac94304e52b348d62bfc9568ff2"></a>
+<a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mqtt_sn_pub_send</b> (void)</td></tr>
+<tr class="separator:a7d09aac94304e52b348d62bfc9568ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adba0283cc8fadf24f2f04246c76e8cde"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adba0283cc8fadf24f2f04246c76e8cde"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>mqtt_sn_get_qos_flag</b> (int8_t qos)</td></tr>
+<tr class="separator:adba0283cc8fadf24f2f04246c76e8cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variáveis</h2></td></tr>
+<tr class="memitem:ace2b3195d298d547a00d8f16d126b030"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace2b3195d298d547a00d8f16d126b030"></a>
+struct <a class="el" href="structmqtt__sn__list__task.html">mqtt_sn_list_task</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mqtt_queue_first</b></td></tr>
+<tr class="separator:ace2b3195d298d547a00d8f16d126b030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f5bdda25ae963bb270e8a301b201b51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f5bdda25ae963bb270e8a301b201b51"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>publish_packet_t</b></td></tr>
+<tr class="separator:a1f5bdda25ae963bb270e8a301b201b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><pre class="fragment">    Conjunto de protótipos e definiçoes do protocolo MQTT-SN
+</pre> <dl class="section author"><dt>Autor</dt><dd>Ânderson Ignácio da Silva <a href="#" onclick="location.href='mai'+'lto:'+'and'+'er'+'son'+'@a'+'ign'+'ac'+'io.'+'co'+'m'; return false;">ander<span style="display: none;">.nosp@m.</span>son@<span style="display: none;">.nosp@m.</span>aigna<span style="display: none;">.nosp@m.</span>cio.<span style="display: none;">.nosp@m.</span>com</a> </dd></dl>
+</div><h2 class="groupheader">Documentação dos valores da enumeração</h2>
+<a class="anchor" id="a754c1055b4431040415cf01b39caaa98"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98">resp_con</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Valores da enumeração</th></tr><tr><td class="fieldname"><a class="anchor" id="a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da"></a>FAIL_CON&#160;</td><td class="fielddoc">
+<p>Erro ao processar algo. </p>
+</td></tr>
+</table>
+<div class="fragment"><div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                     {</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;   <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;   SUCCESS_CON,</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;} <a class="code" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a>;</div>
+<div class="ttc" id="sabado__list__old_8h_html_add91ba4199db8665b9b9fc56fc6783a6"><div class="ttname"><a href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a></div><div class="ttdeci">enum resp_con resp_con_t</div><div class="ttdoc">Tipo de erros de funções. </div></div>
+<div class="ttc" id="sabado__list__old_8h_html_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da"><div class="ttname"><a href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a></div><div class="ttdoc">Erro ao processar algo. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:220</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Documentação das funções</h2>
+<a class="anchor" id="a71004d5b7e8b1add14024102d8d62042"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_sn_check_queue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lista as tarefas da fila. </p>
+<p>Percorre os links dos ponteiros listando os elementos a serem processados pela ASM do MQTT-SN</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">0</td><td>Não recebe argumento</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>Não retorna nada </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                          {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <span class="keywordtype">int</span> cnt = 0;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keyword">struct </span><a class="code" href="structnode.html">node</a> *temp;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  temp = mqtt_queue_first;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <span class="keywordflow">if</span> (mqtt_queue_first  ==  NULL) {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;      debug_mqtt(<span class="stringliteral">&quot;A fila de tarefas esta vazia&quot;</span>);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <span class="keywordflow">while</span> (temp) {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      printf(<span class="stringliteral">&quot;[%p]  &quot;</span>, temp-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">id_task</a>);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      temp = temp-&gt;link;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;      cnt++;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  debug_mqtt(<span class="stringliteral">&quot;Tamanho da fila:[%d]\n&quot;</span>, cnt);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;}</div>
+<div class="ttc" id="structnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">Estrutura de fila MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:369</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a1dba79ab8685a56d3ae57d84aca21ce8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">mqtt_sn_task_t::id_task</a></div><div class="ttdeci">uint16_t * id_task</div><div class="ttdoc">Identificador da tarefa. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:133</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a172afa34fe10ad1ee4ffc0d226b35b4d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> mqtt_sn_check_rc </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>rc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envia requisição de conexão ao broker MQTT-SN. </p>
+<p>Realiza o envio de mensagens do tipo CONNECT ao broker MQTT-SN</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">rc</td><td>Código de retorno da requisição MQTT (Return Code)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">FAIL_CON</td><td>Falha por algum motivo no código de retorno </td></tr>
+    <tr><td class="paramname">SUCCESS_CON</td><td>Sucesso no recebimento do código de retorno</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Tarefa:</a></b></dt><dd>Expandir o tipo de falha para tornar mais precisa a depuração futura </dd></dl>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                                       {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">switch</span> (rc) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">case</span> ACCEPTED:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keywordflow">return</span> SUCCESS_CON;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">case</span> REJECTED_CONGESTION:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">case</span> REJECTED_INVALID_TOPIC_ID:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">case</span> REJECTED_NOT_SUPPORTED:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="ttc" id="sabado__list__old_8h_html_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da"><div class="ttname"><a href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a></div><div class="ttdoc">Erro ao processar algo. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:220</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a200e89a8fd400c652431bd505de6f827"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sabado__list__old_8h.html#aab2bca192b63f37bf4847be3686bca75">mqtt_sn_status_t</a> mqtt_sn_check_status </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envia requisição de conexão ao broker MQTT-SN. </p>
+<p>Realiza o envio de mensagens do tipo CONNECT ao broker MQTT-SN</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">0</td><td>Não recebe argumento</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">FAIL_CON</td><td>Falha ao enviar o pacote CONNECT </td></tr>
+    <tr><td class="paramname">SUCCESS_CON</td><td>Sucesso ao enviar o pacote CONNECT </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                           {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">return</span> mqtt_status;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a4ba04d5c2d485ddfe6a26a1b6d08c539"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> mqtt_sn_create_sck </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmqtt__sn__con__t.html">mqtt_sn_con_t</a>&#160;</td>
+          <td class="paramname"><em>mqtt_sn_connection</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>topics</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>topic_len</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicia conexão ao broker UDP. </p>
+<p>Estabelece a conexão com um servidor MQTT-SN, através da porta 1884 além de iniciar a fila de processos de conexão do protocolo.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mqtt_sn_connection</td><td>Estrutura padrão de comunicação MQTT-SN</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">FAIL_CON</td><td>Falha ao alocar conexão UDP </td></tr>
+    <tr><td class="paramname">SUCCESS_CON</td><td>Sucesso ao alocar conexão UDP</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Tarefa:</a></b></dt><dd>Descobrir como informar se o broker esta ativo antes de realizar o registro da conexão UDP, pois a função de conexão não informa </dd></dl>
+<div class="fragment"><div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                                                                                                 {</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;  <span class="keyword">static</span> uip_ipaddr_t broker_addr;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;  <span class="keyword">static</span> uint8_t con_udp_status = 0;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;  g_mqtt_sn_con = mqtt_sn_connection;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  uip_ip6addr(&amp;broker_addr, *g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>,</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                            *(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>+1),</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;                            *(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>+2),</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;                            *(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>+3),</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                            *(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>+4),</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                            *(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>+5),</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                            *(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>+6),</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                            *(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">ipv6_broker</a>+7));</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  <span class="keywordflow">if</span> (strlen(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#af4ab62a1766a87b4cd8acf2448552909">client_id</a>) &gt; 23){</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    debug_logic(<span class="stringliteral">&quot;Cli. ID SIZE:%d &gt; 23!&quot;</span>,strlen(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#af4ab62a1766a87b4cd8acf2448552909">client_id</a>));</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;  }</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;  debug_mqtt(<span class="stringliteral">&quot;Endereco do broker IPv6: &quot;</span>);</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;  uip_debug_ipaddr_print(&amp;broker_addr);</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  debug_mqtt(<span class="stringliteral">&quot;Endereco da porta:%d &quot;</span>,g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#a8d93540b1ceafa3f9425c72763b256d0">udp_port</a>);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  debug_mqtt(<span class="stringliteral">&quot;Client ID:%s/%d&quot;</span>,g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#af4ab62a1766a87b4cd8acf2448552909">client_id</a>,strlen(g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#af4ab62a1766a87b4cd8acf2448552909">client_id</a>));</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;  con_udp_status = simple_udp_register(&amp;g_mqtt_sn_con.udp_con,</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                                        g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#a8d93540b1ceafa3f9425c72763b256d0">udp_port</a>,</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                                        &amp;broker_addr,</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;                                        g_mqtt_sn_con.<a class="code" href="structmqtt__sn__con__t.html#a8d93540b1ceafa3f9425c72763b256d0">udp_port</a>,</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                                        mqtt_sn_udp_rec_cb);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  <span class="keywordflow">if</span>(!con_udp_status)</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;  <span class="comment">/****************************************************************************/</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;  <span class="comment">// Criando tarefa de [CONNECT]</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;  <span class="comment">//</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;  <span class="comment">// Inicialmente precisamos enviar a requisição de CONNECT ao broker MQTT-SN pa</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;  <span class="comment">// ra que seja possível qualquer outra operação.</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;  <a class="code" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a> connect_task;</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;  connect_task.<a class="code" href="structmqtt__sn__task__t.html#a6b9a925f3adb717097ee92e90a19a5c8">msg_type_q</a> = MQTT_SN_TYPE_CONNECT;</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  <a class="code" href="sabado__list__old_8h.html#a575514d0f0fd3b6c5c4a2c75e604bf79">mqtt_sn_insert_queue</a>(connect_task);</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;  <span class="comment">/****************************************************************************/</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;  <span class="comment">/****************************************************************************/</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;  <span class="comment">// Criando tarefas de [REGISTER]</span></div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;  <span class="comment">//</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;  <span class="comment">// Para cada tópico definido pelo usuário no código principal.Inicia-se o pro</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  <span class="comment">// cesso de preenchimento de tarefas na fila de serviços MQT-SN.</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;  <span class="comment">// Primeiro antes de qualquer processo MQTT-SN registra-se todos os tópicos in</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;  <span class="comment">// formados pelo usuário, otimizando as funções de inscrição e publicação, o</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;  <span class="comment">// broker irá então responder com os respectivos SHORT TOPIC para utilizarmos.</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;  <a class="code" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a> topic_reg;</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;  <span class="keywordtype">size_t</span> i;</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;  <span class="keywordflow">for</span>(i = 0; i &lt; topic_len; i++){</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    g_topic_bind[g_task_id].topic_name = topics[i];</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    topic_reg.<a class="code" href="structmqtt__sn__task__t.html#a6b9a925f3adb717097ee92e90a19a5c8">msg_type_q</a> = MQTT_SN_TYPE_REGISTER;</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    topic_reg.<a class="code" href="structmqtt__sn__task__t.html#a64393dc28e568ae455af9bcd28eaeeac">long_topic</a> = topics[i];</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="sabado__list__old_8h.html#a575514d0f0fd3b6c5c4a2c75e604bf79">mqtt_sn_insert_queue</a>(topic_reg)) <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;  }</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;  <span class="comment">/****************************************************************************/</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;  process_post(&amp;mqtt_sn_main, mqtt_event_connect, NULL);</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;  <span class="keywordflow">return</span> SUCCESS_CON;</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;}</div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a64393dc28e568ae455af9bcd28eaeeac"><div class="ttname"><a href="structmqtt__sn__task__t.html#a64393dc28e568ae455af9bcd28eaeeac">mqtt_sn_task_t::long_topic</a></div><div class="ttdeci">char * long_topic</div><div class="ttdoc">Tópico longo a ser publicado/inscrito. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:131</div></div>
+<div class="ttc" id="sabado__list__old_8h_html_a575514d0f0fd3b6c5c4a2c75e604bf79"><div class="ttname"><a href="sabado__list__old_8h.html#a575514d0f0fd3b6c5c4a2c75e604bf79">mqtt_sn_insert_queue</a></div><div class="ttdeci">resp_con_t mqtt_sn_insert_queue(mqtt_sn_task_t new)</div><div class="ttdoc">Insere uma tarefa na fila. </div><div class="ttdef"><b>Definition:</b> bkp_mqtt.c:210</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html"><div class="ttname"><a href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a></div><div class="ttdoc">estruturas para o bind de topic e short topic id </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:128</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html_a8d93540b1ceafa3f9425c72763b256d0"><div class="ttname"><a href="structmqtt__sn__con__t.html#a8d93540b1ceafa3f9425c72763b256d0">mqtt_sn_con_t::udp_port</a></div><div class="ttdeci">uint16_t udp_port</div><div class="ttdoc">Porta UDP de conexão com o broker (default:1884) </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:264</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html_af4ab62a1766a87b4cd8acf2448552909"><div class="ttname"><a href="structmqtt__sn__con__t.html#af4ab62a1766a87b4cd8acf2448552909">mqtt_sn_con_t::client_id</a></div><div class="ttdeci">const char * client_id</div><div class="ttdoc">Identificador de cliente para conexão com o broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:267</div></div>
+<div class="ttc" id="structmqtt__sn__con__t_html_aedc2daa18c79a13bef1abb9f6a2a24f8"><div class="ttname"><a href="structmqtt__sn__con__t.html#aedc2daa18c79a13bef1abb9f6a2a24f8">mqtt_sn_con_t::ipv6_broker</a></div><div class="ttdeci">uint16_t * ipv6_broker</div><div class="ttdoc">Endereço IPv6 do broker UDP. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:265</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a6b9a925f3adb717097ee92e90a19a5c8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a6b9a925f3adb717097ee92e90a19a5c8">mqtt_sn_task_t::msg_type_q</a></div><div class="ttdeci">uint8_t msg_type_q</div><div class="ttdoc">Tipo de mensagem a ser alocada. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:129</div></div>
+<div class="ttc" id="sabado__list__old_8h_html_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da"><div class="ttname"><a href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a></div><div class="ttdoc">Erro ao processar algo. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:220</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad0a729c99366dad086be6be954e71f2c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_sn_delete_queue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove o elemento mais próximo de ser processado. </p>
+<p>Realiza a remoção do elemento mais próximo de ser processado, no caso o mais antigo inserido na fila</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">0</td><td>Não recebe argumento</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>Não retorna nada</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Tarefa:</a></b></dt><dd>Adicionar opção de exclusão intermediária </dd></dl>
+<div class="fragment"><div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                           {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keyword">struct </span><a class="code" href="structnode.html">node</a> *temp;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  temp = mqtt_queue_first;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordflow">if</span> (mqtt_queue_first == NULL) {</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      debug_mqtt(<span class="stringliteral">&quot;A fila de tarefas esta vazia&quot;</span>);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;      mqtt_queue_first = mqtt_queue_last = NULL;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  }</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;      debug_mqtt(<span class="stringliteral">&quot;Tarefa:[%p] deletada&quot;</span>, mqtt_queue_first-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">id_task</a>);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;      mqtt_queue_first = mqtt_queue_first-&gt;link;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;      free(temp);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;}</div>
+<div class="ttc" id="structnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">Estrutura de fila MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:369</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a1dba79ab8685a56d3ae57d84aca21ce8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">mqtt_sn_task_t::id_task</a></div><div class="ttdeci">uint16_t * id_task</div><div class="ttdoc">Identificador da tarefa. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:133</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a575514d0f0fd3b6c5c4a2c75e604bf79"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> mqtt_sn_insert_queue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmqtt__sn__task__t.html">mqtt_sn_task_t</a>&#160;</td>
+          <td class="paramname"><em>new</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Insere uma tarefa na fila. </p>
+<p>Insere uma nova tarefa na fila de requisições a serem processadas.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">new</td><td>Nova tarefa a ser processada pela ASM do MQTT-SN</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">FAIL_CON</td><td>Não foi possível alocar uma nova tarefa a fila </td></tr>
+    <tr><td class="paramname">SUCCESS_CON</td><td>Foi possível alocar uma nova tarefa a fila</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Tarefa:</a></b></dt><dd>Melhorar alocação dinâmica de memória </dd></dl>
+<div class="fragment"><div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                                                   {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keyword">struct </span><a class="code" href="structnode.html">node</a> *temp,*temp2;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  temp2 = mqtt_queue_first;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <span class="keywordtype">int</span> cnt = 0;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordflow">while</span> (temp2) {</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;      temp2 = temp2-&gt;link;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;      cnt++;</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  }</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="comment">//Limita o número máximo de tarefas alocadas na fila</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="keywordflow">if</span> (cnt &gt; <a class="code" href="group__MQTT__SN__CONTROL.html#ga45ab5881e190d570f3784e50be2cce65">MAX_QUEUE_MQTT_SN</a>)</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  temp = (<span class="keyword">struct </span><a class="code" href="structnode.html">node</a>*)malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code" href="structnode.html">node</a>));</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  temp-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a6b9a925f3adb717097ee92e90a19a5c8">msg_type_q</a>  = <span class="keyword">new</span>.msg_type_q;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  temp-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a3d9e943523a4987c87d38c91a8284f6a">short_topic</a> = <span class="keyword">new</span>.short_topic;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  temp-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a64393dc28e568ae455af9bcd28eaeeac">long_topic</a>  = <span class="keyword">new</span>.long_topic;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  temp-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#ab8140947611504abcb64a4c277effcf5">message</a>     = <span class="keyword">new</span>.message;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  temp-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">id_task</a>     = (uint16_t *)gTaskID++;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  temp-&gt;link = NULL;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <span class="keywordflow">if</span> (mqtt_queue_last  ==  NULL) {</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      mqtt_queue_first = mqtt_queue_last = temp;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;      mqtt_queue_last-&gt;link = temp;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      mqtt_queue_last = temp;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  }</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="keywordflow">return</span> SUCCESS_CON;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
+<div class="ttc" id="structnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">Estrutura de fila MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:369</div></div>
+<div class="ttc" id="group__MQTT__SN__CONTROL_html_ga45ab5881e190d570f3784e50be2cce65"><div class="ttname"><a href="group__MQTT__SN__CONTROL.html#ga45ab5881e190d570f3784e50be2cce65">MAX_QUEUE_MQTT_SN</a></div><div class="ttdeci">#define MAX_QUEUE_MQTT_SN</div><div class="ttdoc">Número máximo de tarefas a serem inseridas alocadas dinamicamente MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:134</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a64393dc28e568ae455af9bcd28eaeeac"><div class="ttname"><a href="structmqtt__sn__task__t.html#a64393dc28e568ae455af9bcd28eaeeac">mqtt_sn_task_t::long_topic</a></div><div class="ttdeci">char * long_topic</div><div class="ttdoc">Tópico longo a ser publicado/inscrito. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:131</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a1dba79ab8685a56d3ae57d84aca21ce8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">mqtt_sn_task_t::id_task</a></div><div class="ttdeci">uint16_t * id_task</div><div class="ttdoc">Identificador da tarefa. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:133</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a3d9e943523a4987c87d38c91a8284f6a"><div class="ttname"><a href="structmqtt__sn__task__t.html#a3d9e943523a4987c87d38c91a8284f6a">mqtt_sn_task_t::short_topic</a></div><div class="ttdeci">uint8_t short_topic</div><div class="ttdoc">Tópico curto a ser publicado/inscrito. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:130</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a6b9a925f3adb717097ee92e90a19a5c8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a6b9a925f3adb717097ee92e90a19a5c8">mqtt_sn_task_t::msg_type_q</a></div><div class="ttdeci">uint8_t msg_type_q</div><div class="ttdoc">Tipo de mensagem a ser alocada. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:129</div></div>
+<div class="ttc" id="sabado__list__old_8h_html_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da"><div class="ttname"><a href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a></div><div class="ttdoc">Erro ao processar algo. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:220</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_ab8140947611504abcb64a4c277effcf5"><div class="ttname"><a href="structmqtt__sn__task__t.html#ab8140947611504abcb64a4c277effcf5">mqtt_sn_task_t::message</a></div><div class="ttdeci">char * message</div><div class="ttdoc">Mensagem correspondente da tarefa. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:132</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="af9146fa082fe2bc6612fb13dbb20ed36"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_sn_recv_parser </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Controla o estado da conexão MQTT-SN. </p>
+<p>A partir do status de conexão MQTT-SN gerencia as requisições atribuindo temporizadores de envio de mensagens conforme a estrutura alocada na fila.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">0</td><td>Não recebe argumento</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>Não retorna nadaRealiza o parsing das mensagens UDP recebidas <pre class="fragment">Realiza o parsing das mensagens UDP recebidas de acordo com
+</pre> o protocolo MQTT-SN, alterando o status da conexão geral com o broker.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>Ponteiro para o conteúdo UDP recebido</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>Não retorna nada </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Tarefa:</a></b></dt><dd>Rever o short topic para adequar bytes [2][3] juntos </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Tarefa:</a></b></dt><dd>Rever o short topic para adequar bytes [2][3] juntos </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Tarefa:</a></b></dt><dd>Rever o short topic para adequar bytes [2][3] juntos.. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Tarefa:</a></b></dt><dd>Rever o short topic para adequar bytes [2][3] juntos... </dd></dl>
+<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                             {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    uint8_t msg_type = data[1],</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            return_code = 0xFF;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Como o MsgType não se altera de posição, testamos primeiro ele antes do</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// returning code, já que este pode variar</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <span class="keywordflow">switch</span> (msg_type) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">case</span> MQTT_SN_TYPE_CONNACK:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;          return_code = data[2]; <span class="comment">//No caso do CONNACK - RC[2]</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;          <span class="keywordflow">if</span> (<a class="code" href="sabado__list__old_8h.html#a172afa34fe10ad1ee4ffc0d226b35b4d">mqtt_sn_check_rc</a>(return_code)){</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            mqtt_status = MQTTSN_CONNECTED;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            debug_mqtt(<span class="stringliteral">&quot;Conectado ao broker MQTT-SN&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            debug_mqtt(<span class="stringliteral">&quot;Iniciando fila de servicos MQTT &quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            ctimer_set(&amp;mqtt_stack_call,TIME_MQTT_POLL, mqtt_sn_state_ctrl, NULL);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;          }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">case</span> MQTT_SN_TYPE_REGACK:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">case</span> MQTT_SN_TYPE_PUBACK:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">case</span> MQTT_SN_TYPE_SUBACK:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">case</span> MQTT_SN_TYPE_UNSUBACK:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="ttc" id="sabado__list__old_8h_html_a172afa34fe10ad1ee4ffc0d226b35b4d"><div class="ttname"><a href="sabado__list__old_8h.html#a172afa34fe10ad1ee4ffc0d226b35b4d">mqtt_sn_check_rc</a></div><div class="ttdeci">resp_con_t mqtt_sn_check_rc(uint8_t rc)</div><div class="ttdoc">Envia requisição de conexão ao broker MQTT-SN. </div><div class="ttdef"><b>Definition:</b> bkp_mqtt.c:22</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ae17664af7f894e29743fafdf8bf98f89"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="sabado__list__old_8h.html#add91ba4199db8665b9b9fc56fc6783a6">resp_con_t</a> mqtt_sn_reg_send </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envio de mensagens ao broker do tipo REGISTER. </p>
+<p>Envia ao broker mensagens do tipo REGISTER com o topic name informado conforme a tarefa primeira na fila</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">0</td><td>Não recebe parâmetro</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valores retornados</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">FAIL_CON</td><td>Falha ao enviar o pacote REGISTER </td></tr>
+    <tr><td class="paramname">SUCCESS_CON</td><td>Sucesso ao enviar o pacote REGISTER </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                             {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <a class="code" href="structregister__packet__t.html">register_packet_t</a> packet;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="comment">/****************************************************************************/</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="comment">// REGISTRO DE TÓPICOS DEFINIDOS</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="comment">// Verifica-se se a fila está vazia,</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="comment">// caso contrário, ainda precisamos</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="comment">// registrar tópicos MQTT_SN</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keyword">struct </span><a class="code" href="structnode.html">node</a> *verEMpty;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordtype">int</span> counter = 0;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  verEMpty = mqtt_queue_first;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="keywordflow">while</span> (verEMpty) {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;      verEMpty = verEMpty-&gt;link;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;      counter++;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  <span class="comment">// Se vazio significa que registramos todos os tópicos</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="keywordflow">if</span> (!counter) {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      gTopicRegistered = 1;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      <span class="keywordflow">return</span> SUCCESS_CON;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="comment">/****************************************************************************/</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keywordtype">size_t</span> topic_name_len = strlen(mqtt_queue_first-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a64393dc28e568ae455af9bcd28eaeeac">long_topic</a>); <span class="comment">//Pega o primeiro da fila aguardando</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keywordflow">if</span> (topic_name_len &gt; MQTT_SN_MAX_TOPIC_LENGTH) {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      debug_mqtt(<span class="stringliteral">&quot;Erro: Nome do topico excede o limite maximo&quot;</span>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  packet.<a class="code" href="group__Pacotes.html#ga7aead736a07eaf25623ad7bfa1f0ee2d">type</a> = MQTT_SN_TYPE_REGISTER;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  packet.<a class="code" href="group__Pacotes.html#gab0380a82be366f48263095460986c3c7">topic_id</a> = 0x0000;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="comment">// Quando o broker responder com o short topic ID,</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="comment">// ele utilizará como message id, o identificador único da task na</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="comment">// queue de serviços do MQTT-SN, logo se torna fácil saber como montar</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="comment">// a relação (short_topic/long_topic) no vetor global mqtt_sn_topics[]</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  packet.<a class="code" href="group__Pacotes.html#ga5f2be45182f0cc39afb7cc3a8d55a1f1">message_id</a> = uip_htons((<span class="keywordtype">int</span>)mqtt_queue_first-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">id_task</a>);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  strncpy(packet.<a class="code" href="group__Pacotes.html#ga4928dc5635290abe481ce340f6d47865">topic_name</a>, mqtt_queue_first-&gt;data.<a class="code" href="structmqtt__sn__task__t.html#a64393dc28e568ae455af9bcd28eaeeac">long_topic</a>, topic_name_len);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  packet.<a class="code" href="group__Pacotes.html#gaf9d495c1655d813d553030485d00fea7">length</a> = 0x06 + topic_name_len;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  packet.<a class="code" href="group__Pacotes.html#ga4928dc5635290abe481ce340f6d47865">topic_name</a>[topic_name_len] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  debug_mqtt(<span class="stringliteral">&quot;Topico a registrar:%s [%d][%d]&quot;</span>,packet.<a class="code" href="group__Pacotes.html#ga4928dc5635290abe481ce340f6d47865">topic_name</a>,strlen(packet.<a class="code" href="group__Pacotes.html#ga4928dc5635290abe481ce340f6d47865">topic_name</a>),packet.<a class="code" href="group__Pacotes.html#gaf9d495c1655d813d553030485d00fea7">length</a>);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  debug_logic(<span class="stringliteral">&quot;Enviando o pacote @REGISTER...&quot;</span>);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  simple_udp_send(&amp;gMQTTSN_con.udp_con,&amp;packet, packet.<a class="code" href="group__Pacotes.html#gaf9d495c1655d813d553030485d00fea7">length</a>);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  mqtt_message_status = MQTTSN_WAITING_REGACK;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keywordflow">return</span> SUCCESS_CON;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;}</div>
+<div class="ttc" id="group__Pacotes_html_ga5f2be45182f0cc39afb7cc3a8d55a1f1"><div class="ttname"><a href="group__Pacotes.html#ga5f2be45182f0cc39afb7cc3a8d55a1f1">register_packet_t::message_id</a></div><div class="ttdeci">uint16_t message_id</div><div class="ttdoc">Identificador único do REGACK correspondente enviado pelo broker normalmente. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:205</div></div>
+<div class="ttc" id="group__Pacotes_html_ga4928dc5635290abe481ce340f6d47865"><div class="ttname"><a href="group__Pacotes.html#ga4928dc5635290abe481ce340f6d47865">register_packet_t::topic_name</a></div><div class="ttdeci">char topic_name[MQTT_SN_MAX_TOPIC_LENGTH]</div><div class="ttdoc">Nome do tópico a ser registrado. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:206</div></div>
+<div class="ttc" id="structnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">Estrutura de fila MQTT-SN. </div><div class="ttdef"><b>Definition:</b> mqtt_sn.h:369</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a64393dc28e568ae455af9bcd28eaeeac"><div class="ttname"><a href="structmqtt__sn__task__t.html#a64393dc28e568ae455af9bcd28eaeeac">mqtt_sn_task_t::long_topic</a></div><div class="ttdeci">char * long_topic</div><div class="ttdoc">Tópico longo a ser publicado/inscrito. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:131</div></div>
+<div class="ttc" id="group__Pacotes_html_gab0380a82be366f48263095460986c3c7"><div class="ttname"><a href="group__Pacotes.html#gab0380a82be366f48263095460986c3c7">register_packet_t::topic_id</a></div><div class="ttdeci">uint16_t topic_id</div><div class="ttdoc">Short Topic que será utilizado para envio do REGISTER - Quando enviado pelo nó, usa-se 0x0000...</div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:204</div></div>
+<div class="ttc" id="structmqtt__sn__task__t_html_a1dba79ab8685a56d3ae57d84aca21ce8"><div class="ttname"><a href="structmqtt__sn__task__t.html#a1dba79ab8685a56d3ae57d84aca21ce8">mqtt_sn_task_t::id_task</a></div><div class="ttdeci">uint16_t * id_task</div><div class="ttdoc">Identificador da tarefa. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:133</div></div>
+<div class="ttc" id="group__Pacotes_html_gaf9d495c1655d813d553030485d00fea7"><div class="ttname"><a href="group__Pacotes.html#gaf9d495c1655d813d553030485d00fea7">register_packet_t::length</a></div><div class="ttdeci">uint8_t length</div><div class="ttdoc">Comprimento total do pacote MQTT-SN. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:202</div></div>
+<div class="ttc" id="structregister__packet__t_html"><div class="ttname"><a href="structregister__packet__t.html">register_packet_t</a></div><div class="ttdoc">Estrutura de pacotes MQTT-SN do tipo REGISTER. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:201</div></div>
+<div class="ttc" id="group__Pacotes_html_ga7aead736a07eaf25623ad7bfa1f0ee2d"><div class="ttname"><a href="group__Pacotes.html#ga7aead736a07eaf25623ad7bfa1f0ee2d">register_packet_t::type</a></div><div class="ttdeci">uint8_t type</div><div class="ttdoc">Descreve o tipo de mensagem que será enviado ao broker. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:203</div></div>
+<div class="ttc" id="sabado__list__old_8h_html_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da"><div class="ttname"><a href="sabado__list__old_8h.html#a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da">FAIL_CON</a></div><div class="ttdoc">Erro ao processar algo. </div><div class="ttdef"><b>Definition:</b> sabado_list_old.h:220</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado em Sábado, 3 de Setembro de 2016 01:44:41 para MQTT-SNContiki por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.8
+</small></address>
+</body>
+</html>

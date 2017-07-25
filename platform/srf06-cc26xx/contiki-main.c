@@ -175,7 +175,6 @@ main(void)
   soc_rtc_init();
   clock_init();
   rtimer_init();
-
   watchdog_init();
   process_init();
 
@@ -235,7 +234,7 @@ main(void)
 
   autostart_start(autostart_processes);
 
-  watchdog_start();
+  //watchdog_start();
 
   fade(LEDS_ORANGE);
 

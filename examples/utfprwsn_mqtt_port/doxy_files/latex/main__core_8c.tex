@@ -1,0 +1,72 @@
+\hypertarget{main__core_8c}{\section{Referência ao ficheiro main\+\_\+core.\+c}
+\label{main__core_8c}\index{main\+\_\+core.\+c@{main\+\_\+core.\+c}}
+}
+
+
+Licensed to the Apache Software Foundation (A\+S\+F) under one or more contributor license agreements.  
+
+
+{\ttfamily \#include \char`\"{}contiki.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}lib/random.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}clock.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/ctimer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}net/ip/uip.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}net/ipv6/uip-\/ds6.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mqtt\+\_\+sn.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}dev/leds.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}net/rime/rime.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}simple-\/udp.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+Diagrama de dependências de inclusão para main\+\_\+core.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main__core_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{main__core_8c_a0a43995afea1479f111fbc2e35be0a7c}{void {\bfseries mqtt\+\_\+sn\+\_\+callback} (char $\ast$topic, char $\ast$message)}\label{main__core_8c_a0a43995afea1479f111fbc2e35be0a7c}
+
+\item 
+\hypertarget{main__core_8c_a271e0d9822452758a68f6e167c5209f8}{void {\bfseries init\+\_\+broker} (void)}\label{main__core_8c_a271e0d9822452758a68f6e167c5209f8}
+
+\item 
+\hypertarget{main__core_8c_a79354dfce54fd0bece29f8d443321b88}{{\bfseries P\+R\+O\+C\+E\+S\+S} (init\+\_\+system\+\_\+process,\char`\"{}\mbox{[}Contiki-\/O\+S\mbox{]} Iniciando sistema operacional\char`\"{})}\label{main__core_8c_a79354dfce54fd0bece29f8d443321b88}
+
+\item 
+\hypertarget{main__core_8c_a7683f5bdcb8cfbbb750ce92e76d1b7eb}{{\bfseries P\+R\+O\+C\+E\+S\+S\+\_\+\+T\+H\+R\+E\+A\+D} (init\+\_\+system\+\_\+process, ev, data)}\label{main__core_8c_a7683f5bdcb8cfbbb750ce92e76d1b7eb}
+
+\end{DoxyCompactItemize}
+\subsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{main__core_8c_a5ca81254b9031056ba22742fb2252fd0}{\hyperlink{structmqtt__sn__con__t}{mqtt\+\_\+sn\+\_\+con\+\_\+t} {\bfseries mqtt\+\_\+sn\+\_\+connection}}\label{main__core_8c_a5ca81254b9031056ba22742fb2252fd0}
+
+\item 
+\hypertarget{main__core_8c_ac531a18312af7e29d65ccde0edd8b894}{A\+U\+T\+O\+S\+T\+A\+R\+T\+\_\+\+P\+R\+O\+C\+E\+S\+S\+E\+S \& {\bfseries init\+\_\+system\+\_\+process}}\label{main__core_8c_ac531a18312af7e29d65ccde0edd8b894}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrição detalhada}
+Licensed to the Apache Software Foundation (A\+S\+F) under one or more contributor license agreements. 
+
+See the N\+O\+T\+I\+C\+E file distributed with this work for additional information regarding copyright ownership. The A\+S\+F licenses this file to you under the Apache License, Version 2.\+0 (the \char`\"{}\+License\char`\"{}); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+\href{http://www.apache.org/licenses/LICENSE-2.0}{\tt http\+://www.\+apache.\+org/licenses/\+L\+I\+C\+E\+N\+S\+E-\/2.\+0}
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \char`\"{}\+A\+S I\+S\char`\"{} B\+A\+S\+I\+S, W\+I\+T\+H\+O\+U\+T W\+A\+R\+R\+A\+N\+T\+I\+E\+S O\+R C\+O\+N\+D\+I\+T\+I\+O\+N\+S O\+F A\+N\+Y K\+I\+N\+D, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+\begin{DoxyAuthor}{Autor}
+Ânderson Ignácio da Silva 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+19 Ago 2016 Arquivo principal do porte do M\+Q\+T\+T-\/\+S\+N, utilizado para testar 
+\end{DoxyDate}
+\begin{DoxySeeAlso}{Veja também}
+\href{http://www.aignacio.com}{\tt http\+://www.\+aignacio.\+com}  Este projeto está sendo liberado pela licença A\+P\+A\+C\+H\+E 2.\+0. 
+\end{DoxySeeAlso}

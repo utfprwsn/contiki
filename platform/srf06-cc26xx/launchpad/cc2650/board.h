@@ -148,6 +148,11 @@
  */
 #define BOARD_IOID_SCL            IOID_4
 #define BOARD_IOID_SDA            IOID_5
+
+#define BOARD_IOID_SDA_HP         IOID_8 /**< Interface 1 SDA: MPU */
+#define BOARD_IOID_SCL_HP         IOID_9 /**< Interface 1 SCL: MPU */
+
+
 /** @} */
 /*---------------------------------------------------------------------------*/
 /**

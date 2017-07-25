@@ -1,0 +1,88 @@
+\hypertarget{group__newlib}{\section{Generic Newlib customizations}
+\label{group__newlib}\index{Generic Newlib customizations@{Generic Newlib customizations}}
+}
+
+
+Library providing generic implementations of Newlib features for Contiki.  
+
+
+Diagrama de colaboração para Generic Newlib customizations\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{group__newlib}
+\end{center}
+\end{figure}
+\subsection*{Ficheiros}
+\begin{DoxyCompactItemize}
+\item 
+ficheiro \hyperlink{syscalls_8c}{syscalls.\+c}
+\begin{DoxyCompactList}\small\item\em System calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group__newlib_gad72dbcf6d0153db1b8d8a58001feed83}{\#define {\bfseries D\+E\+B\+U\+G}~0}\label{group__newlib_gad72dbcf6d0153db1b8d8a58001feed83}
+
+\item 
+\hypertarget{group__newlib_ga1f464e950a4fa11e8821b5c725921a15}{\#define {\bfseries P\+R\+I\+N\+T\+F}(...)}\label{group__newlib_ga1f464e950a4fa11e8821b5c725921a15}
+
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+caddr\+\_\+t \hyperlink{group__newlib_gaae54d7b9578ba1fc171ce6f30f4c68a3}{\+\_\+sbrk} (int incr)
+\begin{DoxyCompactList}\small\item\em Enlarges the allocated heap space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição detalhada}
+Library providing generic implementations of Newlib features for Contiki. 
+
+
+
+\subsection{Documentação das funções}
+\hypertarget{group__newlib_gaae54d7b9578ba1fc171ce6f30f4c68a3}{\index{Generic Newlib customizations@{Generic Newlib customizations}!\+\_\+sbrk@{\+\_\+sbrk}}
+\index{\+\_\+sbrk@{\+\_\+sbrk}!Generic Newlib customizations@{Generic Newlib customizations}}
+\subsubsection[{\+\_\+sbrk}]{\setlength{\rightskip}{0pt plus 5cm}caddr\+\_\+t \+\_\+sbrk (
+\begin{DoxyParamCaption}
+\item[{int}]{incr}
+\end{DoxyParamCaption}
+)}}\label{group__newlib_gaae54d7b9578ba1fc171ce6f30f4c68a3}
+
+
+Enlarges the allocated heap space. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em incr} & Number of bytes by which to increase the heap space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+The previous end of heap on success (which is also a pointer to the start of the newly allocated memory if {\ttfamily incr} is positive), or {\ttfamily (caddr\+\_\+t)-\/1} with {\ttfamily errno} set to {\ttfamily E\+N\+O\+M\+E\+M} on error 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+64 \{
+65   \textcolor{comment}{/*}
+66 \textcolor{comment}{   * Newlib's \_sbrk\_r() assumes that this global errno variable is used here,}
+67 \textcolor{comment}{   * which is different from the errno definition provided by <errno.h>.}
+68 \textcolor{comment}{   */}
+69 \textcolor{preprocessor}{#undef errno}
+70   \textcolor{keyword}{extern} \textcolor{keywordtype}{int} errno;
+71 
+72   \textcolor{comment}{/* Heap boundaries from linker script. */}
+73   \textcolor{keyword}{extern} uint8\_t \_heap;
+74   \textcolor{keyword}{extern} uint8\_t \_eheap;
+75 
+76   \textcolor{keyword}{static} uint8\_t *heap\_end = &\_heap;
+77   uint8\_t *prev\_heap\_end = heap\_end;
+78 
+79   \textcolor{keywordflow}{if}(heap\_end + incr > &\_eheap) \{
+80     PRINTF(\textcolor{stringliteral}{"Out of heap space!\(\backslash\)n"});
+81     errno = ENOMEM;
+82     \textcolor{keywordflow}{return} (caddr\_t)-1;
+83   \}
+84 
+85   heap\_end += incr;
+86   \textcolor{keywordflow}{return} (caddr\_t)prev\_heap\_end;
+87 \}
+\end{DoxyCode}

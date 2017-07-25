@@ -1,0 +1,2050 @@
+\hypertarget{mqtt__sn_8c}{\section{Referência ao ficheiro mqtt\+\_\+sn.\+c}
+\label{mqtt__sn_8c}\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+}
+
+
+Licensed to the Apache Software Foundation (A\+S\+F) under one or more contributor license agreements.  
+
+
+{\ttfamily \#include \char`\"{}contiki.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}net/ip/uip.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}net/ipv6/uip-\/ds6.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}simple-\/udp.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$mqtt\+\_\+sn.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}sys/timer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}list.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/ctimer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sys/etimer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stdint.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+Diagrama de dependências de inclusão para mqtt\+\_\+sn.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mqtt__sn_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{mqtt__sn_8c_a3d0423866ea0d39d4356fb107fcd256b}{{\bfseries P\+R\+O\+C\+E\+S\+S} (mqtt\+\_\+sn\+\_\+main,\char`\"{}\mbox{[}M\+Q\+T\+T-\/S\+N\mbox{]} Processo inicial\char`\"{})}\label{mqtt__sn_8c_a3d0423866ea0d39d4356fb107fcd256b}
+
+\item 
+bool \hyperlink{mqtt__sn_8c_a2620f37584b501fde35e71806a78b35a}{unlock\+\_\+tasks} (void)
+\begin{DoxyCompactList}\small\item\em Libera opção de geração de tarefas. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_ae0cb1cb4ad61ca752d66b286f839d72b}{init\+\_\+sub} (void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Inicia o evento de S\+U\+B\+S\+C\+R\+I\+B\+E. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_ac598f98e844bfd5bbdb577099ddf06d1}{parse\+\_\+mqtt\+\_\+type\+\_\+string} (uint8\+\_\+t type, char $\ast$$\ast$type\+\_\+string)
+\begin{DoxyCompactList}\small\item\em Retorna a string de status correspondente. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{mqtt__sn_8c_a9bd6d4e9304d00d28861751c22b146e4}{mqtt\+\_\+sn\+\_\+check\+\_\+status\+\_\+string} (void)
+\begin{DoxyCompactList}\small\item\em Checa o status da conexãoe em String. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_aab2bca192b63f37bf4847be3686bca75}{mqtt\+\_\+sn\+\_\+status\+\_\+t} \hyperlink{mqtt__sn_8c_a200e89a8fd400c652431bd505de6f827}{mqtt\+\_\+sn\+\_\+check\+\_\+status} (void)
+\begin{DoxyCompactList}\small\item\em Checa o status da conexão M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a172afa34fe10ad1ee4ffc0d226b35b4d}{mqtt\+\_\+sn\+\_\+check\+\_\+rc} (uint8\+\_\+t rc)
+\begin{DoxyCompactList}\small\item\em Envia requisição de conexão ao broker M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{mqtt__sn_8c_adba0283cc8fadf24f2f04246c76e8cde}{mqtt\+\_\+sn\+\_\+get\+\_\+qos\+\_\+flag} (int8\+\_\+t qos)
+\begin{DoxyCompactList}\small\item\em Gera a flag de nível Qo\+S. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_ac5fde757ae886c8827b853125f7458bd}{mqtt\+\_\+sn\+\_\+sub\+\_\+wildcard} (char $\ast$topic, uint8\+\_\+t qos)
+\begin{DoxyCompactList}\small\item\em Prepara tarefa de S\+U\+B\+S\+C\+R\+I\+B\+E do tipo W\+I\+L\+D\+C\+A\+R\+D. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_aab8d5db0224c9b083af9f18094053795}{mqtt\+\_\+sn\+\_\+sub} (char $\ast$topic, uint8\+\_\+t qos)
+\begin{DoxyCompactList}\small\item\em Prepara requisição de inscrição ao broker M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_ab8c0f238b41b373afb8b21e0f594b79d}{mqtt\+\_\+sn\+\_\+pub} (char $\ast$topic, char $\ast$message, bool retain\+\_\+flag, uint8\+\_\+t qos)
+\begin{DoxyCompactList}\small\item\em Prepara requisição de publicação ao broker M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_af60c0aa848adffbfe41a2e655a279f9d}{verf\+\_\+hist\+\_\+sub} (char $\ast$topic)
+\begin{DoxyCompactList}\small\item\em Verifica se o tópico já foi registrado. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_ac81a0d1e0daa51cdb8495a52e317e140}{verf\+\_\+register} (char $\ast$topic)
+\begin{DoxyCompactList}\small\item\em Verifica pré-\/registro do tópico. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_a6674e1ecf45890d3a15ab667fe4a4f58}{print\+\_\+g\+\_\+topics} (void)
+\begin{DoxyCompactList}\small\item\em Exibe os tópicos registrados. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_ada3c457ee81d0b29892742401845d918}{init\+\_\+vectors} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa os vetores M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_adfb1174ee7cff21df2d0afbb6fe2db30}{mqtt\+\_\+sn\+\_\+will\+\_\+topic\+\_\+send} (void)
+\begin{DoxyCompactList}\small\item\em Envia tópico de L\+W\+T. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a6718f310e6635c018a7126c5b1311e50}{mqtt\+\_\+sn\+\_\+will\+\_\+message\+\_\+send} (void)
+\begin{DoxyCompactList}\small\item\em Envia mensagem de L\+W\+T. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_af09083ea59a182fdf109b6e3fa213bec}{mqtt\+\_\+sn\+\_\+ping\+\_\+send} (void)
+\begin{DoxyCompactList}\small\item\em Envia requisição de ping ao broker. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a1b8eb51076a2923f2c036f1ff925c168}{mqtt\+\_\+sn\+\_\+con\+\_\+send} (void)
+\begin{DoxyCompactList}\small\item\em Envia requisição de conexão ao broker M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_ae17664af7f894e29743fafdf8bf98f89}{mqtt\+\_\+sn\+\_\+reg\+\_\+send} (void)
+\begin{DoxyCompactList}\small\item\em Envio de mensagens ao broker do tipo R\+E\+G\+I\+S\+T\+E\+R. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_aa6e0e9b8d7769407ab35fec5443e3896}{mqtt\+\_\+sn\+\_\+regack\+\_\+send} (uint16\+\_\+t msg\+\_\+id, uint16\+\_\+t topic\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Envia pacote do tipo R\+E\+G\+A\+C\+K ao broker. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a550856b818c23fce9e4d5b253c3e7547}{mqtt\+\_\+sn\+\_\+pub\+\_\+send} (char $\ast$topic, char $\ast$message, bool retain\+\_\+flag, uint8\+\_\+t qos)
+\begin{DoxyCompactList}\small\item\em Envia pacote P\+U\+B\+L\+I\+S\+H ao broker M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a105b8d440266b4a582f2d627e57be14a}{mqtt\+\_\+sn\+\_\+sub\+\_\+send} (char $\ast$topic, uint8\+\_\+t qos)
+\begin{DoxyCompactList}\small\item\em Envia pacote S\+U\+B\+S\+C\+R\+I\+B\+E ao broker M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a831d03a2cd7fbc884cec2013c2ebc823}{mqtt\+\_\+sn\+\_\+sub\+\_\+send\+\_\+wildcard} (char $\ast$topic, uint8\+\_\+t qos)
+\begin{DoxyCompactList}\small\item\em Envia pacote S\+U\+B\+S\+C\+R\+I\+B\+E do tipo W\+I\+L\+D\+C\+A\+R\+D ao broker M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+\hypertarget{mqtt__sn_8c_ade91c29dc851d7eef5fe46a9804b4d5e}{\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} {\bfseries mqtt\+\_\+sn\+\_\+disconnect} (uint16\+\_\+t duration)}\label{mqtt__sn_8c_ade91c29dc851d7eef5fe46a9804b4d5e}
+
+\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{mqtt\+\_\+sn\+\_\+insert\+\_\+queue} (\hyperlink{structmqtt__sn__task__t}{mqtt\+\_\+sn\+\_\+task\+\_\+t} new)
+\begin{DoxyCompactList}\small\item\em Insere uma tarefa na fila. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_aa17781596362470e100d5fc4f62a01e9}{mqtt\+\_\+sn\+\_\+delete\+\_\+queue} (void)
+\begin{DoxyCompactList}\small\item\em Remove o elemento mais próximo de ser processado. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_ae4f357f3a8fa7a65fa95b695288c5173}{mqtt\+\_\+sn\+\_\+check\+\_\+queue} (void)
+\begin{DoxyCompactList}\small\item\em Lista as tarefas da fila. \end{DoxyCompactList}\item 
+bool \hyperlink{mqtt__sn_8c_afb698c97e10afa31e2c11351f6ce9388}{mqtt\+\_\+sn\+\_\+check\+\_\+empty} (void)
+\begin{DoxyCompactList}\small\item\em Checa o status da fila de tarefas M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_af9146fa082fe2bc6612fb13dbb20ed36}{mqtt\+\_\+sn\+\_\+recv\+\_\+parser} (const uint8\+\_\+t $\ast$data)
+\begin{DoxyCompactList}\small\item\em Realiza o parsing das mensagens U\+D\+P recebidas. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_ab6fc2a07c15881877943348bef786cd8}{mqtt\+\_\+sn\+\_\+udp\+\_\+rec\+\_\+cb} (struct simple\+\_\+udp\+\_\+connection $\ast$c, const uip\+\_\+ipaddr\+\_\+t $\ast$sender\+\_\+addr, uint16\+\_\+t sender\+\_\+port, const uip\+\_\+ipaddr\+\_\+t $\ast$receiver\+\_\+addr, uint16\+\_\+t receiver\+\_\+port, const uint8\+\_\+t $\ast$data, uint16\+\_\+t datalen)
+\begin{DoxyCompactList}\small\item\em Callback de recepção U\+D\+P. \end{DoxyCompactList}\item 
+\hyperlink{mqtt__sn_8h_add91ba4199db8665b9b9fc56fc6783a6}{resp\+\_\+con\+\_\+t} \hyperlink{mqtt__sn_8c_a8771e78d9d8d5379ff27fba1feefe37c}{mqtt\+\_\+sn\+\_\+create\+\_\+sck} (\hyperlink{structmqtt__sn__con__t}{mqtt\+\_\+sn\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+connection, char $\ast$topics\mbox{[}$\,$\mbox{]}, size\+\_\+t topic\+\_\+len, \hyperlink{mqtt__sn_8h_a679e4bebc7798d960960760150bdc5a7}{mqtt\+\_\+sn\+\_\+cb\+\_\+f} cb\+\_\+f)
+\begin{DoxyCompactList}\small\item\em Inicia conexão ao broker U\+D\+P. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_a46fe607d1db728d41ed6aec6fee3fc77}{mqtt\+\_\+sn\+\_\+init} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa P\+R\+O\+C\+E\+S\+S\+\_\+\+T\+H\+R\+E\+A\+D M\+Q\+T\+T-\/\+S\+N. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_ac9614aca44158215c43b8810e052939d}{timeout\+\_\+con} (void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Processa timeout de pacotes. \end{DoxyCompactList}\item 
+void \hyperlink{mqtt__sn_8c_a35dbd49b5fdc1d6e3dfe2b2d7255cf3e}{timeout\+\_\+ping\+\_\+mqtt} (void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Processa timeout de ping. \end{DoxyCompactList}\item 
+\hypertarget{mqtt__sn_8c_ac4ada750a373f3b01262465d9b3dd468}{{\bfseries P\+R\+O\+C\+E\+S\+S\+\_\+\+T\+H\+R\+E\+A\+D} (mqtt\+\_\+sn\+\_\+main, ev, data)}\label{mqtt__sn_8c_ac4ada750a373f3b01262465d9b3dd468}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrição detalhada}
+Licensed to the Apache Software Foundation (A\+S\+F) under one or more contributor license agreements. 
+
+See the N\+O\+T\+I\+C\+E file distributed with this work for additional information regarding copyright ownership. The A\+S\+F licenses this file to you under the Apache License, Version 2.\+0 (the \char`\"{}\+License\char`\"{}); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+\href{http://www.apache.org/licenses/LICENSE-2.0}{\tt http\+://www.\+apache.\+org/licenses/\+L\+I\+C\+E\+N\+S\+E-\/2.\+0}
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \char`\"{}\+A\+S I\+S\char`\"{} B\+A\+S\+I\+S, W\+I\+T\+H\+O\+U\+T W\+A\+R\+R\+A\+N\+T\+I\+E\+S O\+R C\+O\+N\+D\+I\+T\+I\+O\+N\+S O\+F A\+N\+Y K\+I\+N\+D, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+Este projeto está sendo liberado pela licença A\+P\+A\+C\+H\+E 2.\+0.
+
+\begin{DoxyAuthor}{Autor}
+Ânderson Ignácio da Silva 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+19 Ago 2016 Arquivo principal do código fonte do porte do M\+Q\+T\+T-\/\+S\+N para o Contiki 
+\end{DoxyDate}
+\begin{DoxySeeAlso}{Veja também}
+\href{http://www.aignacio.com}{\tt http\+://www.\+aignacio.\+com}
+\end{DoxySeeAlso}
+\mbox{[}Apontamento n-\/1\mbox{]}\+: Descoberta uma característica do contiki, o que ocorre é que se você utiliza algum temporizador de evento (etimer) e ele expira, ele gera um evento o que e esperado, porém se você tiver testando diversas condições de forma sequencial 1) else if(ev == etimer\+\_\+expired(....)) 2) else if(ev == mqtt\+\_\+event\+\_\+regack) ... M\+E\+S\+M\+O após ter gerado o evento de \char`\"{}expiração\char`\"{}, caso a condição 1) esteja antes da 2), e a 2) que gerou um evento, a 1) será executada anteriormente porque compreendesse que o \char`\"{}timer continua expirado\char`\"{}.
+
+\mbox{[}Apontamento n-\/2\mbox{]}\+: Como nesta A\+P\+I utiliza-\/se malloc necessitamos da função do tipo P\+O\+S\+I\+X chamadas \char`\"{}sbrk\char`\"{} a qual utiliza de chamadas de sistema para realizar a operação de aloca ção de memória.\+Logo, devemos incluir no arquivo principal o arquivo \hyperlink{syscalls_8c}{syscalls.\+c} (arquivo disponibilizado pelo contiki -\/ lib/newlib/syscalls.\+c) e também deve-\/ mos incluir as variáveis \+\_\+heap e \+\_\+eheap no linker script (cc26xx.\+ld) para a função sbrk saber onde começa e termina a zona heap de memória do mcu.
+
+Incluir no linker\+: ... \+\_\+heap = .; \+\_\+eheap = O\+R\+I\+G\+I\+N(\+S\+R\+A\+M) + L\+E\+N\+G\+T\+H(\+S\+R\+A\+M); \} 
+
+\subsection{Documentação das funções}
+\hypertarget{mqtt__sn_8c_ae0cb1cb4ad61ca752d66b286f839d72b}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!init\+\_\+sub@{init\+\_\+sub}}
+\index{init\+\_\+sub@{init\+\_\+sub}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{init\+\_\+sub}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+sub (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ae0cb1cb4ad61ca752d66b286f839d72b}
+
+
+Inicia o evento de S\+U\+B\+S\+C\+R\+I\+B\+E. 
+
+Inicia as requisições de inscrição através do evento
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna argumento \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+116                         \{
+117   debug\_mqtt(\textcolor{stringliteral}{"INICIANDO SUBSCRIBE"});
+118   process\_post(&mqtt\_sn\_main,mqtt\_event\_run\_task,NULL);
+119 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ada3c457ee81d0b29892742401845d918}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!init\+\_\+vectors@{init\+\_\+vectors}}
+\index{init\+\_\+vectors@{init\+\_\+vectors}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{init\+\_\+vectors}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+vectors (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ada3c457ee81d0b29892742401845d918}
+
+
+Inicializa os vetores M\+Q\+T\+T-\/\+S\+N. 
+
+Deleta tarefas na fila e inicializa o vetor de tópicos setando 0x\+F\+F aos identificadores de tópico
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna argumento \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+349                        \{
+350   debug\_mqtt(\textcolor{stringliteral}{"Inicializando vetores..."});
+351   \textcolor{keywordtype}{size\_t} i;
+352   \textcolor{keywordflow}{for} (i = 1; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)\{
+353     g\_topic\_bind[i].short\_topic\_id = 0xFF;
+354     g\_topic\_bind[i].topic\_name = 0;
+355     g\_topic\_bind[i].subscribed = 0x00;
+356   \}
+357 
+358   \textcolor{keywordflow}{while} (!\hyperlink{mqtt__sn_8c_afb698c97e10afa31e2c11351f6ce9388}{mqtt\_sn\_check\_empty}())
+359       \hyperlink{mqtt__sn_8c_aa17781596362470e100d5fc4f62a01e9}{mqtt\_sn\_delete\_queue}();
+360   g\_task\_id = 0;
+361 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_afb698c97e10afa31e2c11351f6ce9388}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+check\+\_\+empty@{mqtt\+\_\+sn\+\_\+check\+\_\+empty}}
+\index{mqtt\+\_\+sn\+\_\+check\+\_\+empty@{mqtt\+\_\+sn\+\_\+check\+\_\+empty}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+check\+\_\+empty}]{\setlength{\rightskip}{0pt plus 5cm}bool mqtt\+\_\+sn\+\_\+check\+\_\+empty (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_afb698c97e10afa31e2c11351f6ce9388}
+
+
+Checa o status da fila de tarefas M\+Q\+T\+T-\/\+S\+N. 
+
+Percorra a lista encadeada de tarefas para verificar se está vazia
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em T\+R\+U\+E} & Fila vazia \\
+\hline
+{\em F\+A\+L\+S\+E} & Há tarefas a serem processadas \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+709                               \{
+710   \textcolor{keywordflow}{if} (mqtt\_queue\_first  ==  NULL)
+711     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+712   \textcolor{keywordflow}{else}
+713     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+714 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ae4f357f3a8fa7a65fa95b695288c5173}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+check\+\_\+queue@{mqtt\+\_\+sn\+\_\+check\+\_\+queue}}
+\index{mqtt\+\_\+sn\+\_\+check\+\_\+queue@{mqtt\+\_\+sn\+\_\+check\+\_\+queue}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+check\+\_\+queue}]{\setlength{\rightskip}{0pt plus 5cm}void mqtt\+\_\+sn\+\_\+check\+\_\+queue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ae4f357f3a8fa7a65fa95b695288c5173}
+
+
+Lista as tarefas da fila. 
+
+Percorre os links dos ponteiros listando os elementos a serem processados pela A\+S\+M do M\+Q\+T\+T-\/\+S\+N
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+690                               \{
+691   \textcolor{keywordtype}{int} cnt = 0;
+692   \textcolor{keyword}{struct }\hyperlink{structnode}{node} *temp;
+693   \textcolor{keywordtype}{char} *task\_type;
+694 
+695   temp = mqtt\_queue\_first;
+696 
+697   debug\_task(\textcolor{stringliteral}{"VALOR DO GLOBAL ID g\_task\_id:%d"},g\_task\_id);
+698 
+699   debug\_task(\textcolor{stringliteral}{"FILA:"});
+700   \textcolor{keywordflow}{while} (temp) \{
+701       \hyperlink{mqtt__sn_8c_ac598f98e844bfd5bbdb577099ddf06d1}{parse\_mqtt\_type\_string}(temp->data.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q},&task\_type);
+702       debug\_task(\textcolor{stringliteral}{"[%2.0d][%s][%d]"},(\textcolor{keywordtype}{int})temp->data.\hyperlink{structmqtt__sn__task__t_a1dba79ab8685a56d3ae57d84aca21ce8}{id\_task}, task\_type,temp->data.
+      \hyperlink{structmqtt__sn__task__t_a25bc8ea535927589bca3720e0e838958}{short\_topic});
+703       temp = temp->link;
+704       cnt++;
+705   \}
+706   debug\_task(\textcolor{stringliteral}{"Tamanho da fila:[%d]"}, cnt);
+707 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a172afa34fe10ad1ee4ffc0d226b35b4d}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+check\+\_\+rc@{mqtt\+\_\+sn\+\_\+check\+\_\+rc}}
+\index{mqtt\+\_\+sn\+\_\+check\+\_\+rc@{mqtt\+\_\+sn\+\_\+check\+\_\+rc}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+check\+\_\+rc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+check\+\_\+rc (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{rc}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a172afa34fe10ad1ee4ffc0d226b35b4d}
+
+
+Envia requisição de conexão ao broker M\+Q\+T\+T-\/\+S\+N. 
+
+Realiza o envio de mensagens do tipo C\+O\+N\+N\+E\+C\+T ao broker M\+Q\+T\+T-\/\+S\+N
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em rc} & Código de retorno da requisição M\+Q\+T\+T (Return Code)\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha por algum motivo no código de retorno \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso no recebimento do código de retorno\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyRefDesc}{Tarefa}
+\item[\hyperlink{todo__todo000006}{Tarefa}]Expandir o tipo de falha para tornar mais precisa a depuração futura \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+192                                        \{
+193   \textcolor{keywordflow}{switch} (rc) \{
+194     \textcolor{keywordflow}{case} ACCEPTED:
+195       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+196     \textcolor{keywordflow}{break};
+197     \textcolor{keywordflow}{case} REJECTED\_CONGESTION:
+198       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+199     \textcolor{keywordflow}{break};
+200     \textcolor{keywordflow}{case} REJECTED\_INVALID\_TOPIC\_ID:
+201       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+202     \textcolor{keywordflow}{break};
+203     \textcolor{keywordflow}{case} REJECTED\_NOT\_SUPPORTED:
+204       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+205     \textcolor{keywordflow}{break};
+206     \textcolor{keywordflow}{default}:
+207       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+208     \textcolor{keywordflow}{break};
+209   \}
+210 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a200e89a8fd400c652431bd505de6f827}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+check\+\_\+status@{mqtt\+\_\+sn\+\_\+check\+\_\+status}}
+\index{mqtt\+\_\+sn\+\_\+check\+\_\+status@{mqtt\+\_\+sn\+\_\+check\+\_\+status}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+check\+\_\+status}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mqtt\+\_\+sn\+\_\+status\+\_\+t} mqtt\+\_\+sn\+\_\+check\+\_\+status (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a200e89a8fd400c652431bd505de6f827}
+
+
+Checa o status da conexão M\+Q\+T\+T-\/\+S\+N. 
+
+Retorna o status da conexão M\+Q\+T\+T-\/\+S\+N baseado na estrutura mqtt\+\_\+sn\+\_\+status\+\_\+t
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em mqtt\+\_\+sn\+\_\+status\+\_\+t} & Estado da conexão \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+188                                            \{
+189   \textcolor{keywordflow}{return} mqtt\_status;
+190 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a9bd6d4e9304d00d28861751c22b146e4}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+check\+\_\+status\+\_\+string@{mqtt\+\_\+sn\+\_\+check\+\_\+status\+\_\+string}}
+\index{mqtt\+\_\+sn\+\_\+check\+\_\+status\+\_\+string@{mqtt\+\_\+sn\+\_\+check\+\_\+status\+\_\+string}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+check\+\_\+status\+\_\+string}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ mqtt\+\_\+sn\+\_\+check\+\_\+status\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a9bd6d4e9304d00d28861751c22b146e4}
+
+
+Checa o status da conexãoe em String. 
+
+Verifica o status da conexão M\+Q\+T\+T-\/\+S\+N e retorna uma string com o estado
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em Não} & recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em S\+T\+R\+I\+N\+G} & String do estado atual da conexão M\+Q\+T\+T-\/\+S\+N \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+159                                        \{
+160   \textcolor{keywordflow}{switch} (mqtt\_status) \{
+161     \textcolor{keywordflow}{case} MQTTSN\_DISCONNECTED:
+162       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"DESCONECTADO"};
+163     \textcolor{keywordflow}{break};
+164     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_CONNACK:
+165       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"AGUARDANDO CONNACK"};
+166     \textcolor{keywordflow}{break};
+167     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_REGACK:
+168       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"AGUARDANDO REGACK"};
+169     \textcolor{keywordflow}{break};
+170     \textcolor{keywordflow}{case} MQTTSN\_CONNECTED:
+171       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"#### CONECTADO ####"};
+172     \textcolor{keywordflow}{break};
+173     \textcolor{keywordflow}{case} MQTTSN\_TOPIC\_REGISTERED:
+174       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"TOPICOS REGISTRADOS"};
+175     \textcolor{keywordflow}{break};
+176     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_WILLTOPICREQ:
+177       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"AGUARDANDO WILL TOPIC"};
+178     \textcolor{keywordflow}{break};
+179     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_WILLMSGREQ:
+180       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"AGUARDANDO WILL MESSAGE"};
+181     \textcolor{keywordflow}{break};
+182     \textcolor{keywordflow}{default}:
+183       \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ESTADO NAO DESCRITO"};
+184     \textcolor{keywordflow}{break};
+185   \}
+186 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a1b8eb51076a2923f2c036f1ff925c168}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+con\+\_\+send@{mqtt\+\_\+sn\+\_\+con\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+con\+\_\+send@{mqtt\+\_\+sn\+\_\+con\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+con\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+con\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a1b8eb51076a2923f2c036f1ff925c168}
+
+
+Envia requisição de conexão ao broker M\+Q\+T\+T-\/\+S\+N. 
+
+Realiza o envio de mensagens do tipo C\+O\+N\+N\+E\+C\+T ao broker M\+Q\+T\+T-\/\+S\+N
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar o pacote C\+O\+N\+N\+E\+C\+T \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar o pacote C\+O\+N\+N\+E\+C\+T \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+422                                  \{
+423   \hyperlink{structconnect__packet__t}{connect\_packet\_t} packet;
+424 
+425   \textcolor{comment}{// Criação do pacote CONNECT}
+426   packet.type = MQTT\_SN\_TYPE\_CONNECT;
+427   packet.flags = MQTT\_SN\_FLAG\_CLEAN;
+428   \textcolor{keywordflow}{if} (g\_will)
+429     packet.flags += MQTT\_SN\_FLAG\_WILL;
+430   packet.protocol\_id = MQTT\_SN\_PROTOCOL\_ID;
+431   packet.duration = uip\_htons(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a276b967ec5d6e3305ee4695488e4472b}{keep\_alive}); \textcolor{comment}{//Realiza a conversão para network byte
+       order}
+432 
+433   strncpy(packet.client\_id, g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id}, strlen(g\_mqtt\_sn\_con.
+      \hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id}));
+434   packet.client\_id[strlen(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id})] = \textcolor{charliteral}{'\(\backslash\)0'};
+435   packet.length = 0x06 + strlen(packet.client\_id);
+436 
+437   \textcolor{comment}{// debug\_mqtt("CLIENT\_ID:%s, Tamanho:%d",packet.client\_id,strlen(packet.client\_id));}
+438   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @CONNECT "});
+439   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+440   \textcolor{comment}{// debug\_mqtt("enviado!");}
+441   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+442 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a8771e78d9d8d5379ff27fba1feefe37c}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+create\+\_\+sck@{mqtt\+\_\+sn\+\_\+create\+\_\+sck}}
+\index{mqtt\+\_\+sn\+\_\+create\+\_\+sck@{mqtt\+\_\+sn\+\_\+create\+\_\+sck}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+create\+\_\+sck}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+create\+\_\+sck (
+\begin{DoxyParamCaption}
+\item[{{\bf mqtt\+\_\+sn\+\_\+con\+\_\+t}}]{mqtt\+\_\+sn\+\_\+connection, }
+\item[{char $\ast$}]{topics\mbox{[}$\,$\mbox{]}, }
+\item[{size\+\_\+t}]{topic\+\_\+len, }
+\item[{{\bf mqtt\+\_\+sn\+\_\+cb\+\_\+f}}]{cb\+\_\+f}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a8771e78d9d8d5379ff27fba1feefe37c}
+
+
+Inicia conexão ao broker U\+D\+P. 
+
+Estabelece a conexão com um servidor M\+Q\+T\+T-\/\+S\+N, através da porta 1884 além de iniciar a fila de processos de conexão do protocolo.
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em mqtt\+\_\+sn\+\_\+connection} & Estrutura padrão de comunicação M\+Q\+T\+T-\/\+S\+N \\
+\hline
+\mbox{\tt in}  & {\em topics} & Vetor de tópicos a serem registrados \\
+\hline
+\mbox{\tt in}  & {\em topic\+\_\+len} & Tamanho do vetor de tópicos a serem registrados \\
+\hline
+\mbox{\tt in}  & {\em mqtt\+\_\+sn\+\_\+cb\+\_\+f} & Ponteiro para função de callback para recebimento das mensagens M\+Q\+T\+T-\/\+S\+N\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao alocar conexão U\+D\+P \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao alocar conexão U\+D\+P \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+876                                                                                                            
+               \{
+877   callback\_mqtt = cb\_f;
+878   \textcolor{comment}{/************************************ RECONEXÃO******************************/}
+879   topics\_len = topic\_len;
+880   \textcolor{keywordtype}{size\_t} t = 0;
+881   \textcolor{keywordflow}{for} (t=0; t < topic\_len; t++)\{
+882     topics\_reconnect[t] = topics[t];
+883     \textcolor{comment}{// debug\_mqtt("Armazenando topico: %s",(char *)topics\_reconnect[t]);}
+884   \}
+885   \textcolor{comment}{/************************************ RECONEXÃO******************************/}
+886 
+887   \textcolor{keyword}{static} uip\_ipaddr\_t broker\_addr;
+888   \textcolor{keyword}{static} uint8\_t con\_udp\_status = 0;
+889 
+890   g\_mqtt\_sn\_con = mqtt\_sn\_connection;
+891   uip\_ip6addr(&broker\_addr, *g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker},
+892                             *(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker}+1),
+893                             *(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker}+2),
+894                             *(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker}+3),
+895                             *(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker}+4),
+896                             *(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker}+5),
+897                             *(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker}+6),
+898                             *(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a058796ada31936dced646e5da3eb329a}{ipv6\_broker}+7));
+899 
+900   \textcolor{keywordflow}{if} (strlen(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id}) > 23)\{
+901     debug\_mqtt(\textcolor{stringliteral}{"Cli. ID SIZE:%d > 23!"},strlen(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id}));
+902     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+903   \}
+904 
+905   debug\_mqtt(\textcolor{stringliteral}{"Endereco do broker IPv6: "});
+906   uip\_debug\_ipaddr\_print(&broker\_addr);
+907   debug\_mqtt(\textcolor{stringliteral}{"Endereco da porta:%d "},g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_ae3c6408a5f3fb41bcddcf7e8266f41a6}{udp\_port});
+908   debug\_mqtt(\textcolor{stringliteral}{"Client ID:%s/%d"},g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id},strlen(g\_mqtt\_sn\_con.
+      \hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id}));
+909 
+910 
+911   \textcolor{keywordflow}{if}(!g\_recon)\{
+912     con\_udp\_status = simple\_udp\_register(&g\_mqtt\_sn\_con.udp\_con,
+913                                           g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_ae3c6408a5f3fb41bcddcf7e8266f41a6}{udp\_port},
+914                                           &broker\_addr,
+915                                           g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_ae3c6408a5f3fb41bcddcf7e8266f41a6}{udp\_port},
+916                                           \hyperlink{mqtt__sn_8c_ab6fc2a07c15881877943348bef786cd8}{mqtt\_sn\_udp\_rec\_cb});
+917     \textcolor{keywordflow}{if}(!con\_udp\_status)
+918       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+919   \}
+920 
+921   \textcolor{keywordflow}{if} (g\_mqtt\_sn\_con.will\_topic && g\_mqtt\_sn\_con.will\_message)
+922     g\_will = \textcolor{keyword}{true};
+923 
+924   \textcolor{comment}{/****************************************************************************/}
+925   \textcolor{comment}{// Criando tarefa de [CONNECT]}
+926   \textcolor{comment}{//}
+927   \textcolor{comment}{// Inicialmente precisamos enviar a requisição de CONNECT ao broker MQTT-SN pa}
+928   \textcolor{comment}{// ra que seja possível qualquer outra operação.}
+929   \hyperlink{structmqtt__sn__task__t}{mqtt\_sn\_task\_t} connect\_task;
+930 
+931   \textcolor{comment}{// debug\_mqtt("Criando tarefa de CONNECT");}
+932   connect\_task.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} = MQTT\_SN\_TYPE\_CONNECT;
+933   \hyperlink{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{mqtt\_sn\_insert\_queue}(connect\_task);
+934   \textcolor{comment}{/****************************************************************************/}
+935 
+936   \textcolor{comment}{/****************************************************************************/}
+937   \textcolor{comment}{// Implementação do recurso de [LWT]}
+938   \textcolor{comment}{// Verificando se o usuário quer utilizar will topic e will message}
+939   \textcolor{keywordflow}{if} (g\_mqtt\_sn\_con.will\_topic && g\_mqtt\_sn\_con.will\_message)\{
+940     \hyperlink{structmqtt__sn__task__t}{mqtt\_sn\_task\_t} will\_topic\_task;
+941     will\_topic\_task.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} = MQTT\_SN\_TYPE\_WILLTOPIC;
+942     \hyperlink{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{mqtt\_sn\_insert\_queue}(will\_topic\_task);
+943 
+944     \hyperlink{structmqtt__sn__task__t}{mqtt\_sn\_task\_t} will\_message\_task;
+945     will\_message\_task.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} = MQTT\_SN\_TYPE\_WILLMSG;
+946     \hyperlink{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{mqtt\_sn\_insert\_queue}(will\_message\_task);
+947   \}
+948 
+949   \textcolor{comment}{/****************************************************************************/}
+950   \textcolor{comment}{// Criando tarefas de [REGISTER]}
+951   \textcolor{comment}{//}
+952   \textcolor{comment}{// Para cada tópico definido pelo usuário no código principal.Inicia-se o pro}
+953   \textcolor{comment}{// cesso de preenchimento de tarefas na fila de serviços MQT-SN.}
+954   \textcolor{comment}{// Primeiro antes de qualquer processo MQTT-SN registra-se todos os tópicos in}
+955   \textcolor{comment}{// formados pelo usuário, otimizando as funções de inscrição e publicação, o}
+956   \textcolor{comment}{// broker irá então responder com os respectivos SHORT TOPIC para utilizarmos.}
+957   \hyperlink{structmqtt__sn__task__t}{mqtt\_sn\_task\_t} topic\_reg;
+958 
+959   \textcolor{comment}{// debug\_mqtt("Criando tarefa de REGISTER");}
+960   \textcolor{keywordtype}{size\_t} i;
+961   \textcolor{keywordflow}{for}(i = 0; i < topic\_len; i++)\{
+962     \textcolor{keywordflow}{if} (g\_mqtt\_sn\_con.will\_topic && g\_mqtt\_sn\_con.will\_message)
+963       g\_topic\_bind[g\_task\_id-2].topic\_name = topics\_reconnect[i]; \textcolor{comment}{// Antecipa-se 2 no indíce em função das
+       2 tasks já alocadas para WILL do LWT}
+964     \textcolor{keywordflow}{else}
+965       g\_topic\_bind[g\_task\_id].topic\_name = topics\_reconnect[i];
+966     topic\_reg.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} = MQTT\_SN\_TYPE\_REGISTER;
+967     \textcolor{keywordflow}{if} (!\hyperlink{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{mqtt\_sn\_insert\_queue}(topic\_reg)) \textcolor{keywordflow}{break};
+968   \}
+969   \textcolor{comment}{/****************************************************************************/}
+970 
+971   process\_post(&mqtt\_sn\_main, mqtt\_event\_run\_task, NULL);
+972 
+973   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+974 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_aa17781596362470e100d5fc4f62a01e9}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+delete\+\_\+queue@{mqtt\+\_\+sn\+\_\+delete\+\_\+queue}}
+\index{mqtt\+\_\+sn\+\_\+delete\+\_\+queue@{mqtt\+\_\+sn\+\_\+delete\+\_\+queue}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+delete\+\_\+queue}]{\setlength{\rightskip}{0pt plus 5cm}void mqtt\+\_\+sn\+\_\+delete\+\_\+queue (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_aa17781596362470e100d5fc4f62a01e9}
+
+
+Remove o elemento mais próximo de ser processado. 
+
+Realiza a remoção do elemento mais próximo de ser processado, no caso o mais antigo inserido na fila
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyRefDesc}{Tarefa}
+\item[\hyperlink{todo__todo000005}{Tarefa}]Adicionar opção de exclusão intermediária \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+669                                \{
+670   \textcolor{keyword}{struct }\hyperlink{structnode}{node} *temp;
+671   \textcolor{keywordtype}{char} *task\_type;
+672 
+673   temp = mqtt\_queue\_first;
+674   \textcolor{keywordflow}{if} (mqtt\_queue\_first->link == NULL) \{
+675       g\_task\_id = 0;
+676       \hyperlink{mqtt__sn_8c_ac598f98e844bfd5bbdb577099ddf06d1}{parse\_mqtt\_type\_string}(mqtt\_queue\_first->data.
+      \hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q},&task\_type);
+677       debug\_task(\textcolor{stringliteral}{"Task removida:[%2.0d][%s]"},(\textcolor{keywordtype}{int})mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_a1dba79ab8685a56d3ae57d84aca21ce8}{id\_task},task\_type);
+678       debug\_task(\textcolor{stringliteral}{"Task info: Fila vazia"});
+679       mqtt\_queue\_first = mqtt\_queue\_last = NULL;
+680   \}
+681   \textcolor{keywordflow}{else} \{
+682       g\_task\_id--;
+683       \hyperlink{mqtt__sn_8c_ac598f98e844bfd5bbdb577099ddf06d1}{parse\_mqtt\_type\_string}(mqtt\_queue\_first->data.
+      \hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q},&task\_type);
+684       debug\_task(\textcolor{stringliteral}{"Task removida:[%2.0d][%s]"},(\textcolor{keywordtype}{int})mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_a1dba79ab8685a56d3ae57d84aca21ce8}{id\_task},task\_type);
+685       mqtt\_queue\_first = mqtt\_queue\_first->link;
+686       free(temp);
+687   \}
+688 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_adba0283cc8fadf24f2f04246c76e8cde}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+get\+\_\+qos\+\_\+flag@{mqtt\+\_\+sn\+\_\+get\+\_\+qos\+\_\+flag}}
+\index{mqtt\+\_\+sn\+\_\+get\+\_\+qos\+\_\+flag@{mqtt\+\_\+sn\+\_\+get\+\_\+qos\+\_\+flag}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+get\+\_\+qos\+\_\+flag}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t mqtt\+\_\+sn\+\_\+get\+\_\+qos\+\_\+flag (
+\begin{DoxyParamCaption}
+\item[{int8\+\_\+t}]{qos}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_adba0283cc8fadf24f2f04246c76e8cde}
+
+
+Gera a flag de nível Qo\+S. 
+
+Retorna o estado da flag correspondente ao nível Qo\+S enviado
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em qos} & Nível Qo\+S desejado\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em Qo\+S} & Retorna a flag do nível Qo\+S desejado \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+212                                         \{
+213     \textcolor{keywordflow}{switch} (qos) \{
+214         \textcolor{keywordflow}{case} -1:
+215           \textcolor{keywordflow}{return} MQTT\_SN\_FLAG\_QOS\_N1;
+216         \textcolor{keywordflow}{case} 0:
+217           \textcolor{keywordflow}{return} MQTT\_SN\_FLAG\_QOS\_0;
+218         \textcolor{keywordflow}{case} 1:
+219           \textcolor{keywordflow}{return} MQTT\_SN\_FLAG\_QOS\_1;
+220         \textcolor{keywordflow}{case} 2:
+221           \textcolor{keywordflow}{return} MQTT\_SN\_FLAG\_QOS\_2;
+222         \textcolor{keywordflow}{default}:
+223           \textcolor{keywordflow}{return} 0;
+224     \}
+225 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a46fe607d1db728d41ed6aec6fee3fc77}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+init@{mqtt\+\_\+sn\+\_\+init}}
+\index{mqtt\+\_\+sn\+\_\+init@{mqtt\+\_\+sn\+\_\+init}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}void mqtt\+\_\+sn\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a46fe607d1db728d41ed6aec6fee3fc77}
+
+
+Inicializa P\+R\+O\+C\+E\+S\+S\+\_\+\+T\+H\+R\+E\+A\+D M\+Q\+T\+T-\/\+S\+N. 
+
+Inicializa a P\+R\+O\+C\+E\+S\+S\+\_\+\+T\+H\+R\+E\+A\+D de M\+Q\+T\+T-\/\+S\+N bem como as variáveis utilizadas e a alocaçãod e eventos
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+976                        \{
+977   process\_start(&mqtt\_sn\_main, NULL);
+978 
+979   \textcolor{comment}{// Alocação de número de evento disponível para os eventos do MQTT-SN}
+980   mqtt\_event\_connect         = process\_alloc\_event();
+981   mqtt\_event\_connack         = process\_alloc\_event();
+982   mqtt\_event\_register        = process\_alloc\_event();
+983   mqtt\_event\_regack          = process\_alloc\_event();
+984   mqtt\_event\_run\_task        = process\_alloc\_event();
+985   mqtt\_event\_pub\_qos\_0       = process\_alloc\_event();
+986   mqtt\_event\_ping\_timeout    = process\_alloc\_event();
+987   mqtt\_event\_suback          = process\_alloc\_event();
+988   mqtt\_event\_subscribe       = process\_alloc\_event();
+989   mqtt\_event\_connected       = process\_alloc\_event();
+990   mqtt\_event\_will\_topicreq   = process\_alloc\_event();
+991   mqtt\_event\_will\_messagereq = process\_alloc\_event();
+992 
+993   \hyperlink{mqtt__sn_8c_ada3c457ee81d0b29892742401845d918}{init\_vectors}();
+994 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+insert\+\_\+queue@{mqtt\+\_\+sn\+\_\+insert\+\_\+queue}}
+\index{mqtt\+\_\+sn\+\_\+insert\+\_\+queue@{mqtt\+\_\+sn\+\_\+insert\+\_\+queue}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+insert\+\_\+queue}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+insert\+\_\+queue (
+\begin{DoxyParamCaption}
+\item[{{\bf mqtt\+\_\+sn\+\_\+task\+\_\+t}}]{new}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}
+
+
+Insere uma tarefa na fila. 
+
+Insere uma nova tarefa na fila de requisições a serem processadas.
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em new} & Nova tarefa a ser processada pela A\+S\+M do M\+Q\+T\+T-\/\+S\+N\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Não foi possível alocar uma nova tarefa a fila \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Foi possível alocar uma nova tarefa a fila\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyRefDesc}{Tarefa}
+\item[\hyperlink{todo__todo000004}{Tarefa}]Melhorar alocação dinâmica de memória \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+630                                                    \{
+631   \textcolor{keyword}{struct }\hyperlink{structnode}{node} *temp,*temp2;
+632 
+633   temp2 = mqtt\_queue\_first;
+634   \textcolor{keywordtype}{int} cnt = 0;
+635   \textcolor{keywordflow}{while} (temp2) \{
+636       temp2 = temp2->link;
+637       cnt++;
+638   \}
+639 
+640   \textcolor{comment}{//Limita o número máximo de tarefas alocadas na fila}
+641   \textcolor{keywordflow}{if} (cnt > \hyperlink{group__MQTT__SN__CONTROL_ga45ab5881e190d570f3784e50be2cce65}{MAX\_QUEUE\_MQTT\_SN})
+642     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+643 
+644   temp = (\textcolor{keyword}{struct }\hyperlink{structnode}{node} *)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \hyperlink{structnode}{node}));
+645   temp->data.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q}  = \textcolor{keyword}{new}.msg\_type\_q;
+646   temp->data.\hyperlink{structmqtt__sn__task__t_a25bc8ea535927589bca3720e0e838958}{short\_topic} = \textcolor{keyword}{new}.short\_topic;
+647   temp->data.retain      = \textcolor{keyword}{new}.retain;
+648   temp->data.\hyperlink{structmqtt__sn__task__t_a5ce109928f26d01872230443c75c91f8}{qos\_level}   = \textcolor{keyword}{new}.qos\_level;
+649   temp->data.\hyperlink{structmqtt__sn__task__t_a1dba79ab8685a56d3ae57d84aca21ce8}{id\_task}     = g\_task\_id;
+650   g\_task\_id++;
+651 
+652   temp->link = NULL;
+653   \textcolor{keywordflow}{if} (mqtt\_queue\_last  ==  NULL) \{
+654       mqtt\_queue\_first = mqtt\_queue\_last = temp;
+655   \}
+656   \textcolor{keywordflow}{else} \{
+657       mqtt\_queue\_last->link = temp;
+658       mqtt\_queue\_last = temp;
+659   \}
+660 
+661   \textcolor{keywordtype}{char} *task\_type;
+662   \textcolor{comment}{//parse\_mqtt\_type\_string(mqtt\_queue\_first->data.msg\_type\_q,&task\_type\_2);}
+663   \textcolor{comment}{//debug\_task("Task principal:[%2.0d][%s]",(int)mqtt\_queue\_first->data.id\_task,task\_type\_2);}
+664   \hyperlink{mqtt__sn_8c_ac598f98e844bfd5bbdb577099ddf06d1}{parse\_mqtt\_type\_string}(temp->data.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q},&task\_type);
+665   debug\_task(\textcolor{stringliteral}{"Task adicionada:[%2.0d][%s]"},(\textcolor{keywordtype}{int})temp->data.\hyperlink{structmqtt__sn__task__t_a1dba79ab8685a56d3ae57d84aca21ce8}{id\_task}, task\_type);
+666   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+667 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_af09083ea59a182fdf109b6e3fa213bec}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+ping\+\_\+send@{mqtt\+\_\+sn\+\_\+ping\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+ping\+\_\+send@{mqtt\+\_\+sn\+\_\+ping\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+ping\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}void mqtt\+\_\+sn\+\_\+ping\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_af09083ea59a182fdf109b6e3fa213bec}
+
+
+Envia requisição de ping ao broker. 
+
+Envia requisição de ping ao broker diretamente por mensagens P\+I\+N\+G R\+E\+Q
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+410                             \{
+411   \hyperlink{structping__req__t}{ping\_req\_t} ping\_request;
+412 
+413   ping\_request.msg\_type = MQTT\_SN\_TYPE\_PINGREQ;
+414   strncpy(ping\_request.client\_id, g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id}, strlen(g\_mqtt\_sn\_con.
+      \hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id}));
+415   ping\_request.client\_id[strlen(g\_mqtt\_sn\_con.\hyperlink{structmqtt__sn__con__t_a3880622ca383fee22fbbac18442bae32}{client\_id})] = \textcolor{charliteral}{'\(\backslash\)0'};
+416   \textcolor{comment}{//debug\_mqtt("Client ID PING:%s",ping\_request.client\_id);}
+417   ping\_request.length = 0x02 + strlen(ping\_request.client\_id);
+418   \textcolor{comment}{//debug\_mqtt("Enviando @PINGREQ");}
+419   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&ping\_request, ping\_request.length);
+420 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ab8c0f238b41b373afb8b21e0f594b79d}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+pub@{mqtt\+\_\+sn\+\_\+pub}}
+\index{mqtt\+\_\+sn\+\_\+pub@{mqtt\+\_\+sn\+\_\+pub}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+pub}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+pub (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic, }
+\item[{char $\ast$}]{message, }
+\item[{bool}]{retain\+\_\+flag, }
+\item[{uint8\+\_\+t}]{qos}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ab8c0f238b41b373afb8b21e0f594b79d}
+
+
+Prepara requisição de publicação ao broker M\+Q\+T\+T-\/\+S\+N. 
+
+Formata e gera a tarefa na fila para publicação no tópico pré-\/registrado
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser publicado \\
+\hline
+\mbox{\tt in}  & {\em message} & Mensagem a ser publicada \\
+\hline
+\mbox{\tt in}  & {\em retain\+\_\+flag} & Identificador de mensagem retentiva \\
+\hline
+\mbox{\tt in}  & {\em qos} & Nível de Qo\+S da publicação\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao gerar a tarefa de publicação \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao gerar a tarefa de publicação \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+280                                                                                 \{
+281   \textcolor{comment}{// Caso haja tópicos para registrar, não habilita a publicação}
+282   \textcolor{comment}{// evitando que prejudique alguma transação, ou seja, tasks}
+283   \textcolor{comment}{// tem prioridade sobre publicações diretas}
+284   \textcolor{keywordflow}{if} (!\hyperlink{mqtt__sn_8c_a2620f37584b501fde35e71806a78b35a}{unlock\_tasks}())
+285     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+286 
+287   \textcolor{comment}{// Analisamos o buffer de tópicos registrados para ver se já foi registrado o tópico}
+288   \textcolor{keywordflow}{if} (!\hyperlink{mqtt__sn_8c_ac81a0d1e0daa51cdb8495a52e317e140}{verf\_register}(topic))
+289     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+290 
+291   \hyperlink{mqtt__sn_8c_a550856b818c23fce9e4d5b253c3e7547}{mqtt\_sn\_pub\_send}(topic,message,retain\_flag,qos);
+292   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+293 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a550856b818c23fce9e4d5b253c3e7547}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+pub\+\_\+send@{mqtt\+\_\+sn\+\_\+pub\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+pub\+\_\+send@{mqtt\+\_\+sn\+\_\+pub\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+pub\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+pub\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic, }
+\item[{char $\ast$}]{message, }
+\item[{bool}]{retain\+\_\+flag, }
+\item[{uint8\+\_\+t}]{qos}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a550856b818c23fce9e4d5b253c3e7547}
+
+
+Envia pacote P\+U\+B\+L\+I\+S\+H ao broker M\+Q\+T\+T-\/\+S\+N. 
+
+Monta o pacote e envia ao broker a mensagem de publicação
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser publicado \\
+\hline
+\mbox{\tt in}  & {\em message} & Mensagem a ser publicada \\
+\hline
+\mbox{\tt in}  & {\em qos} & Nível de Qo\+S da publicação\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar a publicação \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar a publicação \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+501                                                                                      \{
+502   \hyperlink{structpublish__packet__t}{publish\_packet\_t} packet;
+503   uint16\_t stopic = 0x0000;
+504   uint8\_t data\_len = strlen(message);
+505 
+506   \textcolor{comment}{// if (mqtt\_queue\_first->data.msg\_type\_q != MQTT\_SN\_TYPE\_PUBLISH) \{}
+507   \textcolor{comment}{//   debug\_mqtt("Erro: Pacote a processar nao e do tipo PUBLISH");}
+508   \textcolor{comment}{//   return FAIL\_CON;}
+509   \textcolor{comment}{// \}}
+510   \textcolor{keywordtype}{size\_t} i = 0;
+511   \textcolor{keywordflow}{for} (i=0; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)
+512     \textcolor{keywordflow}{if} (strcmp(g\_topic\_bind[i].topic\_name,topic) == 0) \{
+513       stopic = g\_topic\_bind[i].short\_topic\_id;
+514       \textcolor{keywordflow}{break};
+515     \}
+516 
+517   \textcolor{keywordflow}{if} (data\_len > \textcolor{keyword}{sizeof}(packet.data)) \{
+518       printf(\textcolor{stringliteral}{"Erro: Payload e muito grande!\(\backslash\)n"});
+519       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+520   \}
+521 
+522   packet.type  = MQTT\_SN\_TYPE\_PUBLISH;
+523   packet.flags = 0x00;
+524 
+525   \textcolor{keywordflow}{if} (retain\_flag)
+526     packet.flags += MQTT\_SN\_FLAG\_RETAIN;
+527 
+528   packet.flags += \hyperlink{mqtt__sn_8c_adba0283cc8fadf24f2f04246c76e8cde}{mqtt\_sn\_get\_qos\_flag}(qos);
+529 
+530   \textcolor{comment}{// Segundo a especificação:}
+531   \textcolor{comment}{// TopicIdType: indicates whether the field TopicId or TopicName included in this message contains a
+       normal}
+532   \textcolor{comment}{// topic id (set to “0b00”), a pre-defined topic id (set to “0b01”), or a short topic name (set to
+       “0b10”). The}
+533   \textcolor{comment}{// value “0b11” is reserved. Refer to sections 3 and 6.7 for the definition of the various types of topic
+       ids.}
+534   packet.flags += MQTT\_SN\_TOPIC\_TYPE\_NORMAL; \textcolor{comment}{//Utiliza-se o topic id já registrado}
+535 
+536   packet.topic\_id = uip\_htons(stopic);
+537   packet.message\_id = uip\_htons(0x00); \textcolor{comment}{//Relevante somente se QoS > 0}
+538   strncpy(packet.data, message, data\_len+1);
+539   \textcolor{comment}{//}
+540   \textcolor{comment}{//  Pacote PUBLISH}
+541   \textcolor{comment}{//  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+542   \textcolor{comment}{// | Comprimento - 0 | Tipo de mensagem - 1 | Flags - 2 | Topic ID - 3,4 | Msg ID - 5,6 | Dado - 7,n
+       ....|}
+543   \textcolor{comment}{// |\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_
+       \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|}
+544   \textcolor{comment}{//}
+545   packet.length = 0x07 + (data\_len+1);
+546 
+547   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @PUBLISH"});
+548   \textcolor{comment}{// debug\_mqtt("Enviando o pacote @PUBLISH - Task:[%d]",(int)mqtt\_queue\_first->data.id\_task);}
+549   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+550   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+551 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_af9146fa082fe2bc6612fb13dbb20ed36}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+recv\+\_\+parser@{mqtt\+\_\+sn\+\_\+recv\+\_\+parser}}
+\index{mqtt\+\_\+sn\+\_\+recv\+\_\+parser@{mqtt\+\_\+sn\+\_\+recv\+\_\+parser}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+recv\+\_\+parser}]{\setlength{\rightskip}{0pt plus 5cm}void mqtt\+\_\+sn\+\_\+recv\+\_\+parser (
+\begin{DoxyParamCaption}
+\item[{const uint8\+\_\+t $\ast$}]{data}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_af9146fa082fe2bc6612fb13dbb20ed36}
+
+
+Realiza o parsing das mensagens U\+D\+P recebidas. 
+
+Realiza o parsing das mensagens U\+D\+P recebidas de acordo com o protocolo M\+Q\+T\+T-\/\+S\+N, alterando o status da conexão geral com o broker.
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em data} & Ponteiro para o conteúdo U\+D\+P recebido\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyRefDesc}{Tarefa}
+\item[\hyperlink{todo__todo000001}{Tarefa}]Rever o short topic para adequar bytes \mbox{[}2\mbox{]}\mbox{[}3\mbox{]} juntos.. \end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Tarefa}
+\item[\hyperlink{todo__todo000002}{Tarefa}]Rever o short topic para adequar bytes \mbox{[}2\mbox{]}\mbox{[}3\mbox{]} juntos... \end{DoxyRefDesc}
+
+\begin{DoxyCode}
+717                                              \{
+718     uint8\_t msg\_type = data[1],
+719             return\_code = 0xFF,
+720             short\_topic;
+721     \textcolor{keywordtype}{size\_t} i = 0;
+722     \textcolor{comment}{// Como o MsgType não se altera de posição, testamos primeiro ele antes do}
+723     \textcolor{comment}{// returning code, já que este pode variar}
+724     \textcolor{keywordflow}{switch} (msg\_type) \{
+725       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_CONNACK:
+726         return\_code = data[2]; \textcolor{comment}{//No caso do CONNACK - RC[2]}
+727         \textcolor{keywordflow}{if} (\hyperlink{mqtt__sn_8c_a172afa34fe10ad1ee4ffc0d226b35b4d}{mqtt\_sn\_check\_rc}(return\_code))\{
+728           \textcolor{keywordflow}{if} (mqtt\_status == MQTTSN\_WAITING\_CONNACK)
+729             process\_post(&mqtt\_sn\_main, mqtt\_event\_connack, NULL);
+730           \textcolor{keywordflow}{else}
+731             debug\_mqtt(\textcolor{stringliteral}{"Recebido CONNAC sem requisicao!"});
+732         \}
+733       \textcolor{keywordflow}{break};
+734       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_REGACK:
+735         return\_code = data[6]; \textcolor{comment}{//No caso do REGACK - RC[6]}
+736         short\_topic = data[3];
+737         \textcolor{comment}{// Na verdade os bytes de short topic são o [2] e [3], porém}
+738         \textcolor{comment}{// só estamos usa-se o [3] porque não consideramos mais do que}
+739         \textcolor{comment}{// 15 tópicos}
+741 \textcolor{comment}{}        \textcolor{keywordflow}{if} (\hyperlink{mqtt__sn_8c_a172afa34fe10ad1ee4ffc0d226b35b4d}{mqtt\_sn\_check\_rc}(return\_code))\{
+742           \textcolor{keywordflow}{for} (i = 0;i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++) \{ \textcolor{comment}{//Compara o byte menor do MSG ID para
+       atribuir o short topic a requisição REGISTER correta}
+743             \textcolor{keywordflow}{if} (i == data[5])\{
+744               g\_topic\_bind[i].short\_topic\_id = short\_topic;
+745             \}
+746           \}
+747           \textcolor{keywordflow}{if} (mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} == MQTT\_SN\_TYPE\_REGISTER &&
+748               mqtt\_status == MQTTSN\_WAITING\_REGACK)
+749             process\_post(&mqtt\_sn\_main, mqtt\_event\_regack, NULL);
+750           \textcolor{keywordflow}{else}
+751             debug\_mqtt(\textcolor{stringliteral}{"Recebido REGACK sem requisicao!"});
+752         \}
+753       \textcolor{keywordflow}{break};
+754       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_PUBACK:
+755         \textcolor{comment}{// return\_code = data[6]; //No caso do PUBACK - RC[6]}
+756         \textcolor{comment}{// short\_topic = data[3];}
+757         \textcolor{comment}{// // Na verdade os bytes de short topic são o [2] e [3], porém}
+758         \textcolor{comment}{// // só estamos usa-se o [3] porque não consideramos mais do que}
+759         \textcolor{comment}{// // 15 tópicos}
+760         \textcolor{comment}{// /// @todo Rever o short topic para adequar bytes [2][3] juntos}
+761         \textcolor{comment}{//}
+762         \textcolor{comment}{// /// @TODO Implementar verificação de message ID e short topic ID para melhorar a confiança do
+       recebimento}
+763         \textcolor{comment}{// if (mqtt\_sn\_check\_rc(return\_code))}
+764         \textcolor{comment}{//   if (mqtt\_queue\_first->data.msg\_type\_q == MQTT\_SN\_TYPE\_PUBLISH)}
+765         \textcolor{comment}{//     process\_post(&mqtt\_sn\_main, mqtt\_event\_puback, NULL);}
+766       \textcolor{keywordflow}{break};
+767       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_SUBACK:
+768         return\_code = data[7]; \textcolor{comment}{//No caso do SUBACK - RC[7]}
+769         short\_topic = data[4];
+770         \textcolor{comment}{// Na verdade os bytes de short topic são o [2] e [3], porém}
+771         \textcolor{comment}{// só estamos usa-se o [3] porque não consideramos mais do que}
+772         \textcolor{comment}{// 15 tópicos}
+774 \textcolor{comment}{}        debug\_mqtt(\textcolor{stringliteral}{"Recebido SUBACK"});
+775 
+776         \textcolor{keywordflow}{if} (\hyperlink{mqtt__sn_8c_a172afa34fe10ad1ee4ffc0d226b35b4d}{mqtt\_sn\_check\_rc}(return\_code))
+777           \textcolor{keywordflow}{if} (short\_topic != 0x00) \{
+778             debug\_mqtt(\textcolor{stringliteral}{"Reconhecimento de inscricao:[%s]"},g\_topic\_bind[short\_topic].topic\_name);
+779             g\_topic\_bind[short\_topic].subscribed = 0x02;
+780             \textcolor{keywordflow}{if} (mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} == MQTT\_SN\_TYPE\_SUBSCRIBE &&
+781                 mqtt\_status == MQTTSN\_WAITING\_SUBACK)
+782               process\_post(&mqtt\_sn\_main, mqtt\_event\_suback, NULL);
+783             \textcolor{keywordflow}{else}
+784               debug\_mqtt(\textcolor{stringliteral}{"Recebido SUBACK sem requisicao!"});
+785           \}
+786           \textcolor{keywordflow}{else}\{
+787             debug\_mqtt(\textcolor{stringliteral}{"Recebido SUBACK de WILDCARD"});
+788             \textcolor{keywordflow}{if} (mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} == MQTT\_SN\_TYPE\_SUB\_WILDCARD)\{
+789               mqtt\_status = MQTTSN\_TOPIC\_REGISTERED;
+790               \hyperlink{mqtt__sn_8c_aa17781596362470e100d5fc4f62a01e9}{mqtt\_sn\_delete\_queue}();
+791             \}
+792           \}
+793         \textcolor{keywordflow}{else}
+794           debug\_mqtt(\textcolor{stringliteral}{"Erro: Codigo de retorno invalido"});
+795       \textcolor{keywordflow}{break};
+796       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_PINGRESP:
+797         g\_ping\_flag\_resp = \textcolor{keyword}{true};
+798         \textcolor{comment}{//debug\_mqtt("Ping respondido");}
+799       \textcolor{keywordflow}{break};
+800       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_PINGREQ:
+801         \hyperlink{mqtt__sn_8c_af09083ea59a182fdf109b6e3fa213bec}{mqtt\_sn\_ping\_send}();
+802       \textcolor{keywordflow}{break};
+803       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_PUBLISH:
+804         debug\_mqtt(\textcolor{stringliteral}{"Recebida publicacao:"});
+805         uint8\_t message\_length = data[0]-7;
+806         \textcolor{comment}{//uint8\_t msg\_id = data[6];}
+807         short\_topic = data[4];
+808         \textcolor{keywordtype}{char} message[MQTT\_SN\_MAX\_PACKET\_LENGTH];
+809         \textcolor{comment}{// debug\_mqtt("[Msg\_ID][%d]/[Topic ID][%d]",msg\_id,short\_topic);}
+810 
+811         \textcolor{keywordtype}{size\_t} i;
+812         \textcolor{keywordflow}{for} (i = 0; i < (message\_length); i++)
+813           message[i] = data[i+7];
+814         message[i] = \textcolor{charliteral}{'\(\backslash\)0'};
+815         \textcolor{comment}{// debug\_mqtt("Topico:%s",g\_topic\_bind[short\_topic].topic\_name);}
+816         \textcolor{comment}{// debug\_mqtt("Mensagem:%s",message);}
+817         \textcolor{comment}{// debug\_mqtt("\(\backslash\)n");}
+818         (*callback\_mqtt)(g\_topic\_bind[short\_topic].topic\_name, message);
+819       \textcolor{keywordflow}{break};
+820       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_REGISTER:
+821         debug\_mqtt(\textcolor{stringliteral}{"Recebido registro de topico novo:"});
+822         uint8\_t msg\_id\_reg = data[5];
+823         uint8\_t message\_length\_buf = data[0]-6;
+824         \textcolor{keywordtype}{size\_t} j,t;
+825         \textcolor{keywordtype}{char} buff[MQTT\_SN\_MAX\_TOPIC\_LENGTH];
+826 
+827         short\_topic = data[3];
+828 
+829         \textcolor{keywordflow}{for} (t = 0; t < message\_length\_buf; t++)
+830           buff[t] = data[t+6];
+831         buff[t] = \textcolor{charliteral}{'\(\backslash\)0'};
+832 
+833         \textcolor{keywordflow}{for} (j = 0; j < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; j++)
+834           \textcolor{keywordflow}{if} (g\_topic\_bind[j].short\_topic\_id == 0xFF)
+835             \textcolor{keywordflow}{break};
+836 
+837         \textcolor{comment}{// Apesar de a variável ser local (buff) precisamos alocar dinamicamente}
+838         \textcolor{comment}{// memória para o ponteiro s para que consigamos fornecer um novo endereço}
+839         \textcolor{comment}{// de memória para a estrutura g\_topic\_bind...}
+840         \textcolor{keywordtype}{char} *s;
+841         s = (\textcolor{keywordtype}{char} *)malloc(strlen(buff)+1);
+842         strcpy(s,buff);
+843         g\_topic\_bind[j].short\_topic\_id = short\_topic;
+844         g\_topic\_bind[j].subscribed = \textcolor{keyword}{true};
+845         g\_topic\_bind[j].topic\_name = s;
+846 
+847         debug\_mqtt(\textcolor{stringliteral}{"Topico registrado![%s]"},g\_topic\_bind[j].topic\_name);
+848         \hyperlink{mqtt__sn_8c_aa6e0e9b8d7769407ab35fec5443e3896}{mqtt\_sn\_regack\_send}((uint16\_t)msg\_id\_reg,(uint16\_t)short\_topic);
+849       \textcolor{keywordflow}{break};
+850       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_WILLTOPICREQ:
+851         \textcolor{comment}{// debug\_mqtt("Recebido um pacote WILL TOPIC REQ");}
+852         \textcolor{keywordflow}{if} (mqtt\_status == MQTTSN\_WAITING\_WILLTOPICREQ)
+853           process\_post(&mqtt\_sn\_main,mqtt\_event\_will\_topicreq,NULL);
+854       \textcolor{keywordflow}{break};
+855       \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_WILLMSGREQ:
+856         \textcolor{keywordflow}{if} (mqtt\_status == MQTTSN\_WAITING\_WILLMSGREQ)
+857           process\_post(&mqtt\_sn\_main,mqtt\_event\_will\_messagereq,NULL);
+858       \textcolor{keywordflow}{break};
+859       \textcolor{keywordflow}{default}:
+860         debug\_mqtt(\textcolor{stringliteral}{"Recebida mensagem porem nao identificada!"});
+861       \textcolor{keywordflow}{break};
+862     \}
+863 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ae17664af7f894e29743fafdf8bf98f89}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+reg\+\_\+send@{mqtt\+\_\+sn\+\_\+reg\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+reg\+\_\+send@{mqtt\+\_\+sn\+\_\+reg\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+reg\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+reg\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ae17664af7f894e29743fafdf8bf98f89}
+
+
+Envio de mensagens ao broker do tipo R\+E\+G\+I\+S\+T\+E\+R. 
+
+Envia ao broker mensagens do tipo R\+E\+G\+I\+S\+T\+E\+R com o topic name informado conforme a tarefa primeira na fila
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe parâmetro\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar o pacote R\+E\+G\+I\+S\+T\+E\+R \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar o pacote R\+E\+G\+I\+S\+T\+E\+R \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+444                                  \{
+445   \hyperlink{structregister__packet__t}{register\_packet\_t} packet;
+446 
+447   \textcolor{keywordtype}{size\_t} i = 0;
+448   \textcolor{keywordflow}{for} (i=1; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)
+449     \textcolor{keywordflow}{if} (g\_topic\_bind[i].short\_topic\_id == 0xFF)
+450       \textcolor{keywordflow}{break};
+451 
+452   uint16\_t task\_id = i;
+453   \textcolor{comment}{// Leak of memory}
+454   \textcolor{comment}{//size\_t topic\_name\_len = strlen(mqtt\_queue\_first->data.long\_topic); //Pega o primeiro da fila aguardando}
+455   \textcolor{keywordtype}{size\_t} topic\_name\_len = strlen(g\_topic\_bind[task\_id].topic\_name);
+456 
+457   \textcolor{keywordflow}{if} (topic\_name\_len > MQTT\_SN\_MAX\_TOPIC\_LENGTH) \{
+458     debug\_mqtt(\textcolor{stringliteral}{"Erro: Nome do topico excede o limite maximo"});
+459     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+460   \}
+461 
+462   \textcolor{keywordflow}{if} (mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q} != MQTT\_SN\_TYPE\_REGISTER) \{
+463     debug\_mqtt(\textcolor{stringliteral}{"Erro: Pacote a processar nao e do tipo REGISTER"});
+464     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+465   \}
+466 
+467   packet.type = MQTT\_SN\_TYPE\_REGISTER;
+468   packet.topic\_id = 0x0000;
+469 
+470   \textcolor{comment}{// Quando o broker responder com o short topic ID,}
+471   \textcolor{comment}{// ele utilizará como message id, o identificador único da task na}
+472   \textcolor{comment}{// queue de serviços do MQTT-SN, logo se torna fácil saber como montar}
+473   \textcolor{comment}{// a relação (short\_topic/long\_topic) no vetor global g\_topic\_bind[]}
+474   packet.message\_id = uip\_htons(task\_id);
+475 
+476   strncpy(packet.topic\_name, g\_topic\_bind[task\_id].topic\_name, topic\_name\_len);
+477   packet.length = 0x06 + topic\_name\_len;
+478   packet.topic\_name[topic\_name\_len] = \textcolor{charliteral}{'\(\backslash\)0'};
+479 
+480   debug\_mqtt(\textcolor{stringliteral}{"Topico a registrar:%s [%d][MSG\_ID:%d]"},packet.topic\_name,strlen(packet.topic\_name),(\textcolor{keywordtype}{int})
+      mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_a1dba79ab8685a56d3ae57d84aca21ce8}{id\_task});
+481   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @REGISTER"});
+482   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+483 
+484   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+485 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_aa6e0e9b8d7769407ab35fec5443e3896}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+regack\+\_\+send@{mqtt\+\_\+sn\+\_\+regack\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+regack\+\_\+send@{mqtt\+\_\+sn\+\_\+regack\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+regack\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+regack\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{uint16\+\_\+t}]{msg\+\_\+id, }
+\item[{uint16\+\_\+t}]{topic\+\_\+id}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_aa6e0e9b8d7769407ab35fec5443e3896}
+
+
+Envia pacote do tipo R\+E\+G\+A\+C\+K ao broker. 
+
+Envia ao broker M\+Q\+T\+T-\/\+S\+N a mensagem do tipo R\+E\+G\+A\+C\+K quando receber algum tópico via Wildcad
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em msg\+\_\+id} & Message id correspondente do envio \\
+\hline
+\mbox{\tt in}  & {\em topic\+\_\+id} & Topic I\+D enviado pelo broker para registrar no vetor de tópicos o tópico novo\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar a regack \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar a regack \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+487                                                                   \{
+488   \hyperlink{structregack__packet__t}{regack\_packet\_t} packet;
+489 
+490   packet.type = MQTT\_SN\_TYPE\_REGACK;
+491   packet.topic\_id = uip\_htons(topic\_id);
+492   packet.message\_id = uip\_htons(msg\_id);
+493   packet.return\_code = 0x00;
+494   packet.length = 0x07;
+495 
+496   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @REGACK"});
+497   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+498   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+499 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_aab8d5db0224c9b083af9f18094053795}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+sub@{mqtt\+\_\+sn\+\_\+sub}}
+\index{mqtt\+\_\+sn\+\_\+sub@{mqtt\+\_\+sn\+\_\+sub}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+sub}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+sub (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic, }
+\item[{uint8\+\_\+t}]{qos}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_aab8d5db0224c9b083af9f18094053795}
+
+
+Prepara requisição de inscrição ao broker M\+Q\+T\+T-\/\+S\+N. 
+
+Formata e gera a tarefa na fila para inscrição no tópico pré-\/registrado
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser inscrito \\
+\hline
+\mbox{\tt in}  & {\em qos} & Nível de Qo\+S da inscrição\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao gerar a tarefa de inscrição \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao gerar a tarefa de inscrição \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+239                                                 \{
+240   \textcolor{comment}{// Caso haja tópicos para registrar, não habilita a inscrição}
+241   \textcolor{comment}{// evitando que prejudique alguma transação, ou seja, tasks}
+242   \textcolor{comment}{// tem prioridade sobre inscrições diretas}
+243   \textcolor{comment}{// if (!unlock\_tasks())}
+244   \textcolor{comment}{// return FAIL\_CON;}
+245 
+246   \textcolor{keywordflow}{if}(strstr(topic,\textcolor{stringliteral}{"#"}) || strstr(topic,\textcolor{stringliteral}{"+"}))\{
+247     \hyperlink{mqtt__sn_8c_ac5fde757ae886c8827b853125f7458bd}{mqtt\_sn\_sub\_wildcard}(topic,qos);
+248     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+249   \}
+250 
+251   \textcolor{keywordflow}{if} (!\hyperlink{mqtt__sn_8c_ac81a0d1e0daa51cdb8495a52e317e140}{verf\_register}(topic))
+252   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+253 
+254   \textcolor{keywordflow}{if}(\hyperlink{mqtt__sn_8c_af60c0aa848adffbfe41a2e655a279f9d}{verf\_hist\_sub}(topic))\{
+255     \hyperlink{structmqtt__sn__task__t}{mqtt\_sn\_task\_t} subscribe\_task;
+256     \textcolor{keywordtype}{size\_t} i;
+257     \textcolor{keywordflow}{for} (i=0; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)
+258       \textcolor{keywordflow}{if}(strcmp(g\_topic\_bind[i].topic\_name,topic) == 0) \textcolor{comment}{// Tópico novo ou existe?}
+259         \textcolor{keywordflow}{break};
+260 
+261     subscribe\_task.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q}      = MQTT\_SN\_TYPE\_SUBSCRIBE;
+262     subscribe\_task.\hyperlink{structmqtt__sn__task__t_a5ce109928f26d01872230443c75c91f8}{qos\_level}       = qos;
+263     subscribe\_task.\hyperlink{structmqtt__sn__task__t_a25bc8ea535927589bca3720e0e838958}{short\_topic}     = i;
+264 
+265     \textcolor{comment}{// Comentadas as duas linhas abaixo porque consideraremos que o usuário irá registrar os}
+266     \textcolor{comment}{// topicos no começo do programa não sendo necessário gerar o evento de run\_task}
+267     \textcolor{comment}{//if (mqtt\_sn\_check\_empty())}
+268     \textcolor{comment}{//  ctimer\_set(&mqtt\_time\_subscribe, 3*MQTT\_SN\_TIMEOUT, init\_sub, NULL);}
+269 
+270     \textcolor{keywordflow}{if} (!\hyperlink{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{mqtt\_sn\_insert\_queue}(subscribe\_task))
+271      debug\_task(\textcolor{stringliteral}{"ERRO AO ADICIONAR NA FILA"});
+272 
+273     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+274   \}
+275   \textcolor{keywordflow}{else}
+276     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+277 
+278 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a105b8d440266b4a582f2d627e57be14a}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+sub\+\_\+send@{mqtt\+\_\+sn\+\_\+sub\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+sub\+\_\+send@{mqtt\+\_\+sn\+\_\+sub\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+sub\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+sub\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic, }
+\item[{uint8\+\_\+t}]{qos}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a105b8d440266b4a582f2d627e57be14a}
+
+
+Envia pacote S\+U\+B\+S\+C\+R\+I\+B\+E ao broker M\+Q\+T\+T-\/\+S\+N. 
+
+Monta o pacote e envia ao broker a mensagem de inscrição
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser inscrito (deve estar pré-\/listado e passado como argumento em mqtt\+\_\+sn\+\_\+create\+\_\+sck) \\
+\hline
+\mbox{\tt in}  & {\em qos} & Nível de Qo\+S da publicação\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar a inscrição \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar a inscrição \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+553                                                      \{
+554   \hyperlink{structsubscribe__packet__t}{subscribe\_packet\_t} packet;
+555   uint16\_t stopic = 0x0000;
+556 
+557   \textcolor{comment}{// if (mqtt\_queue\_first->data.msg\_type\_q != MQTT\_SN\_TYPE\_PUBLISH) \{}
+558   \textcolor{comment}{//   debug\_mqtt("Erro: Pacote a processar nao e do tipo PUBLISH");}
+559   \textcolor{comment}{//   return FAIL\_CON;}
+560   \textcolor{comment}{// \}}
+561   \textcolor{keywordtype}{size\_t} i = 0;
+562   \textcolor{keywordflow}{for} (i=0; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)
+563     \textcolor{keywordflow}{if} (strcmp(g\_topic\_bind[i].topic\_name,topic) == 0) \{
+564       stopic = g\_topic\_bind[i].short\_topic\_id;
+565       \textcolor{keywordflow}{break};
+566     \}
+567 
+568   packet.type  = MQTT\_SN\_TYPE\_SUBSCRIBE;
+569   packet.flags = 0x00;
+570 
+571   packet.flags += \hyperlink{mqtt__sn_8c_adba0283cc8fadf24f2f04246c76e8cde}{mqtt\_sn\_get\_qos\_flag}(0);
+572   packet.message\_id = uip\_htons(stopic);
+573   packet.topic\_id =  uip\_htons(stopic);
+574   packet.flags += MQTT\_SN\_TOPIC\_TYPE\_PREDEFINED; \textcolor{comment}{//Utiliza-se o topic id já registrado}
+575   packet.length = 0x07;
+576   \textcolor{comment}{//}
+577   \textcolor{comment}{//  Pacote SUBSCRIBE}
+578   \textcolor{comment}{//  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+       \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+579   \textcolor{comment}{// | Comprimento - 0 | Tipo de mensagem - 1 | Flags - 2 | Msg ID - 3,4  | Topic ID - 5,6 ou Topic name
+       5,n ....|}
+580   \textcolor{comment}{//
+       |\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|}
+581   \textcolor{comment}{//}
+582   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @SUBSCRIBE"});
+583   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+584   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+585 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a831d03a2cd7fbc884cec2013c2ebc823}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+sub\+\_\+send\+\_\+wildcard@{mqtt\+\_\+sn\+\_\+sub\+\_\+send\+\_\+wildcard}}
+\index{mqtt\+\_\+sn\+\_\+sub\+\_\+send\+\_\+wildcard@{mqtt\+\_\+sn\+\_\+sub\+\_\+send\+\_\+wildcard}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+sub\+\_\+send\+\_\+wildcard}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+sub\+\_\+send\+\_\+wildcard (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic, }
+\item[{uint8\+\_\+t}]{qos}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a831d03a2cd7fbc884cec2013c2ebc823}
+
+
+Envia pacote S\+U\+B\+S\+C\+R\+I\+B\+E do tipo W\+I\+L\+D\+C\+A\+R\+D ao broker M\+Q\+T\+T-\/\+S\+N. 
+
+Monta o pacote e envia ao broker a mensagem de inscrição do tipo Wildcard (\#,+)
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser inscrito (deve estar pré-\/listado e passado como argumento em mqtt\+\_\+sn\+\_\+create\+\_\+sck) \\
+\hline
+\mbox{\tt in}  & {\em qos} & Nível de Qo\+S da publicação\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar a inscrição \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar a inscrição \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+587                                                               \{
+588   \hyperlink{structsubscribe__wildcard__packet__t}{subscribe\_wildcard\_packet\_t} packet;
+589 
+590   \textcolor{comment}{// Analisamos o buffer de tópicos registrados para ver se já foi registrado o tópico}
+591   \textcolor{keywordtype}{size\_t} i = 0;
+592   \textcolor{keywordflow}{for} (i=0; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)\{
+593     \textcolor{keywordflow}{if} (g\_topic\_bind[i].short\_topic\_id == 0xFF)
+594       \textcolor{keywordflow}{break};
+595   \}
+596 
+597   packet.type  = MQTT\_SN\_TYPE\_SUBSCRIBE;
+598   packet.flags = 0x00;
+599 
+600   packet.flags += \hyperlink{mqtt__sn_8c_adba0283cc8fadf24f2f04246c76e8cde}{mqtt\_sn\_get\_qos\_flag}(0);
+601   packet.message\_id = uip\_htons(i);
+602   strncpy(packet.topic\_name,topic,strlen(topic));
+603   packet.flags += MQTT\_SN\_TOPIC\_TYPE\_NORMAL;
+604   packet.length = 0x05+strlen(topic);
+605 
+606   \textcolor{comment}{//}
+607   \textcolor{comment}{//  Pacote SUBSCRIBE}
+608   \textcolor{comment}{//  \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+       \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+609   \textcolor{comment}{// | Comprimento - 0 | Tipo de mensagem - 1 | Flags - 2 | Msg ID - 3,4  | Topic ID - 5,6 ou Topic name
+       5,n ....|}
+610   \textcolor{comment}{//
+       |\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|}
+611   \textcolor{comment}{//}
+612   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @SUBSCRIBE(Wildcard)"});
+613   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+614   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+615 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ac5fde757ae886c8827b853125f7458bd}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+sub\+\_\+wildcard@{mqtt\+\_\+sn\+\_\+sub\+\_\+wildcard}}
+\index{mqtt\+\_\+sn\+\_\+sub\+\_\+wildcard@{mqtt\+\_\+sn\+\_\+sub\+\_\+wildcard}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+sub\+\_\+wildcard}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+sub\+\_\+wildcard (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic, }
+\item[{uint8\+\_\+t}]{qos}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ac5fde757ae886c8827b853125f7458bd}
+
+
+Prepara tarefa de S\+U\+B\+S\+C\+R\+I\+B\+E do tipo W\+I\+L\+D\+C\+A\+R\+D. 
+
+Gera tarefa de inscrição com Wildcard ao broker M\+Q\+T\+T-\/\+S\+N
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser inscrito (deve estar pré-\/listado e passado como argumento em mqtt\+\_\+sn\+\_\+create\+\_\+sck) \\
+\hline
+\mbox{\tt in}  & {\em qos} & Nível de Qo\+S da publicação\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar a inscrição \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar a inscrição \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+227                                                          \{
+228   \hyperlink{structmqtt__sn__task__t}{mqtt\_sn\_task\_t} subscribe\_task;
+229 
+230   subscribe\_task.\hyperlink{structmqtt__sn__task__t_afb14d280d486f10af744fb1ac7f145eb}{msg\_type\_q}      = MQTT\_SN\_TYPE\_SUB\_WILDCARD;
+231   subscribe\_task.\hyperlink{structmqtt__sn__task__t_a5ce109928f26d01872230443c75c91f8}{qos\_level}       = qos;
+232   topic\_temp\_wildcard            = topic;
+233   \textcolor{keywordflow}{if} (!\hyperlink{mqtt__sn_8c_a575514d0f0fd3b6c5c4a2c75e604bf79}{mqtt\_sn\_insert\_queue}(subscribe\_task))
+234    debug\_task(\textcolor{stringliteral}{"ERRO AO ADICIONAR NA FILA"});
+235 
+236   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+237 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ab6fc2a07c15881877943348bef786cd8}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+udp\+\_\+rec\+\_\+cb@{mqtt\+\_\+sn\+\_\+udp\+\_\+rec\+\_\+cb}}
+\index{mqtt\+\_\+sn\+\_\+udp\+\_\+rec\+\_\+cb@{mqtt\+\_\+sn\+\_\+udp\+\_\+rec\+\_\+cb}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+udp\+\_\+rec\+\_\+cb}]{\setlength{\rightskip}{0pt plus 5cm}void mqtt\+\_\+sn\+\_\+udp\+\_\+rec\+\_\+cb (
+\begin{DoxyParamCaption}
+\item[{struct simple\+\_\+udp\+\_\+connection $\ast$}]{c, }
+\item[{const uip\+\_\+ipaddr\+\_\+t $\ast$}]{sender\+\_\+addr, }
+\item[{uint16\+\_\+t}]{sender\+\_\+port, }
+\item[{const uip\+\_\+ipaddr\+\_\+t $\ast$}]{receiver\+\_\+addr, }
+\item[{uint16\+\_\+t}]{receiver\+\_\+port, }
+\item[{const uint8\+\_\+t $\ast$}]{data, }
+\item[{uint16\+\_\+t}]{datalen}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ab6fc2a07c15881877943348bef786cd8}
+
+
+Callback de recepção U\+D\+P. 
+
+Recebe dados da conexão U\+D\+P com o broker
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em simple\+\_\+udp\+\_\+connection} & Handle da conexão U\+D\+P \\
+\hline
+\mbox{\tt in}  & {\em sender\+\_\+addr} & Endereço I\+P do broker \\
+\hline
+\mbox{\tt in}  & {\em sender\+\_\+port} & Porta de envio \\
+\hline
+\mbox{\tt in}  & {\em receiver\+\_\+addr} & Endereço I\+P de recepção \\
+\hline
+\mbox{\tt in}  & {\em receiver\+\_\+port} & Porta de recepção \\
+\hline
+\mbox{\tt in}  & {\em data} & Dado recebido \\
+\hline
+\mbox{\tt in}  & {\em datalen} & Tamanho do dado recebido\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna parâmetro \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+871                                               \{
+872   debug\_udp(\textcolor{stringliteral}{"##########RECEBIDO ALGO VIA UDP!##########"});
+873   \hyperlink{mqtt__sn_8c_af9146fa082fe2bc6612fb13dbb20ed36}{mqtt\_sn\_recv\_parser}(data);
+874 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a6718f310e6635c018a7126c5b1311e50}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+will\+\_\+message\+\_\+send@{mqtt\+\_\+sn\+\_\+will\+\_\+message\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+will\+\_\+message\+\_\+send@{mqtt\+\_\+sn\+\_\+will\+\_\+message\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+will\+\_\+message\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+will\+\_\+message\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a6718f310e6635c018a7126c5b1311e50}
+
+
+Envia mensagem de L\+W\+T. 
+
+Envia mensagem a ser publicada quando o tópico se desconectar
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar a mensagem Will M\+S\+G \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar a mensagem Will M\+S\+G \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+388                                           \{
+389   \hyperlink{structwillmessage__packet__t}{willmessage\_packet\_t} packet;
+390 
+391   \textcolor{keywordtype}{size\_t} message\_name\_len = strlen(g\_mqtt\_sn\_con.will\_message);
+392 
+393   \textcolor{keywordflow}{if} (message\_name\_len > MQTT\_SN\_MAX\_TOPIC\_LENGTH) \{
+394     debug\_mqtt(\textcolor{stringliteral}{"Erro: Nome da mensagem WILL excede o limite maximo"});
+395     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+396   \}
+397 
+398   packet.type = MQTT\_SN\_TYPE\_WILLMSG;
+399 
+400   strncpy(packet.will\_message, g\_mqtt\_sn\_con.will\_message, message\_name\_len);
+401   packet.length = 0x02 + message\_name\_len;
+402   packet.will\_message[message\_name\_len] = \textcolor{charliteral}{'\(\backslash\)0'};
+403 
+404   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @WILL MESSAGE"});
+405   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+406 
+407   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+408 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_adfb1174ee7cff21df2d0afbb6fe2db30}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!mqtt\+\_\+sn\+\_\+will\+\_\+topic\+\_\+send@{mqtt\+\_\+sn\+\_\+will\+\_\+topic\+\_\+send}}
+\index{mqtt\+\_\+sn\+\_\+will\+\_\+topic\+\_\+send@{mqtt\+\_\+sn\+\_\+will\+\_\+topic\+\_\+send}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{mqtt\+\_\+sn\+\_\+will\+\_\+topic\+\_\+send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} mqtt\+\_\+sn\+\_\+will\+\_\+topic\+\_\+send (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_adfb1174ee7cff21df2d0afbb6fe2db30}
+
+
+Envia tópico de L\+W\+T. 
+
+Envia tópico utilizado quando o dispositivo se desconectar
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Falha ao enviar a mensagem Will M\+S\+G \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Sucesso ao enviar a mensagem Will M\+S\+G \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+364                                         \{
+365   \hyperlink{structwilltopic__packet__t}{willtopic\_packet\_t} packet;
+366 
+367   \textcolor{keywordtype}{size\_t} topic\_name\_len = strlen(g\_mqtt\_sn\_con.will\_topic);
+368 
+369   \textcolor{keywordflow}{if} (topic\_name\_len > MQTT\_SN\_MAX\_TOPIC\_LENGTH) \{
+370     debug\_mqtt(\textcolor{stringliteral}{"Erro: Nome do topico WILL excede o limite maximo"});
+371     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+372   \}
+373 
+374   packet.flags = MQTT\_SN\_FLAG\_RETAIN;
+375 
+376   packet.type = MQTT\_SN\_TYPE\_WILLTOPIC;
+377 
+378   strncpy(packet.will\_topic, g\_mqtt\_sn\_con.will\_topic, topic\_name\_len);
+379   packet.length = 0x03 + topic\_name\_len;
+380   packet.will\_topic[topic\_name\_len] = \textcolor{charliteral}{'\(\backslash\)0'};
+381 
+382   debug\_mqtt(\textcolor{stringliteral}{"Enviando o pacote @WILL TOPIC"});
+383   simple\_udp\_send(&g\_mqtt\_sn\_con.udp\_con,&packet, packet.length);
+384 
+385   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+386 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ac598f98e844bfd5bbdb577099ddf06d1}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!parse\+\_\+mqtt\+\_\+type\+\_\+string@{parse\+\_\+mqtt\+\_\+type\+\_\+string}}
+\index{parse\+\_\+mqtt\+\_\+type\+\_\+string@{parse\+\_\+mqtt\+\_\+type\+\_\+string}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{parse\+\_\+mqtt\+\_\+type\+\_\+string}]{\setlength{\rightskip}{0pt plus 5cm}void parse\+\_\+mqtt\+\_\+type\+\_\+string (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{type, }
+\item[{char $\ast$$\ast$}]{type\+\_\+string}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ac598f98e844bfd5bbdb577099ddf06d1}
+
+
+Retorna a string de status correspondente. 
+
+Realiza o parsing do estado da conexão M\+Q\+T\+T-\/\+S\+N traduzindo de typedef enum para estado em string
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em type} & Não recebe argumento \\
+\hline
+\mbox{\tt in}  & {\em type\+\_\+string} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+121                                                              \{
+122   \textcolor{keywordflow}{switch} (type) \{
+123     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_CONNECT:
+124       *type\_string = \textcolor{stringliteral}{"CONNECT"};
+125     \textcolor{keywordflow}{break};
+126     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_REGISTER:
+127       *type\_string = \textcolor{stringliteral}{"REGISTER"};
+128     \textcolor{keywordflow}{break};
+129     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_SUB\_WILDCARD:
+130       *type\_string = \textcolor{stringliteral}{"SUBSCRIBE\_WILDCARD"};
+131     \textcolor{keywordflow}{break};
+132     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_PUBLISH:
+133       *type\_string = \textcolor{stringliteral}{"PUBLISH"};
+134     \textcolor{keywordflow}{break};
+135     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_SUBSCRIBE:
+136       *type\_string = \textcolor{stringliteral}{"SUBSCRIBE"};
+137     \textcolor{keywordflow}{break};
+138     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_PINGREQ:
+139       *type\_string = \textcolor{stringliteral}{"PINGREQ"};
+140     \textcolor{keywordflow}{break};
+141     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_PINGRESP:
+142       *type\_string = \textcolor{stringliteral}{"PINGRESP"};
+143     \textcolor{keywordflow}{break};
+144     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_DISCONNECT:
+145       *type\_string = \textcolor{stringliteral}{"DISCONNECT"};
+146     \textcolor{keywordflow}{break};
+147     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_WILLTOPIC:
+148       *type\_string = \textcolor{stringliteral}{"WILL\_TOPIC"};
+149     \textcolor{keywordflow}{break};
+150     \textcolor{keywordflow}{case} MQTT\_SN\_TYPE\_WILLMSG:
+151       *type\_string = \textcolor{stringliteral}{"WILL\_MESSAGE"};
+152     \textcolor{keywordflow}{break};
+153     \textcolor{keywordflow}{default}:
+154       *type\_string = \textcolor{stringliteral}{"Estado nao definido nas opcoes"};
+155     \textcolor{keywordflow}{break};
+156   \}
+157 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a6674e1ecf45890d3a15ab667fe4a4f58}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!print\+\_\+g\+\_\+topics@{print\+\_\+g\+\_\+topics}}
+\index{print\+\_\+g\+\_\+topics@{print\+\_\+g\+\_\+topics}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{print\+\_\+g\+\_\+topics}]{\setlength{\rightskip}{0pt plus 5cm}void print\+\_\+g\+\_\+topics (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a6674e1ecf45890d3a15ab667fe4a4f58}
+
+
+Exibe os tópicos registrados. 
+
+Exibe a lista de tópicos registrados no broker
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+341                          \{
+342   \textcolor{keywordtype}{size\_t} i;
+343   debug\_mqtt(\textcolor{stringliteral}{"Vetor de topicos"});
+344   \textcolor{keywordflow}{for}(i = 0 ; g\_topic\_bind[i].short\_topic\_id != 0xFF; i++) \{
+345     debug\_mqtt(\textcolor{stringliteral}{"[i=%d][%d][%s]"},i,g\_topic\_bind[i].short\_topic\_id,g\_topic\_bind[i].topic\_name);
+346   \}
+347 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ac9614aca44158215c43b8810e052939d}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!timeout\+\_\+con@{timeout\+\_\+con}}
+\index{timeout\+\_\+con@{timeout\+\_\+con}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{timeout\+\_\+con}]{\setlength{\rightskip}{0pt plus 5cm}void timeout\+\_\+con (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ac9614aca44158215c43b8810e052939d}
+
+
+Processa timeout de pacotes. 
+
+Processa toda e qualquer requisição de expiração de tempo por timeout de envio de mensagens (S\+U\+B\+S\+C\+R\+I\+B\+E, P\+U\+B\+L\+I\+S\+H, R\+E\+G\+I\+S\+T\+E\+R)
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+996                            \{
+997   \textcolor{keywordflow}{switch} (mqtt\_status) \{
+998     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_CONNACK:
+999       \textcolor{keywordflow}{if} (g\_tries\_send >= \hyperlink{group__MQTT__SN__CONTROL_gaad5ac7de3008d8fa37447193aebc31e2}{MQTT\_SN\_RETRY}) \{
+1000         g\_tries\_send = 0;
+1001         process\_post(&mqtt\_sn\_main,mqtt\_event\_ping\_timeout,NULL);
+1002         debug\_mqtt(\textcolor{stringliteral}{"Limite maximo de pacotes CONNECT"});
+1003       \}
+1004       \textcolor{keywordflow}{else}\{
+1005         debug\_mqtt(\textcolor{stringliteral}{"Expirou tempo de CONNECT"});
+1006         \hyperlink{mqtt__sn_8c_a1b8eb51076a2923f2c036f1ff925c168}{mqtt\_sn\_con\_send}();
+1007         mqtt\_status = MQTTSN\_WAITING\_CONNACK;
+1008         ctimer\_reset(&mqtt\_time\_connect);
+1009         g\_tries\_send++;
+1010       \}
+1011     \textcolor{keywordflow}{break};
+1012     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_REGACK:
+1013       \textcolor{keywordflow}{if} (g\_tries\_send >= \hyperlink{group__MQTT__SN__CONTROL_gaad5ac7de3008d8fa37447193aebc31e2}{MQTT\_SN\_RETRY}) \{
+1014         g\_tries\_send = 0;
+1015         process\_post(&mqtt\_sn\_main,mqtt\_event\_ping\_timeout,NULL);
+1016         debug\_mqtt(\textcolor{stringliteral}{"Limite maximo de pacotes REGISTER"});
+1017       \}
+1018       \textcolor{keywordflow}{else}\{
+1019         debug\_mqtt(\textcolor{stringliteral}{"Expirou tempo de REGISTER"});
+1020         \hyperlink{mqtt__sn_8c_ae17664af7f894e29743fafdf8bf98f89}{mqtt\_sn\_reg\_send}();
+1021         mqtt\_status = MQTTSN\_WAITING\_REGACK;
+1022         ctimer\_reset(&mqtt\_time\_register);
+1023         g\_tries\_send++;
+1024       \}
+1025     \textcolor{keywordflow}{break};
+1026     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_SUBACK:
+1027       \textcolor{keywordflow}{if} (g\_tries\_send >= \hyperlink{group__MQTT__SN__CONTROL_gaad5ac7de3008d8fa37447193aebc31e2}{MQTT\_SN\_RETRY}) \{
+1028         g\_tries\_send = 0;
+1029         process\_post(&mqtt\_sn\_main,mqtt\_event\_ping\_timeout,NULL);
+1030         debug\_mqtt(\textcolor{stringliteral}{"Limite maximo de pacotes SUBSCRIBE"});
+1031       \}
+1032       \textcolor{keywordflow}{else}\{
+1033         debug\_mqtt(\textcolor{stringliteral}{"Expirou tempo de SUBSCRIBE"});
+1034         \hyperlink{mqtt__sn_8c_a105b8d440266b4a582f2d627e57be14a}{mqtt\_sn\_sub\_send}(g\_topic\_bind[mqtt\_queue\_first->data.
+      \hyperlink{structmqtt__sn__task__t_a25bc8ea535927589bca3720e0e838958}{short\_topic}].topic\_name, mqtt\_queue\_first->data.\hyperlink{structmqtt__sn__task__t_a5ce109928f26d01872230443c75c91f8}{qos\_level});
+1035         mqtt\_status = MQTTSN\_WAITING\_SUBACK;
+1036         ctimer\_reset(&mqtt\_time\_subscribe);
+1037         g\_tries\_send++;
+1038       \}
+1039     \textcolor{keywordflow}{break};
+1040     \textcolor{keywordflow}{case} MQTTSN\_WAITING\_WILLTOPICREQ:
+1041       \textcolor{keywordflow}{if} (g\_tries\_send >= \hyperlink{group__MQTT__SN__CONTROL_gaad5ac7de3008d8fa37447193aebc31e2}{MQTT\_SN\_RETRY}) \{
+1042         g\_tries\_send = 0;
+1043         process\_post(&mqtt\_sn\_main,mqtt\_event\_ping\_timeout,NULL);
+1044         debug\_mqtt(\textcolor{stringliteral}{"Limite maximo de pacotes CONNECT para WILL TOPIC"});
+1045       \}
+1046       \textcolor{keywordflow}{else}\{
+1047         debug\_mqtt(\textcolor{stringliteral}{"Expirou tempo de CONNECT para WILL TOPIC"});
+1048         \hyperlink{mqtt__sn_8c_a1b8eb51076a2923f2c036f1ff925c168}{mqtt\_sn\_con\_send}();
+1049         mqtt\_status = MQTTSN\_WAITING\_WILLTOPICREQ;
+1050         ctimer\_reset(&mqtt\_time\_connect);
+1051         g\_tries\_send++;
+1052       \}
+1053     \textcolor{keywordflow}{break};
+1054     \textcolor{keywordflow}{case} MQTTSN\_CONNECTED:
+1055       \textcolor{comment}{//process\_post(&mqtt\_sn\_main, mqtt\_event\_run\_task, NULL);}
+1056     \textcolor{keywordflow}{break};
+1057     \textcolor{keywordflow}{default}:
+1058       debug\_mqtt(\textcolor{stringliteral}{"Expirou tempo de estado desconhecido"});
+1059     \textcolor{keywordflow}{break};
+1060   \}
+1061 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a35dbd49b5fdc1d6e3dfe2b2d7255cf3e}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!timeout\+\_\+ping\+\_\+mqtt@{timeout\+\_\+ping\+\_\+mqtt}}
+\index{timeout\+\_\+ping\+\_\+mqtt@{timeout\+\_\+ping\+\_\+mqtt}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{timeout\+\_\+ping\+\_\+mqtt}]{\setlength{\rightskip}{0pt plus 5cm}void timeout\+\_\+ping\+\_\+mqtt (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ptr}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a35dbd49b5fdc1d6e3dfe2b2d7255cf3e}
+
+
+Processa timeout de ping. 
+
+Processa toda expiração de tempo por timeout de envio de mensagens P\+I\+N\+G\+R\+E\+Q
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em 0} & Não retorna nada \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+1063                                  \{
+1064   \textcolor{comment}{//debug\_mqtt("\(\backslash\)nTentativas PING:%d",g\_tries\_ping);}
+1065   \textcolor{keywordflow}{if} (g\_ping\_flag\_resp) \{
+1066     g\_ping\_flag\_resp = \textcolor{keyword}{false};
+1067     g\_tries\_ping = 0;
+1068     \textcolor{comment}{//debug\_mqtt("Enviando PING REQUEST");}
+1069     \hyperlink{mqtt__sn_8c_af09083ea59a182fdf109b6e3fa213bec}{mqtt\_sn\_ping\_send}();
+1070   \}
+1071   \textcolor{keywordflow}{else}\{
+1072     \textcolor{keywordflow}{if} (g\_tries\_ping >= \hyperlink{group__MQTT__SN__CONTROL_ga180af20d177732dc470c147452feb30f}{MQTT\_SN\_RETRY\_PING}) \{
+1073       g\_tries\_ping = 0;
+1074       ctimer\_stop(&mqtt\_time\_ping);
+1075       \textcolor{keywordflow}{if} (mqtt\_status != MQTTSN\_DISCONNECTED)
+1076         process\_post(&mqtt\_sn\_main,mqtt\_event\_ping\_timeout,NULL);
+1077       debug\_mqtt(\textcolor{stringliteral}{"Limite tentativas de PING RESPONSE"});
+1078     \}
+1079     \textcolor{keywordflow}{else}\{
+1080       debug\_mqtt(\textcolor{stringliteral}{"INCREMENTANDO PING"});
+1081       \hyperlink{mqtt__sn_8c_af09083ea59a182fdf109b6e3fa213bec}{mqtt\_sn\_ping\_send}();
+1082       g\_tries\_ping++;
+1083     \}
+1084   \}
+1085   ctimer\_reset(&mqtt\_time\_ping);
+1086 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_a2620f37584b501fde35e71806a78b35a}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!unlock\+\_\+tasks@{unlock\+\_\+tasks}}
+\index{unlock\+\_\+tasks@{unlock\+\_\+tasks}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{unlock\+\_\+tasks}]{\setlength{\rightskip}{0pt plus 5cm}bool unlock\+\_\+tasks (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_a2620f37584b501fde35e71806a78b35a}
+
+
+Libera opção de geração de tarefas. 
+
+Habilita a geração de tarefas na fila conforma o estado da conexão M\+Q\+T\+T-\/\+S\+N
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em 0} & Não recebe argumento\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em T\+R\+U\+E} & Pode-\/se gerar tarefa na fila \\
+\hline
+{\em F\+A\+L\+S\+E} & Estado da conexão M\+Q\+T\+T-\/\+S\+N impossibilita geração de tarefas na fila \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+110                         \{
+111   \textcolor{keywordflow}{if} (mqtt\_status == MQTTSN\_TOPIC\_REGISTERED)
+112     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+113   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+114 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_af60c0aa848adffbfe41a2e655a279f9d}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!verf\+\_\+hist\+\_\+sub@{verf\+\_\+hist\+\_\+sub}}
+\index{verf\+\_\+hist\+\_\+sub@{verf\+\_\+hist\+\_\+sub}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{verf\+\_\+hist\+\_\+sub}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} verf\+\_\+hist\+\_\+sub (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_af60c0aa848adffbfe41a2e655a279f9d}
+
+
+Verifica se o tópico já foi registrado. 
+
+Verifica se o tópico em análise já foi previamente registrado ou está em processo de registro
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser inscrito (deve estar pré-\/listado e passado como argumento em mqtt\+\_\+sn\+\_\+create\+\_\+sck)\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Tópico já foi registrado ou está em andamento \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Tópico liberado para inscrição \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+295                                      \{
+296   \textcolor{keywordtype}{size\_t} i;
+297   \textcolor{comment}{//}
+298   \textcolor{comment}{// for (i=0; i < MAX\_TOPIC\_USED; i++)}
+299   \textcolor{comment}{//   if(strcmp(g\_topic\_bind[i].topic\_name,topic) == 0) // Tópico novo ou existe?}
+300   \textcolor{comment}{//     break;}
+301   \textcolor{comment}{//}
+302   \textcolor{comment}{// if (g\_topic\_bind[i].short\_topic\_id == 0xFF) \{}
+303   \textcolor{comment}{//   debug\_mqtt("Topico nao registrado!")}
+304   \textcolor{comment}{//   return FAIL\_CON;}
+305   \textcolor{comment}{// \}}
+306 
+307   \textcolor{keywordflow}{for} (i=0; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)
+308     \textcolor{keywordflow}{if}(strcmp(g\_topic\_bind[i].topic\_name,topic) == 0)
+309       \textcolor{keywordflow}{break};
+310 
+311   \textcolor{keywordflow}{if} (g\_topic\_bind[i].subscribed == 0x01)\{  \textcolor{comment}{// Na fila para inscrever? 0x01?}
+312     debug\_mqtt(\textcolor{stringliteral}{"Inscricao do topico em andamento:[%s]"},g\_topic\_bind[i].topic\_name);
+313     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+314   \}
+315   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (g\_topic\_bind[i].subscribed == 0x02) \{  \textcolor{comment}{// Já inscrito? 0x02?}
+316     debug\_mqtt(\textcolor{stringliteral}{"Topico inscrito:[%s]"},g\_topic\_bind[i].topic\_name);
+317     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+318   \}
+319   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (g\_topic\_bind[i].subscribed == 0x00)\{  \textcolor{comment}{// Caso g\_topic\_bind[i].subscribed == 0x00 vamos preparar
+       o topico para ser inscrito}
+320     g\_topic\_bind[i].subscribed = 0x01;
+321     debug\_mqtt(\textcolor{stringliteral}{"Preparando para inscricao:[%s]"},g\_topic\_bind[i].topic\_name);
+322     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+323   \}
+324   \textcolor{keywordflow}{else}\{
+325     debug\_mqtt(\textcolor{stringliteral}{"Topico com valor estranho no SUBSCRIBED:%d"},g\_topic\_bind[i].subscribed);
+326     \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+327   \}
+328 
+329 \}
+\end{DoxyCode}
+\hypertarget{mqtt__sn_8c_ac81a0d1e0daa51cdb8495a52e317e140}{\index{mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}!verf\+\_\+register@{verf\+\_\+register}}
+\index{verf\+\_\+register@{verf\+\_\+register}!mqtt\+\_\+sn.\+c@{mqtt\+\_\+sn.\+c}}
+\subsubsection[{verf\+\_\+register}]{\setlength{\rightskip}{0pt plus 5cm}{\bf resp\+\_\+con\+\_\+t} verf\+\_\+register (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{topic}
+\end{DoxyParamCaption}
+)}}\label{mqtt__sn_8c_ac81a0d1e0daa51cdb8495a52e317e140}
+
+
+Verifica pré-\/registro do tópico. 
+
+Verifica se o tópico já foi pré-\/registrado antes de iniciar qualquer operação
+
+
+\begin{DoxyParams}[1]{Parâmetros}
+\mbox{\tt in}  & {\em topic} & Tópico a ser verificado\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Valores retornados}
+{\em F\+A\+I\+L\+\_\+\+C\+O\+N} & Tópico não foi pré-\/registrado \\
+\hline
+{\em S\+U\+C\+C\+E\+S\+S\+\_\+\+C\+O\+N} & Tópico registrado no vetor de tópicos \\
+\hline
+\end{DoxyRetVals}
+
+\begin{DoxyCode}
+331                                      \{
+332   \textcolor{keywordtype}{size\_t} i;
+333   \textcolor{keywordflow}{for} (i=0; i < \hyperlink{group__MQTT__SN__CONTROL_ga5ed98e8fc00194886ebc14d25540f81b}{MAX\_TOPIC\_USED}; i++)
+334     \textcolor{keywordflow}{if}(strcmp(g\_topic\_bind[i].topic\_name,topic) == 0)  \textcolor{comment}{// Tópico novo ou existe?}
+335       \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ae7b7a388c90c2c5428cced225760885f}{SUCCESS\_CON};
+336 
+337   debug\_mqtt(\textcolor{stringliteral}{"Topico nao registrado!"});
+338   \textcolor{keywordflow}{return} \hyperlink{mqtt__sn_8h_a754c1055b4431040415cf01b39caaa98ac6ae922662cbaf7958eb387bfd6fe4da}{FAIL\_CON};
+339 \}
+\end{DoxyCode}
