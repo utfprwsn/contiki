@@ -52,7 +52,7 @@ PROCESS(hello_world_process, "Hello world process");
 PROCESS(blink_process, "LED blink process");
 
 /*---------------------------------------------------------------------------*/
-AUTOSTART_PROCESSES(&hello_world_process);
+AUTOSTART_PROCESSES(&blink_process);
 /*---------------------------------------------------------------------------*/
 PROCESS_THREAD(hello_world_process, ev, data)
 {
@@ -69,7 +69,7 @@ PROCESS_THREAD(hello_world_process, ev, data)
     if(ev == PROCESS_EVENT_TIMER){
         leds_toggle(LEDS_RED);
         etimer_reset(&et_hello);
-        printf("Piscando o LED vermelho!\n");
+        printf("HELLO: Piscando o LED vermelho!\n");
     }
   }
 
@@ -81,7 +81,7 @@ PROCESS_THREAD(blink_process, ev, data)
   PROCESS_BEGIN();
 
   leds_off(LEDS_ALL);
-  etimer_set(&et_blink, 5*CLOCK_SECOND);
+  etimer_set(&et_blink, 2*CLOCK_SECOND);
   PROCESS_WAIT_EVENT_UNTIL(ev == PROCESS_EVENT_TIMER);
 
   etimer_set(&et_blink, 5*CLOCK_SECOND);
@@ -90,7 +90,7 @@ PROCESS_THREAD(blink_process, ev, data)
     if(ev == PROCESS_EVENT_TIMER){
         leds_toggle(LEDS_GREEN);
         etimer_reset(&et_blink);
-        printf("Piscando o LED verde!\n");
+        printf("BLINK: Piscando o LED verde!\n");
     }
 
   }
