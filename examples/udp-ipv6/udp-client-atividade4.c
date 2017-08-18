@@ -47,6 +47,7 @@ static char buf[MAX_PAYLOAD_LEN];
 #define LED_SET_STATE (0x7A)
 #define LED_GET_STATE (0x7B)
 #define LED_STATE (0x7C)
+#define CONN_PORT (8802)
 
 static struct uip_udp_conn *client_conn;
 
@@ -224,8 +225,8 @@ PROCESS_THREAD(udp_client_process, ev, data)
   }
 
   /* new connection with remote host */
-  client_conn = udp_new(&ipaddr, UIP_HTONS(3000), NULL);
-  udp_bind(client_conn, UIP_HTONS(3001));
+  client_conn = udp_new(&ipaddr, UIP_HTONS(CONN_PORT), NULL);
+  udp_bind(client_conn, UIP_HTONS(CONN_PORT));
 
   PRINT6ADDR(&client_conn->ripaddr);
   PRINTF(" local/remote port %u/%u\n",
