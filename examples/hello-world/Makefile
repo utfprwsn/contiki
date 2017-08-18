@@ -1,4 +1,4 @@
-CONTIKI_PROJECT = hello-world cc26xx-demo
+CONTIKI_PROJECT = hello-world
 all: $(CONTIKI_PROJECT)
 
 CONTIKI = ../..
