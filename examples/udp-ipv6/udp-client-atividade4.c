@@ -41,6 +41,7 @@
 
 #define SEND_INTERVAL		15 * CLOCK_SECOND
 #define MAX_PAYLOAD_LEN		40
+#define CONN_PORT     8802
 static char buf[MAX_PAYLOAD_LEN];
 
 static struct uip_udp_conn *client_conn;
@@ -67,7 +68,7 @@ tcpip_handler(void)
 static void
 timeout_handler(void)
 {
-    char payload=LED_TOGGLE_REQUEST;
+    char payload;
 
 
     if(uip_ds6_get_global(ADDR_PREFERRED) == NULL) {
