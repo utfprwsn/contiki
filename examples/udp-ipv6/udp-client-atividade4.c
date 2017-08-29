@@ -43,12 +43,6 @@
 #define MAX_PAYLOAD_LEN		40
 static char buf[MAX_PAYLOAD_LEN];
 
-#define LED_TOGGLE_REQUEST (0x79)
-#define LED_SET_STATE (0x7A)
-#define LED_GET_STATE (0x7B)
-#define LED_STATE (0x7C)
-#define CONN_PORT (8802)
-
 static struct uip_udp_conn *client_conn;
 
 #define UIP_UDP_BUF  ((struct uip_udp_hdr *)&uip_buf[UIP_LLH_LEN + UIP_IPH_LEN])
@@ -62,45 +56,11 @@ static void
 tcpip_handler(void)
 {
     char *dados;
-    int i=0;
 
     if(uip_newdata()) {
         dados = uip_appdata;
         dados[uip_datalen()] = '\0';
         printf("Response from the server: '%s'\n", dados);
-
-        switch (dados[0])
-        {
-        case LED_SET_STATE:
-        {
-            PRINTF("LED_SET_STATE (0x%x)\n", dados[1]);
-            leds_off(LEDS_ALL);
-            leds_on(dados[1]);
-            //break ommited to send answer
-        }
-        case LED_GET_STATE:
-        {
-            uip_ipaddr_copy(&client_conn->ripaddr, &UIP_IP_BUF->srcipaddr);
-            client_conn->rport = UIP_UDP_BUF->destport;
-            buf[0] = LED_STATE;
-            buf[1] = leds_get();
-            uip_udp_packet_send(client_conn, buf, 2);
-            PRINTF("Enviando LED_STATE para [");
-            PRINT6ADDR(&client_conn->ripaddr);
-            PRINTF("]:%u\n", UIP_HTONS(client_conn->rport));
-            break;
-        }
-        default:
-        {
-            PRINTF("Comando Invalido: ");
-            for(i=0;i<uip_datalen();i++)
-            {
-                PRINTF("0x%02X ",dados[i]);
-            }
-            PRINTF("\n");
-            break;
-        }
-        }
     }
 }
 /*---------------------------------------------------------------------------*/
@@ -114,17 +74,6 @@ timeout_handler(void)
       PRINTF("Aguardando auto-configuracao de IP\n");
       return;
     }
-
-    //leds_on(LEDS_RED);
-    memset(buf, 0, MAX_PAYLOAD_LEN);
-
-    PRINTF("Cliente para [");
-
-    PRINT6ADDR(&client_conn->ripaddr);
-
-    memcpy(buf, &payload, sizeof(payload));
-    PRINTF("]:%u,", UIP_HTONS(client_conn->rport));
-    PRINTF(" LED_TOGGLE_REQUEST\n");
     uip_udp_packet_send(client_conn, buf, strlen(buf));
 }
 /*---------------------------------------------------------------------------*/
