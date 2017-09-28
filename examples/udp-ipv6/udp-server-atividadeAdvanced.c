@@ -64,8 +64,8 @@ float operate(int32_t op1, int32_t op2, int8_t op)
     {
     case OP_SUM: return op1+op2;
     case OP_SUBTRACT: return op1-op2;
-    case OP_MULTIPLY: (float)op1*(float)op2;
-    case OP_DIVIDE: (float)op1/(float)op2;
+    case OP_MULTIPLY: return (float)op1*(float)op2;
+    case OP_DIVIDE: return (float)op1/(float)op2;
     default: return 0;
     }
 }
