@@ -41,8 +41,13 @@
 
 #define SEND_INTERVAL		15 * CLOCK_SECOND
 #define MAX_PAYLOAD_LEN		40
-#define CONN_PORT     8802
 static char buf[MAX_PAYLOAD_LEN];
+
+#define LED_TOGGLE_REQUEST (0x79)
+#define LED_SET_STATE (0x7A)
+#define LED_GET_STATE (0x7B)
+#define LED_STATE (0x7C)
+#define CONN_PORT (8802)
 
 static struct uip_udp_conn *client_conn;
 
@@ -57,24 +62,69 @@ static void
 tcpip_handler(void)
 {
     char *dados;
+    int i=0;
 
     if(uip_newdata()) {
         dados = uip_appdata;
         dados[uip_datalen()] = '\0';
         printf("Response from the server: '%s'\n", dados);
+
+        switch (dados[0])
+        {
+        case LED_SET_STATE:
+        {
+            PRINTF("LED_SET_STATE (0x%x)\n", dados[1]);
+            leds_off(LEDS_ALL);
+            leds_on(dados[1]);
+            //break ommited to send answer
+        }
+        case LED_GET_STATE:
+        {
+            uip_ipaddr_copy(&client_conn->ripaddr, &UIP_IP_BUF->srcipaddr);
+            client_conn->rport = UIP_UDP_BUF->destport;
+            buf[0] = LED_STATE;
+            buf[1] = leds_get();
+            uip_udp_packet_send(client_conn, buf, 2);
+            PRINTF("Enviando LED_STATE para [");
+            PRINT6ADDR(&client_conn->ripaddr);
+            PRINTF("]:%u\n", UIP_HTONS(client_conn->rport));
+            break;
+        }
+        default:
+        {
+            PRINTF("Comando Invalido: ");
+            for(i=0;i<uip_datalen();i++)
+            {
+                PRINTF("0x%02X ",dados[i]);
+            }
+            PRINTF("\n");
+            break;
+        }
+        }
     }
 }
 /*---------------------------------------------------------------------------*/
 static void
 timeout_handler(void)
 {
-    char payload;
+    char payload=LED_TOGGLE_REQUEST;
 
 
     if(uip_ds6_get_global(ADDR_PREFERRED) == NULL) {
       PRINTF("Aguardando auto-configuracao de IP\n");
       return;
     }
+
+    //leds_on(LEDS_RED);
+    memset(buf, 0, MAX_PAYLOAD_LEN);
+
+    PRINTF("Cliente para [");
+
+    PRINT6ADDR(&client_conn->ripaddr);
+
+    memcpy(buf, &payload, sizeof(payload));
+    PRINTF("]:%u,", UIP_HTONS(client_conn->rport));
+    PRINTF(" LED_TOGGLE_REQUEST\n");
     uip_udp_packet_send(client_conn, buf, strlen(buf));
 }
 /*---------------------------------------------------------------------------*/
@@ -162,17 +212,8 @@ PROCESS_THREAD(udp_client_process, ev, data)
 
   print_local_addresses();
 
-  static resolv_status_t status = RESOLV_STATUS_UNCACHED;
-  while(status != RESOLV_STATUS_CACHED) {
-    status = set_connection_address(&ipaddr);
-
-    if(status == RESOLV_STATUS_RESOLVING) {
-      PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
-    } else if(status != RESOLV_STATUS_CACHED) {
-      PRINTF("Can't get connection address.\n");
-      PROCESS_YIELD();
-    }
-  }
+  //configura o IP de destino
+  uip_ip6addr(&ipaddr, 0xfe80, 0, 0, 0, 0x0215, 0x2000, 0x0002, 0x2145);
 
   /* new connection with remote host */
   client_conn = udp_new(&ipaddr, UIP_HTONS(CONN_PORT), NULL);
