@@ -142,7 +142,7 @@ AUTOSTART_PROCESSES(&cc26xx_demo_process, &adc_process_sensor,&gpio_process);
      return LPM_MODE_DEEP_SLEEP;
  }
 
- void sleep_enter(void)
+ void sleep_enter(uint8_t mode)
  {
      leds_on(LEDS_RED);
  }
@@ -421,7 +421,7 @@ PROCESS_THREAD(adc_process_sensor, ev, data)
 
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et_adc_sensor));
 
-      sensor = sensors_find(ADC_SENSOR);
+      sensor = (struct sensors_sensor *) sensors_find(ADC_SENSOR);
       if(sensor) {
           SENSORS_ACTIVATE(*sensor);
           sensor->configure(ADC_SENSOR_SET_CHANNEL,ADC_COMPB_IN_AUXIO7);
