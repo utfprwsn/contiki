@@ -64,8 +64,8 @@ float operate(int32_t op1, int32_t op2, int8_t op)
     {
     case OP_SUM: return op1+op2;
     case OP_SUBTRACT: return op1-op2;
-    case OP_MULTIPLY: (float)op1*(float)op2;
-    case OP_DIVIDE: (float)op1/(float)op2;
+    case OP_MULTIPLY: return (float)op1*(float)op2;
+    case OP_DIVIDE: return (float)op1/(float)op2;
     default: return 0;
     }
 }
@@ -116,7 +116,7 @@ tcpip_handler(void)
         }
         case OP_REQUEST:
         {
-            struct mathopreq* req = (struct mathopreq*)buf;
+            struct mathopreq* req = (struct mathopreq*)uip_appdata;
             struct mathopreply reply;
             uint8_t* rep8 = (uint8_t*)&reply;
             PRINTF("OP_REQUEST\n");
@@ -124,6 +124,7 @@ tcpip_handler(void)
 
             reply.opResult = OP_RESULT;
             reply.fpResult = operate(req->op1, req->op2, req->operation);
+            reply.fpResult *= req->fc;
             reply.intPart = (int32_t)reply.fpResult;
             reply.fracPart = (int32_t)(ABS_P((reply.fpResult - reply.intPart)*10000));
 
@@ -138,7 +139,7 @@ tcpip_handler(void)
             //envia o pacote
             uip_ipaddr_copy(&server_conn->ripaddr, &UIP_IP_BUF->srcipaddr);
             server_conn->rport = UIP_UDP_BUF->destport;
-            uip_udp_packet_send(server_conn, buf, 2);
+            uip_udp_packet_send(server_conn, (void*)&reply, sizeof(struct mathopreply));
             PRINTF("\n Enviando OP_REPLY para [");
             PRINT6ADDR(&server_conn->ripaddr);
             PRINTF("]:%u\n", UIP_HTONS(server_conn->rport));
@@ -157,7 +158,7 @@ tcpip_handler(void)
         }
     }
 
-    uip_udp_packet_send(server_conn, buf, strlen(buf));
+    //uip_udp_packet_send(server_conn, buf, strlen(buf));
     /* Restore server connection to allow data from any node */
     memset(&server_conn->ripaddr, 0, sizeof(server_conn->ripaddr));
     return;
