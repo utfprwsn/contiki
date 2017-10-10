@@ -80,7 +80,7 @@ powertrace_print(char *str)
   uint64_t idle_transmit, idle_listen;
   uint64_t all_idle_transmit, all_idle_listen;
 
-  static long unsigned int seqno;
+  static unsigned long seqno;
 
   uint64_t time, all_time, radio, all_radio;
   
@@ -121,7 +121,7 @@ powertrace_print(char *str)
          all_cpu, all_lpm, all_transmit, all_listen, all_idle_transmit, all_idle_listen,
          cpu, lpm, transmit, listen, idle_transmit, idle_listen,
          (int)((100L * (all_transmit + all_listen)) / all_time),
-         (int)(((10000L * (all_transmit + all_listen)) / all_time) - (100L * (all_transmit + all_listen) / all_time) * 100),
+         (int)((10000L * (all_transmit + all_listen) / all_time) - (100L * (all_transmit + all_listen) / all_time) * 100),
          (int)((100L * (transmit + listen)) / time),
          (int)((10000L * (transmit + listen) / time) - (100L * (transmit + listen) / time) * 100),
          (int)((100L * all_transmit) / all_time),
