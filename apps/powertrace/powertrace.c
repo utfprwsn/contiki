@@ -72,17 +72,17 @@ PROCESS(powertrace_process, "Periodic power output");
 void
 powertrace_print(char *str)
 {
-  static unsigned long last_cpu, last_lpm, last_transmit, last_listen;
-  static unsigned long last_idle_transmit, last_idle_listen;
+  static uint64_t last_cpu, last_lpm, last_transmit, last_listen;
+  static uint64_t last_idle_transmit, last_idle_listen;
 
-  unsigned long cpu, lpm, transmit, listen;
-  unsigned long all_cpu, all_lpm, all_transmit, all_listen;
-  unsigned long idle_transmit, idle_listen;
-  unsigned long all_idle_transmit, all_idle_listen;
+  uint64_t cpu, lpm, transmit, listen;
+  uint64_t all_cpu, all_lpm, all_transmit, all_listen;
+  uint64_t idle_transmit, idle_listen;
+  uint64_t all_idle_transmit, all_idle_listen;
 
-  static unsigned long seqno;
+  static long unsigned int seqno;
 
-  unsigned long time, all_time, radio, all_radio;
+  uint64_t time, all_time, radio, all_radio;
   
   struct powertrace_sniff_stats *s;
 
@@ -115,13 +115,13 @@ powertrace_print(char *str)
   all_radio = energest_type_time(ENERGEST_TYPE_LISTEN) +
     energest_type_time(ENERGEST_TYPE_TRANSMIT);
 
-  printf("%s %lu P %d.%d %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu (radio %d.%02d%% / %d.%02d%% tx %d.%02d%% / %d.%02d%% listen %d.%02d%% / %d.%02d%%)\n",
+  printf("%s %lu P %d.%d %lu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu (radio %d.%02d%% / %d.%02d%% tx %d.%02d%% / %d.%02d%% listen %d.%02d%% / %d.%02d%%)\n",
          str,
          clock_time(), linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1], seqno,
          all_cpu, all_lpm, all_transmit, all_listen, all_idle_transmit, all_idle_listen,
          cpu, lpm, transmit, listen, idle_transmit, idle_listen,
          (int)((100L * (all_transmit + all_listen)) / all_time),
-         (int)((10000L * (all_transmit + all_listen) / all_time) - (100L * (all_transmit + all_listen) / all_time) * 100),
+         (int)(((10000L * (all_transmit + all_listen)) / all_time) - (100L * (all_transmit + all_listen) / all_time) * 100),
          (int)((100L * (transmit + listen)) / time),
          (int)((10000L * (transmit + listen) / time) - (100L * (transmit + listen) / time) * 100),
          (int)((100L * all_transmit) / all_time),

@@ -39,6 +39,7 @@ LDFLAGS += -T $(LDSCRIPT)
 LDFLAGS += -Wl,--gc-sections,--sort-section=alignment
 LDFLAGS += -Wl,-Map=$(@:.elf=-$(TARGET).map),--cref,--no-warn-mismatch
 OBJCOPY_FLAGS += -O binary --gap-fill 0xff
+#OBJCOPY_FLAGS += -O binary
 OBJDUMP_FLAGS += --disassemble --source --disassembler-options=force-thumb
 
 ifdef WERROR
@@ -47,9 +48,11 @@ endif
 
 ### Are we building with code size optimisations?
 ifeq ($(SMALL),1)
-  CFLAGS += -Os
+  #CFLAGS += -Os
+  CFLAGS += -O0
 else
-  CFLAGS += -O2
+  #CFLAGS += -O2
+  CFLAGS += -O0
 endif
 
 ### If the user-specified a Node ID, pass a define

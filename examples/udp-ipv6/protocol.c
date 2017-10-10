@@ -33,7 +33,7 @@ void printRequest(struct mathopreq *req)
     uint32_t fracPart;
     intPart = (int32_t)req->fc;
     fracPart = ABS_P((int32_t)((req->fc - intPart)*10000));
-    PRINTF("(%d%s%d)*%d.%d",req->op1,operator(req->operation),req->op2,intPart,fracPart);
+    PRINTF("(%ld%s%ld)*%ld.%lu",req->op1,operator(req->operation),req->op2,intPart,fracPart);
 }
 
 void printReply(struct mathopreply *req)
@@ -43,7 +43,7 @@ void printReply(struct mathopreply *req)
     intPart = (int32_t)req->fpResult;
     uint8_t* buffer = (uint8_t*)req;
     fracPart = ABS_P((int32_t)((req->fpResult - intPart)*10000));
-    PRINTF("%d.%d (%d.%d): ",req->intPart,req->fracPart,intPart,fracPart);
+    PRINTF("%ld.%lu (%ld.%lu): ",req->intPart,req->fracPart,intPart,fracPart);
     uint8_t crc=0;
     for(int i=0;i<sizeof(struct mathopreply)-1;i++)
     {
