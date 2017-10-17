@@ -43,6 +43,7 @@ struct mathopreply {
   uint8_t crc;
 }  __attribute__((packed));
 
+char * operator(uint8_t op);
 void printRequest(struct mathopreq *req);
 void printReply(struct mathopreply *req);
 
