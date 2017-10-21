@@ -162,7 +162,7 @@ PROCESS_THREAD(udp_server_process, ev, data)
 
   print_local_addresses();
 
-#if 1 //UIP_CONF_ROUTER
+#if 0 //UIP_CONF_ROUTER
   dag = rpl_set_root(RPL_DEFAULT_INSTANCE,
                      &uip_ds6_get_global(ADDR_PREFERRED)->ipaddr);
   if(dag != NULL) {
