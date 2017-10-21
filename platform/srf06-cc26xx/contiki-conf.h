@@ -61,6 +61,8 @@
 #define NETSTACK_CONF_MAC     csma_driver
 #endif
 
+#define NETSTACK_CONF_RDC nullrdc_driver
+
 #ifndef NETSTACK_CONF_RDC
 #define NETSTACK_CONF_RDC     contikimac_driver
 #endif
