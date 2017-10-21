@@ -132,7 +132,7 @@
 /* UIP_CONF_ROUTER specifies if the IPv6 node should be a router or
    not. By default, all Contiki nodes are routers. */
 #ifndef UIP_CONF_ROUTER
-#define UIP_CONF_ROUTER 0
+#define UIP_CONF_ROUTER 1
 #endif /* UIP_CONF_ROUTER */
 
 /* UIP_CONF_IPV6_RPL specifies if RPL is to be used for IPv6
