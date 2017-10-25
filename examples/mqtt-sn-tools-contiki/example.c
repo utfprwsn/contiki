@@ -27,21 +27,29 @@
 
 
 #include "contiki.h"
+#include "contiki-lib.h"
+#include "contiki-net.h"
 #include "lib/random.h"
 #include "sys/ctimer.h"
 #include "sys/etimer.h"
 #include "net/ip/uip.h"
 #include "net/ipv6/uip-ds6.h"
+#include "net/ip/uip-nameserver.h"
 #include "mqtt-sn.h"
+#include "rpl.h"
+#include "net/ip/resolv.h"
 
 #include "net/rime/rime.h"
 
 #include "simple-udp.h"
 
+#define DEBUG DEBUG_PRINT
+#include "net/ip/uip-debug.h"
+
 #include <stdio.h>
 #include <string.h>
 
-#define UDP_PORT 1884
+#define UDP_PORT 1883
 
 #define REQUEST_RETRIES 4
 #define DEFAULT_SEND_INTERVAL		(10 * CLOCK_SECOND)
@@ -49,7 +57,7 @@
 
 static struct mqtt_sn_connection mqtt_sn_c;
 static char *mqtt_client_id="sensor";
-static char ctrl_topic[22] = "0000000000000000/ctrl\0";//of form "0011223344556677/ctrl" it is null terminated, and is 21 charactes
+static char ctrl_topic[22] = "0000000000000000/msg\0";//of form "0011223344556677/ctrl" it is null terminated, and is 21 charactes
 static char pub_topic[21] = "0000000000000000/msg\0";
 static uint16_t ctrl_topic_id;
 static uint16_t publisher_topic_id;
@@ -130,8 +138,10 @@ suback_receiver(struct mqtt_sn_connection *mqc, const uip_ipaddr_t *source_addr,
 static void
 publish_receiver(struct mqtt_sn_connection *mqc, const uip_ipaddr_t *source_addr, const uint8_t *data, uint16_t datalen)
 {
+  //publish_packet_t* pkt = (publish_packet_t*)data;
   memcpy(&incoming_packet, data, datalen);
-  printf("Published message received\n");
+  incoming_packet.data[datalen-7] = 0x00;
+  printf("Published message received: %s\n", incoming_packet.data);
   //see if this message corresponds to ctrl channel subscription request
   if (uip_htons(incoming_packet.topic_id) == ctrl_topic_id) {
     //the new message interval will be read from the first byte of the recieved packet
@@ -245,10 +255,69 @@ static void connection_timer_callback(void *mqc)
   process_post(&example_mqttsn_process, connection_timeout_event, NULL);
 }
 
+/*---------------------------------------------------------------------------*/
+static void
+print_local_addresses(void)
+{
+  int i;
+  uint8_t state;
+
+  PRINTF("Client IPv6 addresses: ");
+  for(i = 0; i < UIP_DS6_ADDR_NB; i++) {
+    state = uip_ds6_if.addr_list[i].state;
+    if(uip_ds6_if.addr_list[i].isused &&
+       (state == ADDR_TENTATIVE || state == ADDR_PREFERRED)) {
+      PRINT6ADDR(&uip_ds6_if.addr_list[i].ipaddr);
+      PRINTF("\n");
+    }
+  }
+}
+/*---------------------------------------------------------------------------*/
+static resolv_status_t
+set_connection_address(uip_ipaddr_t *ipaddr)
+{
+#ifndef UDP_CONNECTION_ADDR
+#if RESOLV_CONF_SUPPORTS_MDNS
+#define UDP_CONNECTION_ADDR       pksr.eletrica.eng.br
+#elif UIP_CONF_ROUTER
+#define UDP_CONNECTION_ADDR       fd00:0:0:0:0212:7404:0004:0404
+#else
+#define UDP_CONNECTION_ADDR       fe80:0:0:0:6466:6666:6666:6666
+#endif
+#endif /* !UDP_CONNECTION_ADDR */
+
+#define _QUOTEME(x) #x
+#define QUOTEME(x) _QUOTEME(x)
+
+  resolv_status_t status = RESOLV_STATUS_ERROR;
+
+  if(uiplib_ipaddrconv(QUOTEME(UDP_CONNECTION_ADDR), ipaddr) == 0) {
+    uip_ipaddr_t *resolved_addr = NULL;
+    status = resolv_lookup(QUOTEME(UDP_CONNECTION_ADDR),&resolved_addr);
+    if(status == RESOLV_STATUS_UNCACHED || status == RESOLV_STATUS_EXPIRED) {
+      PRINTF("Attempting to look up %s\n",QUOTEME(UDP_CONNECTION_ADDR));
+      resolv_query(QUOTEME(UDP_CONNECTION_ADDR));
+      status = RESOLV_STATUS_RESOLVING;
+    } else if(status == RESOLV_STATUS_CACHED && resolved_addr != NULL) {
+      PRINTF("Lookup of \"%s\" succeded!\n",QUOTEME(UDP_CONNECTION_ADDR));
+    } else if(status == RESOLV_STATUS_RESOLVING) {
+      PRINTF("Still looking up \"%s\"...\n",QUOTEME(UDP_CONNECTION_ADDR));
+    } else {
+      PRINTF("Lookup of \"%s\" failed. status = %d\n",QUOTEME(UDP_CONNECTION_ADDR),status);
+    }
+    if(resolved_addr)
+      uip_ipaddr_copy(ipaddr, resolved_addr);
+  } else {
+    status = RESOLV_STATUS_CACHED;
+  }
+
+  return status;
+}
+
 PROCESS_THREAD(example_mqttsn_process, ev, data)
 {
   static struct etimer periodic_timer;
-  static uip_ipaddr_t broker_addr;
+  static uip_ipaddr_t broker_addr,google_dns;
   static uint8_t connection_retries = 0;
 
   PROCESS_BEGIN();
@@ -260,7 +329,41 @@ PROCESS_THREAD(example_mqttsn_process, ev, data)
   //uip_ip6addr(&broker_addr, 0x2001, 0x0db8, 1, 0xffff, 0, 0, 0xc0a8, 0xd480);//192.168.212.128 with tayga
   //uip_ip6addr(&broker_addr, 0xaaaa, 0, 2, 0xeeee, 0, 0, 0xc0a8, 0xd480);//192.168.212.128 with tayga
   //uip_ip6addr(&broker_addr, 0xaaaa, 0, 2, 0xeeee, 0, 0, 0xac10, 0xdc01);//172.16.220.1 with tayga
-  uip_ip6addr(&broker_addr, 0xaaaa, 0, 2, 0xeeee, 0, 0, 0xac10, 0xdc80);//172.16.220.128 with tayga
+  uip_ip6addr(&google_dns, 0x2001, 0x4860, 0x4860, 0x0, 0x0, 0x0, 0x0, 0x8888);//172.16.220.1 with tayga
+  etimer_set(&periodic_timer, 2*CLOCK_SECOND);
+  while(uip_ds6_get_global(ADDR_PREFERRED) == NULL)
+  {
+    PROCESS_WAIT_EVENT();
+    if(etimer_expired(&periodic_timer))
+    {
+        PRINTF("Aguardando auto-configuracao de IP\n");
+        etimer_set(&periodic_timer, 2*CLOCK_SECOND);
+    }
+  }
+
+  print_local_addresses();
+
+  rpl_dag_t *dag = rpl_get_any_dag();
+  if(dag) {
+    //uip_ipaddr_copy(sixlbr_addr, globaladdr);
+    uip_nameserver_update(&google_dns, UIP_NAMESERVER_INFINITE_LIFETIME);
+  }
+
+  static resolv_status_t status = RESOLV_STATUS_UNCACHED;
+  while(status != RESOLV_STATUS_CACHED) {
+    status = set_connection_address(&broker_addr);
+
+    if(status == RESOLV_STATUS_RESOLVING) {
+      PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
+    } else if(status != RESOLV_STATUS_CACHED) {
+      PRINTF("Can't get connection address.\n");
+      PROCESS_YIELD();
+    }
+  }
+
+  //uip_ip6addr(&broker_addr, 0x2001,0x1284,0xf016,0x5bfa,0xf66d,0x4ff,0xfed6,0x1339);//172.16.220.128 with tayga
+
+
   mqtt_sn_create_socket(&mqtt_sn_c,UDP_PORT, &broker_addr, UDP_PORT);
   (&mqtt_sn_c)->mc = &mqtt_sn_call;
 
@@ -269,17 +372,13 @@ PROCESS_THREAD(example_mqttsn_process, ev, data)
           linkaddr_node_addr.u8[4],linkaddr_node_addr.u8[5],linkaddr_node_addr.u8[6],
           linkaddr_node_addr.u8[7]);
 
-  /*Wait a little to let system get set*/
-  etimer_set(&periodic_timer, 17*CLOCK_SECOND);
-  PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer));
-
   /*Request a connection and wait for connack*/
   printf("requesting connection \n ");
   connection_timeout_event = process_alloc_event();
   ctimer_set( &connection_timer, REPLY_TIMEOUT, connection_timer_callback, NULL);
   mqtt_sn_send_connect(&mqtt_sn_c,mqtt_client_id,mqtt_keep_alive);
   connection_state = MQTTSN_WAITING_CONNACK;
-  while (connection_retries < 4)
+  while (connection_retries < 15)
   {
     PROCESS_WAIT_EVENT();
     if (ev == mqttsn_connack_event) {
@@ -287,14 +386,14 @@ PROCESS_THREAD(example_mqttsn_process, ev, data)
       printf("connection acked\n");
       ctimer_stop(&connection_timer);
       connection_state = MQTTSN_CONNECTED;
-      connection_retries = 4;//using break here may mess up switch statement of proces
+      connection_retries = 15;//using break here may mess up switch statement of proces
     }
     if (ev == connection_timeout_event) {
       connection_state = MQTTSN_CONNECTION_FAILED;
       connection_retries++;
       printf("connection timeout\n");
       ctimer_restart(&connection_timer);
-      if (connection_retries < 4) {
+      if (connection_retries < 15) {
         mqtt_sn_send_connect(&mqtt_sn_c,mqtt_client_id,mqtt_keep_alive);
         connection_state = MQTTSN_WAITING_CONNACK;
       }
