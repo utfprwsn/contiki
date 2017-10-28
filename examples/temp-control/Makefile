@@ -3,7 +3,7 @@ CFLAGS+=-g
 
 
 
-CONTIKI_PROJECT = temp-control
+CONTIKI_PROJECT = udp-temp-control
 all: $(CONTIKI_PROJECT)
 
 CONTIKI = ../..
