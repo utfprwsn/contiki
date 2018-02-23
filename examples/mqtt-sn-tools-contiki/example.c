@@ -293,7 +293,7 @@ set_connection_address(uip_ipaddr_t *ipaddr)
 {
 #ifndef UDP_CONNECTION_ADDR
 #if RESOLV_CONF_SUPPORTS_MDNS
-#define UDP_CONNECTION_ADDR       pksr.eletrica.eng.br
+#define UDP_CONNECTION_ADDR       sctdf.com.br
 #elif UIP_CONF_ROUTER
 #define UDP_CONNECTION_ADDR       fd00:0:0:0:0212:7404:0004:0404
 #else
@@ -439,29 +439,18 @@ PROCESS_THREAD(example_mqttsn_process, ev, data)
     etimer_set(&periodic_timer, 3*CLOCK_SECOND);
     PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&periodic_timer));
     process_start(&publish_process, 0);
+    etimer_set(&et, 2*CLOCK_SECOND);
+    while(1)
+    {
+      PROCESS_WAIT_EVENT();
+      if(etimer_expired(&et)) {
+        leds_toggle(LEDS_ALL);
+        etimer_restart(&et);
+      }
+    }
   } else {
     printf("unable to connect\n");
   }
-  //monitor connection
-  etimer_set(&et, 2*CLOCK_SECOND);
-  while(1)
-  {
-    PROCESS_WAIT_EVENT();
-    if(etimer_expired(&et)) {
-      leds_toggle(LEDS_ALL);
-      etimer_restart(&et);
-    }
-    /*if (connection_state == MQTTSN_DISCONNECTED || data==41)
-    {
-        printf("forcando goto\n");
-        process_exit(&ctrl_subscription_process);
-        process_exit(&publish_process);
-        goto testegoto;
-    }*/
-  }
-
-
-
   PROCESS_END();
 }
 /*---------------------------------------------------------------------------*/
