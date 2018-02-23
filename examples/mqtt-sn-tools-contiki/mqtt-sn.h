@@ -266,13 +266,13 @@ const char* mqtt_sn_return_code_string(uint8_t return_code);
 void mqtt_sn_set_debug(uint8_t value);
 #endif // 1
 #if 0
-void mqtt_sn_recieve_connack(struct mqtt_sn_connection *mqc);
+void mqtt_sn_receive_connack(struct mqtt_sn_connection *mqc);
 #endif
 #if 0
-uint16_t mqtt_sn_recieve_regack(struct mqtt_sn_connection *mqc);
+uint16_t mqtt_sn_receive_regack(struct mqtt_sn_connection *mqc);
 #endif
 #if 0
-uint16_t mqtt_sn_recieve_suback(struct mqtt_sn_connection *mqc);
+uint16_t mqtt_sn_receive_suback(struct mqtt_sn_connection *mqc);
 #endif
 #if 0
 publish_packet_t* mqtt_sn_loop(int sock, int timeout);

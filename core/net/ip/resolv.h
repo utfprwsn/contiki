@@ -48,10 +48,14 @@
  *  will respond to MDNS queries for this device's hostname,
  *  as described by draft-cheshire-dnsext-multicastdns.
  */
+
+#define DEBUG (1)
+
 #ifndef RESOLV_CONF_SUPPORTS_MDNS
 #define RESOLV_CONF_SUPPORTS_MDNS     (1)
 #endif
 
+#define CONTIKI_CONF_CUSTOM_HOSTNAME     (1)
 /**
  * Event that is broadcasted when a DNS name has been resolved.
  */

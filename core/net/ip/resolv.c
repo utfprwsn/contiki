@@ -1179,7 +1179,10 @@ PROCESS_THREAD(resolv_process, ev, data)
   /* TODO: Is there anything we need to do here for IPv4 multicast? */
 #endif
 
+#ifndef CONTIKI_CONF_CUSTOM_HOSTNAME
   resolv_set_hostname(CONTIKI_CONF_DEFAULT_HOSTNAME);
+#endif
+
 #endif /* RESOLV_CONF_SUPPORTS_MDNS */
 
   while(1) {

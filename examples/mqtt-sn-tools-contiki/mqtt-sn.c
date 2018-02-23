@@ -56,7 +56,7 @@ topic_map_t *topic_map = NULL;
 
 /*MQTT_SN events*/
 process_event_t mqtt_sn_request_event;
-//Connack recieved
+//Connack received
 static process_event_t connack_event;
 static process_event_t disconnect_event;
 static process_event_t receive_timeout_event;
@@ -85,7 +85,7 @@ mqtt_sn_receiver(struct simple_udp_connection *sock, const uip_ipaddr_t *sender_
   struct mqtt_sn_connection *mqc = (struct mqtt_sn_connection *)sock;
   if (mqc->keep_alive > 0 && mqc->stat == MQTTSN_CONNECTED){
     ctimer_restart((&(mqc->receive_timer)));
-    printf("recieve timer reset\n");
+    printf("receive timer reset\n");
   }
   if (datalen >= 2)
   {
@@ -247,6 +247,7 @@ PROCESS_THREAD(mqtt_sn_process, ev, data)
       if(mqc->mc->keepalive_timeout != NULL) {
         mqc->mc->keepalive_timeout(mqc);
       }
+      mqc->stat = MQTTSN_DISCONNECTED;
     }
     else if (ev == send_timeout_event){
       //if last send has expired, we need to send a pingreq
@@ -490,9 +491,9 @@ void mqtt_sn_send_disconnect(struct mqtt_sn_connection *mqc)
 }
 #endif
 #if 0
-void mqtt_sn_recieve_connack(int sock)
+void mqtt_sn_receive_connack(int sock)
 {
-    connack_packet_t *packet = recieve_packet(sock);
+    connack_packet_t *packet = receive_packet(sock);
 
     if (packet == NULL) {
         fprintf(stderr, "Failed to connect to MQTT-S gateway.\n");
@@ -589,9 +590,9 @@ const char* mqtt_sn_lookup_topic(int topic_id)
     return NULL;
 }
 
-uint16_t mqtt_sn_recieve_regack(int sock)
+uint16_t mqtt_sn_receive_regack(int sock)
 {
-    regack_packet_t *packet = recieve_packet(sock);
+    regack_packet_t *packet = receive_packet(sock);
     uint16_t received_message_id, received_topic_id;
 
     if (packet == NULL) {
@@ -628,9 +629,9 @@ uint16_t mqtt_sn_recieve_regack(int sock)
 }
 #endif
 #if 0
-uint16_t mqtt_sn_recieve_suback(int sock)
+uint16_t mqtt_sn_receive_suback(int sock)
 {
-    suback_packet_t *packet = recieve_packet(sock);
+    suback_packet_t *packet = receive_packet(sock);
     uint16_t received_message_id, received_topic_id;
 
     if (packet == NULL) {
