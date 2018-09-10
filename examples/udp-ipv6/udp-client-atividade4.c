@@ -164,10 +164,35 @@ PROCESS_THREAD(udp_client_process, ev, data)
   PRINTF("UDP client process started\n");
 
 #if UIP_CONF_ROUTER
-  set_global_address();
+  //set_global_address();
 #endif
 
+  etimer_set(&et, 2*CLOCK_SECOND);
+  while(uip_ds6_get_global(ADDR_PREFERRED) == NULL)
+  {
+      PROCESS_WAIT_EVENT();
+      if(etimer_expired(&et))
+      {
+          PRINTF("Aguardando auto-configuracao de IP\n");
+          etimer_set(&et, 2*CLOCK_SECOND);
+      }
+  }
+
+
   print_local_addresses();
+
+  static resolv_status_t status = RESOLV_STATUS_UNCACHED;
+  while(status != RESOLV_STATUS_CACHED) {
+    status = set_connection_address(&ipaddr);
+
+    if(status == RESOLV_STATUS_RESOLVING) {
+      //PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
+        PROCESS_WAIT_EVENT();
+    } else if(status != RESOLV_STATUS_CACHED) {
+      PRINTF("Can't get connection address.\n");
+      PROCESS_YIELD();
+    }
+  }
 
 #if MDNS
   static resolv_status_t status = RESOLV_STATUS_UNCACHED;
