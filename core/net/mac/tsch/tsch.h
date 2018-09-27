@@ -39,6 +39,46 @@
 #include "net/mac/mac.h"
 #include "net/mac/tsch/tsch-security.h"
 
+#define TX_INIT 1
+#define TS_TX_OFFSET 2
+#define TS_TX_OFFSET_AFTER_TRANSMIT 3
+#define TS_RX_ACK_DELAY 4
+#define TS_ACK_WAIT 5
+#define ACK_RECEIVED 6
+#define RADIO_OFF_AFTER_ACK_RECEIVED 7
+#define RADIO_OFF_END_TX_SLOT 8
+#define TX_END 9
+#define RX_INIT (0x0A)
+#define TS_RX_OFFSET (0x0B)
+#define RX_IDLE (0x0C)
+#define RX_IDLE_RX_OFF (0x0D)
+#define PACKET_DETECTED (0x0E)
+#define PACKET_RECEIVED (0x0F)
+#define RX_OFF_AFTER_PACKET_RECEIVED (0x10)
+#define RX_ACK_SEND (0x11)
+#define RX_END (0x12)
+#define SLOT_START (0x13)
+#define SLOT_START_TURN_RADIO_ON (0x14)
+#define SLOT_START_RADIO_IS_ON (0x15)
+#define SLOT_END (0x16)
+#define SLOT_SCHEDULE (0x17)
+#define SLOT_OPERATION_END (0x18)
+
+
+#define TSCH_DEBUG(x) do {                   \
+    uint32_t j=0,k[5]={0,1,12,15,21};                               \
+    for(uint32_t i=0; i<5; i++) {                                               \
+      if(1<<i & x) {            \
+        j |= 1<<k[i];                                           \
+      }                                                         \
+    }                                                           \
+    ti_lib_gpio_clear_multi_dio(1<<IOID_0 | 1<<IOID_1 | 1<<IOID_12 | 1<<IOID_15 | 1<<IOID_21); \
+    ti_lib_gpio_set_multi_dio(j); \
+  } while(0)
+
+
+
+
 /******** Configuration *******/
 
 /* Max time before sending a unicast keep-alive message to the time source */
@@ -114,7 +154,7 @@
 #ifdef TSCH_CONF_ASSOCIATION_POLL_FREQUENCY
 #define TSCH_ASSOCIATION_POLL_FREQUENCY TSCH_CONF_ASSOCIATION_POLL_FREQUENCY
 #else
-#define TSCH_ASSOCIATION_POLL_FREQUENCY 100
+#define TSCH_ASSOCIATION_POLL_FREQUENCY 500
 #endif
 
 /* When associating, check ASN against our own uptime (time in minutes)..

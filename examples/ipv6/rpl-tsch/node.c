@@ -42,6 +42,7 @@
 #include "net/ipv6/uip-ds6-route.h"
 #include "net/mac/tsch/tsch.h"
 #include "net/rpl/rpl-private.h"
+#include "powertrace.h"
 #if WITH_ORCHESTRA
 #include "orchestra.h"
 #endif /* WITH_ORCHESTRA */
@@ -53,6 +54,8 @@
 #if CONFIG_VIA_BUTTON
 #include "button-sensor.h"
 #endif /* CONFIG_VIA_BUTTON */
+
+#include "ti-lib.h"
 
 /*---------------------------------------------------------------------------*/
 PROCESS(node_process, "RPL Node");
@@ -187,6 +190,23 @@ PROCESS_THREAD(node_process, ev, data)
   coordinator_candidate = (node_id == 1);
 #endif
 
+
+
+  //Inicialização dos pinos para debug do TSCH
+
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_0);
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_1);
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_12);
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_15);
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_21);
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_22);
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_23);
+    ti_lib_rom_ioc_pin_type_gpio_output(IOID_24);
+    ti_lib_gpio_clear_multi_dio(1<<IOID_0 | 1<<IOID_1 | 1<<IOID_12 | 1<<IOID_15 | 1<<IOID_21 | 1<<IOID_22 | 1<<IOID_23 | 1<<IOID_24);
+
+    printf("Guard Time (us): %d\n",TSCH_CONF_RX_WAIT);
+    printf("Timeslot Length (us): %d\n",TSCH_CONF_DEFAULT_TIMESLOT_LENGTH);
+
   if(coordinator_candidate) {
     if(LLSEC802154_ENABLED) {
       node_role = role_6dr_sec;
@@ -209,9 +229,9 @@ PROCESS_THREAD(node_process, ev, data)
              node_role == role_6ln ? "6ln" : (node_role == role_6dr) ? "6dr" : "6dr-sec",
              CONFIG_WAIT_TIME);
       PROCESS_WAIT_EVENT_UNTIL(((ev == sensors_event) &&
-                                (data == &button_sensor) && button_sensor.value(0) > 0)
+                                (data == &button_sensor) /*&& button_sensor.value(0) > 0*/)
                                || etimer_expired(&et));
-      if(ev == sensors_event && data == &button_sensor && button_sensor.value(0) > 0) {
+      if(ev == sensors_event && data == &button_sensor /*&& button_sensor.value(0) > 0*/) {
         node_role = (node_role + 1) % 3;
         if(LLSEC802154_ENABLED == 0 && node_role == role_6dr_sec) {
           node_role = (node_role + 1) % 3;
@@ -243,6 +263,7 @@ PROCESS_THREAD(node_process, ev, data)
 
   /* Print out routing tables every minute */
   etimer_set(&et, CLOCK_SECOND * 60);
+  powertrace_start(CLOCK_SECOND * 60);
   while(1) {
     print_network_status();
     PROCESS_YIELD_UNTIL(etimer_expired(&et));

@@ -56,6 +56,19 @@
 #include <string.h>
 #include <stdbool.h>
 /*---------------------------------------------------------------------------*/
+#ifndef CPU_DEBUG_LPM_ENTER_EVENT
+#define CPU_DEBUG_LPM_ENTER_EVENT() ti_lib_gpio_clear_dio(IOID_24)
+#endif
+#ifndef CPU_DEBUG_LPM_LEAVE_EVENT
+#define CPU_DEBUG_LPM_LEAVE_EVENT() ti_lib_gpio_set_dio(IOID_24)
+#endif
+#ifndef CPU_DEBUG_LPM_DROP_LEAVE_EVENT
+#define CPU_DEBUG_LPM_DROP_LEAVE_EVENT()
+#endif
+#ifndef CPU_DEBUG_LPM_DROP_ENTER_EVENT
+#define CPU_DEBUG_LPM_DROP_ENTER_EVENT()
+#endif
+
 #if ENERGEST_CONF_ON
 static unsigned long irq_energest = 0;
 
@@ -84,6 +97,7 @@ LIST(modules_list);
 
 #define MAX_SLEEP_TIME        RTIMER_SECOND
 #define MIN_SAFE_SCHEDULE     8u
+
 /*---------------------------------------------------------------------------*/
 /* Prototype of a function in clock.c. Called every time we come out of DS */
 void clock_update(void);
@@ -249,6 +263,7 @@ wake_up(void)
    */
   oscillators_request_hf_xosc();
 #endif
+  CPU_DEBUG_LPM_LEAVE_EVENT();
 }
 /*---------------------------------------------------------------------------*/
 static uint8_t
@@ -394,12 +409,11 @@ lpm_sleep(void)
 
   /* Just to be on the safe side, explicitly disable Deep Sleep */
   HWREG(NVIC_SYS_CTRL) &= ~(NVIC_SYS_CTRL_SLEEPDEEP);
-
+  CPU_DEBUG_LPM_ENTER_EVENT();
   ti_lib_prcm_sleep();
-
+  CPU_DEBUG_LPM_LEAVE_EVENT();
   /* Remember IRQ energest for next pass */
   ENERGEST_IRQ_SAVE(irq_energest);
-
   ENERGEST_SWITCH(ENERGEST_TYPE_LPM, ENERGEST_TYPE_CPU);
 }
 /*---------------------------------------------------------------------------*/
@@ -432,7 +446,7 @@ deep_sleep(void)
     /* Clear the bits specified in the lock */
     domains &= ~module->domain_lock;
   }
-
+  CPU_DEBUG_LPM_ENTER_EVENT();
   /* Pat the dog: We don't want it to shout right after we wake up */
   watchdog_periodic();
 
@@ -506,6 +520,7 @@ deep_sleep(void)
   }
 
   /* We are only interested in IRQ energest while idle or in LPM */
+
   ENERGEST_IRQ_RESTORE(irq_energest);
   ENERGEST_SWITCH(ENERGEST_TYPE_CPU, ENERGEST_TYPE_LPM);
 
@@ -539,19 +554,24 @@ void
 lpm_drop()
 {
   uint8_t max_pm;
-
   /* Critical. Don't get interrupted! */
   ti_lib_int_master_disable();
-
+  CPU_DEBUG_LPM_DROP_ENTER_EVENT();
   max_pm = setup_sleep_mode();
-
   /* Drop */
   if(max_pm == LPM_MODE_SLEEP) {
-    lpm_sleep();
+      CPU_DEBUG_LPM_DROP_LEAVE_EVENT();
+      CPU_DEBUG_LPM_DROP_ENTER_EVENT();
+      lpm_sleep();
   } else if(max_pm == LPM_MODE_DEEP_SLEEP) {
-    deep_sleep();
+      CPU_DEBUG_LPM_DROP_LEAVE_EVENT();
+      CPU_DEBUG_LPM_DROP_ENTER_EVENT();
+      CPU_DEBUG_LPM_DROP_LEAVE_EVENT();
+      CPU_DEBUG_LPM_DROP_ENTER_EVENT();
+      deep_sleep();
   }
 
+  CPU_DEBUG_LPM_DROP_LEAVE_EVENT();
   ti_lib_int_master_enable();
 }
 /*---------------------------------------------------------------------------*/

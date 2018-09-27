@@ -80,7 +80,7 @@ powertrace_print(char *str)
   uint64_t idle_transmit, idle_listen;
   uint64_t all_idle_transmit, all_idle_listen;
 
-  static unsigned long seqno;
+  static unsigned long seqno,microssegundos,segundos;
 
   uint64_t time, all_time, radio, all_radio;
   
@@ -114,10 +114,11 @@ powertrace_print(char *str)
   all_time = all_cpu + all_lpm;
   all_radio = energest_type_time(ENERGEST_TYPE_LISTEN) +
     energest_type_time(ENERGEST_TYPE_TRANSMIT);
-
-  printf("%s %lu P %d.%d %lu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu (radio %d.%02d%% / %d.%02d%% tx %d.%02d%% / %d.%02d%% listen %d.%02d%% / %d.%02d%%)\n",
+  microssegundos = RTIMERTICKS_TO_US_64(all_time);
+  segundos = all_time/RTIMER_ARCH_SECOND;
+  printf("%s %lu microssegundos: %lu segundos: %lu P %d.%d %lu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu (radio %d.%02d%% / %d.%02d%% tx %d.%02d%% / %d.%02d%% listen %d.%02d%% / %d.%02d%%)\n",  
          str,
-         clock_time(), linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1], seqno,
+         clock_time(), microssegundos, segundos, linkaddr_node_addr.u8[0], linkaddr_node_addr.u8[1], seqno,
          all_cpu, all_lpm, all_transmit, all_listen, all_idle_transmit, all_idle_listen,
          cpu, lpm, transmit, listen, idle_transmit, idle_listen,
          (int)((100L * (all_transmit + all_listen)) / all_time),

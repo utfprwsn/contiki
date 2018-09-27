@@ -114,6 +114,19 @@
 #undef TSCH_SCHEDULE_CONF_DEFAULT_LENGTH
 #define TSCH_SCHEDULE_CONF_DEFAULT_LENGTH 3
 
+#undef TSCH_CONF_DEFAULT_HOPPING_SEQUENCE
+#define TSCH_CONF_DEFAULT_HOPPING_SEQUENCE TSCH_HOPPING_SEQUENCE_4_4
+
+#undef TSCH_CONF_ASSOCIATION_POLL_FREQUENCY
+#define TSCH_CONF_ASSOCIATION_POLL_FREQUENCY 500 //aqui você pode definir quantas vezes por segundo o rádio vai escanear cada canal, o padrão é 100. Este parâmetro provavelmente poderá ser otimizado de forma a minimizar o tempo de associação (Rendezvous)
+
+#undef TSCH_CONF_CHANNEL_SCAN_DURATION
+#define TSCH_CONF_CHANNEL_SCAN_DURATION CLOCK_SECOND/10 //definindo o tempo que o TSCH fica em cada canal, o padrão é 1 segundo. Este parâmetro provavelmente poderá ser otimizado de forma a minimizar o tempo de associação (Rendezvous)
+
+#undef TSCH_CONF_DEFAULT_TIMESLOT_LENGTH
+#define TSCH_CONF_DEFAULT_TIMESLOT_LENGTH 15000 //definindo o tamanho do timeslot, o padrão é 10ms, mas utilizamos 15ms porque caso contrário o tempo fica muito curto
+
+
 #if WITH_SECURITY
 
 /* Enable security */
