@@ -49,7 +49,7 @@
  *  as described by draft-cheshire-dnsext-multicastdns.
  */
 
-#define DEBUG (1)
+//#define DEBUG (1)
 
 #ifndef RESOLV_CONF_SUPPORTS_MDNS
 #define RESOLV_CONF_SUPPORTS_MDNS     (1)

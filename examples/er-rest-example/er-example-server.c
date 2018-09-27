@@ -71,8 +71,7 @@ extern resource_t
   res_push,
   res_event,
   res_sub,
-  res_b1_sep_b2,
-  res_utfprwsn;
+  res_b1_sep_b2;
 #if PLATFORM_HAS_LEDS
 extern resource_t res_leds, res_toggle;
 #endif
@@ -132,8 +131,7 @@ PROCESS_THREAD(er_example_server, ev, data)
    * WARNING: Activating twice only means alternate path, not two instances!
    * All static variables are the same for each URI path.
    */
-  rest_activate_resource(&res_hello, "test/hello");
-  rest_activate_resource(&res_utfprwsn, "utfprwsn/echo");
+  rest_activate_resource(&res_hello, "test/hello");  
 /*  rest_activate_resource(&res_mirror, "debug/mirror"); */
 /*  rest_activate_resource(&res_chunks, "test/chunks"); */
 /*  rest_activate_resource(&res_separate, "test/separate"); */

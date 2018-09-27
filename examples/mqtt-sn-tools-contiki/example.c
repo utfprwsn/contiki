@@ -178,7 +178,7 @@ PROCESS_THREAD(publish_process, ev, data)
   static uint8_t registration_tries;
   static struct etimer send_timer;
   static uint8_t buf_len;
-  static uint8_t message_number;
+  static uint32_t message_number;
   static char buf[20];
   static mqtt_sn_register_request *rreq = &regreq;
 
@@ -210,7 +210,7 @@ PROCESS_THREAD(publish_process, ev, data)
     {
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&send_timer));
 
-      sprintf(buf, "Message %d", message_number);
+      sprintf(buf, "Message %u", message_number);
       printf("publishing at topic: %s -> msg: %s\n", pub_topic, buf);
       message_number++;
       buf_len = strlen(buf);
@@ -387,7 +387,7 @@ PROCESS_THREAD(example_mqttsn_process, ev, data)
       PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
     } else if(status != RESOLV_STATUS_CACHED) {
       PRINTF("Can't get connection address.\n");
-      PROCESS_YIELD();
+      PROCESS_WAIT_EVENT();
     }
   }
 
