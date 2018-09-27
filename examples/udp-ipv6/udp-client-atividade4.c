@@ -181,19 +181,6 @@ PROCESS_THREAD(udp_client_process, ev, data)
 
   print_local_addresses();
 
-  static resolv_status_t status = RESOLV_STATUS_UNCACHED;
-  while(status != RESOLV_STATUS_CACHED) {
-    status = set_connection_address(&ipaddr);
-
-    if(status == RESOLV_STATUS_RESOLVING) {
-      //PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
-        PROCESS_WAIT_EVENT();
-    } else if(status != RESOLV_STATUS_CACHED) {
-      PRINTF("Can't get connection address.\n");
-      PROCESS_YIELD();
-    }
-  }
-
 #if MDNS
   static resolv_status_t status = RESOLV_STATUS_UNCACHED;
   while(status != RESOLV_STATUS_CACHED) {
