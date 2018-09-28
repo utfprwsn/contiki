@@ -84,6 +84,25 @@
 #define PRINTF(...)
 #endif
 
+#ifndef RADIO_DEBUG_TX_OFF_EVENT
+#define RADIO_DEBUG_TX_OFF_EVENT() ti_lib_gpio_clear_dio(IOID_22)
+#endif
+#ifndef RADIO_DEBUG_TX_ON_EVENT
+#define RADIO_DEBUG_TX_ON_EVENT() ti_lib_gpio_set_dio(IOID_22)
+#endif
+#ifndef RADIO_DEBUG_RX_OFF_EVENT
+#define RADIO_DEBUG_RX_OFF_EVENT() ti_lib_gpio_clear_dio(IOID_23)
+#endif
+#ifndef RADIO_DEBUG_RX_ON_EVENT
+#define RADIO_DEBUG_RX_ON_EVENT() ti_lib_gpio_set_dio(IOID_23)
+#endif
+#ifndef CPU_DEBUG_LPM_ENTER_EVENT
+#define CPU_DEBUG_LPM_ENTER_EVENT() ti_lib_gpio_clear_dio(IOID_24)
+#endif
+#ifndef CPU_DEBUG_LPM_LEAVE_EVENT
+#define CPU_DEBUG_LPM_LEAVE_EVENT() ti_lib_gpio_set_dio(IOID_24)
+#endif
+
 /* Configuration to enable/disable auto ACKs in IEEE mode */
 #ifdef IEEE_MODE_CONF_AUTOACK
 #define IEEE_MODE_AUTOACK IEEE_MODE_CONF_AUTOACK
@@ -680,6 +699,7 @@ rx_on(void)
   ret = rf_cmd_ieee_rx();
 
   if(ret) {
+    RADIO_DEBUG_RX_ON_EVENT();
     ENERGEST_ON(ENERGEST_TYPE_LISTEN);
   }
 
@@ -716,7 +736,7 @@ rx_off(void)
     PRINTF("RX off: BG status=0x%04x\n", RF_RADIO_OP_GET_STATUS(cmd_ieee_rx_buf));
     ret = RF_CORE_CMD_ERROR;
   }
-
+  RADIO_DEBUG_RX_OFF_EVENT();
   ENERGEST_OFF(ENERGEST_TYPE_LISTEN);
 
   return ret;
@@ -847,6 +867,9 @@ init(void)
 
   rf_core_set_modesel();
 
+  ti_lib_gpio_clear_dio(IOID_22);
+  ti_lib_gpio_clear_dio(IOID_23);
+
   /* Initialise RX buffers */
   memset(rx_buf_0, 0, RX_BUF_SIZE);
   memset(rx_buf_1, 0, RX_BUF_SIZE);
@@ -868,7 +891,7 @@ init(void)
     PRINTF("init: on() failed\n");
     return RF_CORE_CMD_ERROR;
   }
-
+  RADIO_DEBUG_RX_ON_EVENT();
   ENERGEST_ON(ENERGEST_TYPE_LISTEN);
 
   rf_core_primary_mode_register(&mode_ieee);
@@ -947,6 +970,8 @@ transmit(unsigned short transmit_len)
 
   if(ret) {
     /* If we enter here, TX actually started */
+    RADIO_DEBUG_RX_OFF_EVENT();
+    RADIO_DEBUG_TX_ON_EVENT();
     ENERGEST_OFF(ENERGEST_TYPE_LISTEN);
     ENERGEST_ON(ENERGEST_TYPE_TRANSMIT);
 
@@ -959,7 +984,9 @@ transmit(unsigned short transmit_len)
        *  2) change the radio ISR priority to allow radio ISR to interrupt rtimer ISR.
        */
       if(!poll_mode) {
+        //CPU_DEBUG_LPM_ENTER_EVENT();
         lpm_sleep();
+        //CPU_DEBUG_LPM_LEAVE_EVENT();
       }
     }
 
@@ -987,6 +1014,8 @@ transmit(unsigned short transmit_len)
    * Update ENERGEST state here, before a potential call to off(), which
    * will correctly update it if required.
    */
+  RADIO_DEBUG_TX_OFF_EVENT();
+  RADIO_DEBUG_RX_ON_EVENT();
   ENERGEST_OFF(ENERGEST_TYPE_TRANSMIT);
   ENERGEST_ON(ENERGEST_TYPE_LISTEN);
 
@@ -1309,14 +1338,14 @@ off(void)
   /* stopping the rx explicitly results in lower sleep-mode power usage */
   rx_off();
   rf_core_power_down();
-
+  //RADIO_DEBUG_RX_EVENT();
   ENERGEST_OFF(ENERGEST_TYPE_LISTEN);
 
 #if !CC2650_FAST_RADIO_STARTUP
   /* Switch HF clock source to the RCOSC to preserve power.
    * This must be done after stopping RAT.
    */
-  oscillators_switch_to_hf_rc();
+  oscillators_switch_to_hf_xosc();//oscillators_switch_to_hf_rc();
 #endif
 
   /* We pulled the plug, so we need to restore the status manually */
