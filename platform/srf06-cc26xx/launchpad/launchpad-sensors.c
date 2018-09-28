@@ -44,7 +44,8 @@
 #include <string.h>
 /*---------------------------------------------------------------------------*/
 /** \brief Exports a global symbol to be used by the sensor API */
-SENSORS(&button_left_sensor, &button_right_sensor, &bmp_280_sensor, &adc_sensor);
+//SENSORS(&button_left_sensor, &button_right_sensor, &bmp_280_sensor, &adc_sensor);
+SENSORS(&button_left_sensor, &button_right_sensor, &adc_sensor);
 
 /*---------------------------------------------------------------------------*/
 /** @} */

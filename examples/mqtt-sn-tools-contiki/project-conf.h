@@ -59,4 +59,8 @@
 //#define NETSTACK_CONF_RADIO   contiki_maca_driver
 //#define NETSTACK_CONF_RADIO   cc2420_driver
 //#define NETSTACK_CONF_FRAMER  framer_nullmac
+
+#define RTIMER_CONF_MULTIPLE_ACCESS (1)
+//#define NETSTACK_CONF_WITH_IPV6 (1)
+
 #endif /* PROJECT_CONF_H_ */

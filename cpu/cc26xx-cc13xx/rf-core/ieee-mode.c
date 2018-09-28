@@ -1316,7 +1316,7 @@ off(void)
   /* Switch HF clock source to the RCOSC to preserve power.
    * This must be done after stopping RAT.
    */
-  oscillators_switch_to_hf_rc();
+  oscillators_switch_to_hf_xosc();//oscillators_switch_to_hf_rc();
 #endif
 
   /* We pulled the plug, so we need to restore the status manually */
