@@ -206,6 +206,9 @@ PROCESS_THREAD(node_process, ev, data)
 
     printf("Guard Time (us): %d\n",TSCH_CONF_RX_WAIT);
     printf("Timeslot Length (us): %d\n",TSCH_CONF_DEFAULT_TIMESLOT_LENGTH);
+    printf("Beacon Interval (s): %d\n",TSCH_EB_PERIOD/CLOCK_SECOND);
+    printf("KA Timeout (s): %d\n", TSCH_KEEPALIVE_TIMEOUT/CLOCK_SECOND);
+    printf("Guard Beacon: %d\n", GUARD_BEACON);
 
   if(coordinator_candidate) {
     if(LLSEC802154_ENABLED) {

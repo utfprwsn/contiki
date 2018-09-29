@@ -112,10 +112,31 @@
 /* 6TiSCH minimal schedule length.
  * Larger values result in less frequent active slots: reduces capacity and saves energy. */
 #undef TSCH_SCHEDULE_CONF_DEFAULT_LENGTH
-#define TSCH_SCHEDULE_CONF_DEFAULT_LENGTH 3
+#define TSCH_SCHEDULE_CONF_DEFAULT_LENGTH 7
+
+#undef TSCH_CONF_RX_WAIT
+#define TSCH_CONF_RX_WAIT (1800)
+
+#undef TSCH_CONF_ADAPTIVE_TIMESYNC
+#define TSCH_CONF_ADAPTIVE_TIMESYNC (0)
+
+#undef TSCH_CONF_MAX_KEEPALIVE_TIMEOUT
+#define TSCH_CONF_MAX_KEEPALIVE_TIMEOUT (150 * CLOCK_SECOND)
+
+#define TSCH_CONF_MAX_EB_PERIOD (130 * CLOCK_SECOND)
+
+#undef TSCH_CONF_DESYNC_THRESHOLD
+#define TSCH_CONF_DESYNC_THRESHOLD (TSCH_MAX_KEEPALIVE_TIMEOUT)
+
+#define TSCH_CONF_RESYNC_WITH_SFD_TIMESTAMPS (0)
+#define TSCH_CONF_EB_PERIOD (60*CLOCK_SECOND)
+#define TSCH_GB_PERIOD (20*CLOCK_SECOND)
+#define GUARD_BEACON (0)
+#define GUARD_BEACON_TIME US_TO_RTIMERTICKS(TSCH_DEFAULT_TS_RX_WAIT*3/8)
+#define GUARD_BEACON_FRAME (0x57)
 
 #undef TSCH_CONF_DEFAULT_HOPPING_SEQUENCE
-#define TSCH_CONF_DEFAULT_HOPPING_SEQUENCE TSCH_HOPPING_SEQUENCE_4_4
+#define TSCH_CONF_DEFAULT_HOPPING_SEQUENCE TSCH_HOPPING_SEQUENCE_1_1
 
 #undef TSCH_CONF_ASSOCIATION_POLL_FREQUENCY
 #define TSCH_CONF_ASSOCIATION_POLL_FREQUENCY 500 //aqui você pode definir quantas vezes por segundo o rádio vai escanear cada canal, o padrão é 100. Este parâmetro provavelmente poderá ser otimizado de forma a minimizar o tempo de associação (Rendezvous)
@@ -157,6 +178,9 @@
 /*******************************************************/
 /************* Other system configuration **************/
 /*******************************************************/
+
+#undef ENERGEST_CONF_ON  
+#define ENERGEST_CONF_ON (1)
 
 #if CONTIKI_TARGET_Z1
 /* Save some space to fit the limited RAM of the z1 */

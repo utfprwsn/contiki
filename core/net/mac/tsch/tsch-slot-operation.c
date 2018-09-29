@@ -290,10 +290,14 @@ tsch_schedule_slot_operation(struct rtimer *tm, rtimer_clock_t ref_time, rtimer_
   int missed = check_timer_miss(ref_time, offset - RTIMER_GUARD, now);
 
   if(missed) {
+    /*TSCH_LOG_ADD(tsch_log_message,
+                 snprintf(log->message, sizeof(log->message),
+                          "!dl-miss %s %d %d",
+                          str, (int)(now-ref_time), (int)offset);*/
     TSCH_LOG_ADD(tsch_log_message,
-                snprintf(log->message, sizeof(log->message),
-                    "!dl-miss %s %d %d",
-                        str, (int)(now-ref_time), (int)offset);
+                 snprintf(log->message, sizeof(log->message),
+                          "now %d ref %d off %d",
+                          (int)now, (int)ref_time, (int)offset);
     );
 
     return 0;
@@ -474,6 +478,7 @@ PT_THREAD(tsch_tx_slot(struct pt *pt, struct rtimer *t))
 
   /* tx status */
   static uint8_t mac_tx_status;
+  static uint8_t beacon_id;
   /* is the packet in its neighbor's queue? */
   uint8_t in_queue;
   static int dequeued_index;
@@ -556,11 +561,103 @@ PT_THREAD(tsch_tx_slot(struct pt *pt, struct rtimer *t))
         } else
 #endif /* CCA_ENABLED */
         {
-          /* delay before TX */
-          TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX, "TxBeforeTx");
-          TSCH_DEBUG(TS_TX_OFFSET);
-          /* send packet already in radio tx buffer */
-          mac_tx_status = NETSTACK_RADIO.transmit(packet_len);
+#if !GUARD_BEACON
+                    /* delay before TX */
+                    TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX, "TxBeforeTx");/*Linha Original*/
+                    TSCH_DEBUG_TX_EVENT();
+                    /* send packet already in radio tx buffer */
+                    mac_tx_status = NETSTACK_RADIO.transmit(packet_len);
+
+#else /* !GUARD_BEACON */
+                    /* send packet already in radio tx buffer */
+                    if(!is_broadcast) //se nao for broadcast, envia apenas 1 vez
+                    {
+                        /* delay before TX */
+                        TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX, "TxBeforeTx");
+                        TSCH_DEBUG_TX_EVENT();
+                        mac_tx_status = NETSTACK_RADIO.transmit(packet_len);
+                    }
+                    else
+                    {
+                        if(packet_len <= 1) //se for um GB envia 3x
+                        {
+                            static rtimer_clock_t now,before;
+                            /* delay before TX */
+                            before = RTIMER_NOW();
+                            TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX - GUARD_BEACON_TIME, "TxBeforeTx");
+                            now = RTIMER_NOW();
+                            //PRINTF("Tempo dormindo: now %d bef %d\n",(int)(now), (int)(before));
+                            TSCH_DEBUG_TX_EVENT();
+                            packet_len++;
+                            beacon_id = 0x11;
+                            uint8_t *pointer = (uint8_t *)packet;
+                            pointer[packet_len-1] = beacon_id;
+
+
+                            NETSTACK_RADIO.prepare(packet, packet_len)==0;
+
+                            before = RTIMER_NOW();
+                            mac_tx_status = NETSTACK_RADIO.transmit(packet_len);
+                            now = RTIMER_NOW();
+                            //PRINTF("Tempo dormindo 1: now %d bef %d\n",(int)(now), (int)(before));
+                            TSCH_LOG_ADD(tsch_log_message,
+                                         snprintf(log->message, sizeof(log->message),
+                                                  "TB 1 now %d bef %d", (int)now, (int)before));
+
+                            packet = queuebuf_dataptr(current_packet->qb);
+                            packet_len = queuebuf_datalen(current_packet->qb);
+                            //atualiza o relógio enviado no 2º beacon
+                            //packet_ready = tsch_packet_update_eb(packet, packet_len, current_packet->tsch_sync_ie_offset);
+                            packet_len++;
+                            //PRINTF("Posicao identificador beacon: %d\n",packet_len);
+                            beacon_id = 0x22;
+                            pointer = (uint8_t *)packet;
+                            pointer[packet_len-1] = beacon_id;
+                            //TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX+(now-before), "TxBeforeTx");
+                            TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX, "TxBeforeTx");
+                            if(NETSTACK_RADIO.prepare(packet, packet_len) == 0)
+
+                            {
+                                before = RTIMER_NOW();
+                                mac_tx_status = NETSTACK_RADIO.transmit(packet_len);
+                                now = RTIMER_NOW();
+                                //PRINTF("Tempo dormindo 2: now %d bef %d\n",(int)(now), (int)(before));
+                                TSCH_LOG_ADD(tsch_log_message,
+                                             snprintf(log->message, sizeof(log->message),
+                                                      "TB 2 now %d bef %d", (int)now, (int)before));
+                            }
+                            packet = queuebuf_dataptr(current_packet->qb);
+                            packet_len = queuebuf_datalen(current_packet->qb);
+                            //atualiza o relógio enviado no 3º beacon
+                            //packet_ready = tsch_packet_update_eb(packet, packet_len, current_packet->tsch_sync_ie_offset);
+                            packet_len++;
+                            beacon_id = 0x33;
+                            pointer = (uint8_t *)packet;
+                            pointer[packet_len-1] = beacon_id;
+                            //TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX + GUARD_BEACON_TIME + (now-before), "TxBeforeTx");
+                            TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX + GUARD_BEACON_TIME, "TxBeforeTx");
+                            if(NETSTACK_RADIO.prepare(packet, packet_len) == 0)
+                            {
+                                before = RTIMER_NOW();
+                                mac_tx_status = NETSTACK_RADIO.transmit(packet_len);
+                                now = RTIMER_NOW();
+                                //PRINTF("Tempo dormindo 3: now %d bef %d\n",(int)(now), (int)(before));
+                                TSCH_LOG_ADD(tsch_log_message,
+                                             snprintf(log->message, sizeof(log->message),
+                                                      "TB 3 now %d bef %d", (int)now, (int)before));
+                            }
+
+                        }
+                        else //se for um broadcast qqer envia 1x
+                        {
+                            /* delay before TX */
+                            TSCH_SCHEDULE_AND_YIELD(pt, t, current_slot_start, tsch_timing[tsch_ts_tx_offset] - RADIO_DELAY_BEFORE_TX, "TxBeforeTx");
+                            TSCH_DEBUG_TX_EVENT();
+                            mac_tx_status = NETSTACK_RADIO.transmit(packet_len);
+                        }
+                    }
+
+#endif
           /* Save tx timestamp */
           tx_start_time = current_slot_start + tsch_timing[tsch_ts_tx_offset];
           /* calculate TX duration based on sent packet len */
@@ -650,6 +747,9 @@ PT_THREAD(tsch_tx_slot(struct pt *pt, struct rtimer *t))
                   } else {
                     drift_correction = eack_time_correction;
                   }
+                  //não corrige drift com ack, somente com EB, para possibilitar
+                  //avaliação do Guard Beacon
+                  drift_correction = 0;
                   if(drift_correction != eack_time_correction) {
                     TSCH_LOG_ADD(tsch_log_message,
                         snprintf(log->message, sizeof(log->message),
@@ -695,7 +795,7 @@ PT_THREAD(tsch_tx_slot(struct pt *pt, struct rtimer *t))
         log->tx.mac_tx_status = mac_tx_status;
     log->tx.num_tx = current_packet->transmissions;
     log->tx.datalen = queuebuf_datalen(current_packet->qb);
-    log->tx.drift = drift_correction;
+    log->tx.drift = RTIMERTICKS_TO_US(drift_correction);
     log->tx.drift_used = is_drift_correction_used;
     log->tx.is_data = ((((uint8_t *)(queuebuf_dataptr(current_packet->qb)))[0]) & 7) == FRAME802154_DATAFRAME;
 #if LLSEC802154_ENABLED
@@ -732,6 +832,8 @@ PT_THREAD(tsch_rx_slot(struct pt *pt, struct rtimer *t))
   static linkaddr_t destination_address;
   static int16_t input_index;
   static int input_queue_drop = 0;
+  static uint8_t is_gb;
+  static uint8_t is_eb;
 
   PT_BEGIN(pt);
 
@@ -791,7 +893,37 @@ PT_THREAD(tsch_rx_slot(struct pt *pt, struct rtimer *t))
         radio_value_t radio_last_rssi;
 
         /* Read packet */
-        current_input->len = NETSTACK_RADIO.read((void *)current_input->payload, TSCH_PACKET_MAX_LEN);
+        
+#if !GUARD_BEACON /*Inserido Marcos 03/09*/
+
+                current_input->len = NETSTACK_RADIO.read((void *)current_input->payload, TSCH_PACKET_MAX_LEN);
+
+#else /* !GUARD_BEACON */    /*Inserido Marcos 03/09*/
+
+                current_input->len = NETSTACK_RADIO.read((void *)current_input->payload, TSCH_PACKET_MAX_LEN);
+
+                is_gb = *(current_input->payload+current_input->len-2) == GUARD_BEACON_FRAME;
+
+                if(is_gb)
+                {
+                    TSCH_LOG_ADD(tsch_log_message,
+                         snprintf(log->message, sizeof(log->message),
+                          "Eh guard beacon: %d", is_gb));
+
+                    TSCH_LOG_ADD(tsch_log_message,
+                         snprintf(log->message, sizeof(log->message),
+                           "Numero do beacon: %.2X", *(current_input->payload+current_input->len-1)));
+                    //printf("Eh guard beacon: %d\n", is_gb);
+                    //printf("Numero do beacon: %.2X\n", *(current_input->payload+current_input->len-1));
+                    current_input->len -= 1;
+                }
+#endif  /*Inserido Marcos 03/09*/
+
+        uint8_t ret = frame802154_parse(current_input->payload, current_input->len, &frame);
+        is_eb = ret
+                && frame.fcf.frame_version == FRAME802154_IEEE802154E_2012
+                && frame.fcf.frame_type == FRAME802154_BEACONFRAME;
+
         NETSTACK_RADIO.get_value(RADIO_PARAM_LAST_RSSI, &radio_last_rssi);
         current_input->rx_asn = tsch_current_asn;
         current_input->rssi = (signed)radio_last_rssi;
@@ -800,6 +932,14 @@ PT_THREAD(tsch_rx_slot(struct pt *pt, struct rtimer *t))
         frame_valid = header_len > 0 &&
           frame802154_check_dest_panid(&frame) &&
           frame802154_extract_linkaddr(&frame, &source_address, &destination_address);
+
+        if(is_eb)
+        {
+            TSCH_LOG_ADD(tsch_log_message,
+               snprintf(log->message, sizeof(log->message),
+               "Eh beacon: %d", is_eb));
+            //printf("Eh beacon: %d\n", is_eb);
+        }
 
 #if TSCH_RESYNC_WITH_SFD_TIMESTAMPS
         /* At the end of the reception, get an more accurate estimate of SFD arrival time */
@@ -829,7 +969,7 @@ PT_THREAD(tsch_rx_slot(struct pt *pt, struct rtimer *t))
         }
 #endif /* LLSEC802154_ENABLED */
 
-        if(frame_valid) {
+        if(frame_valid || is_gb) {
           if(linkaddr_cmp(&destination_address, &linkaddr_node_addr)
              || linkaddr_cmp(&destination_address, &linkaddr_null)) {
             int do_nack = 0;
@@ -881,18 +1021,68 @@ PT_THREAD(tsch_rx_slot(struct pt *pt, struct rtimer *t))
               }
             }
 
-            /* If the sender is a time source, proceed to clock drift compensation */
-            n = tsch_queue_get_nbr(&source_address);
-            if(n != NULL && n->is_time_source) {
-              int32_t since_last_timesync = TSCH_ASN_DIFF(tsch_current_asn, last_sync_asn);
-              /* Keep track of last sync time */
-              last_sync_asn = tsch_current_asn;
-              /* Save estimated drift */
-              drift_correction = -estimated_drift;
-              is_drift_correction_used = 1;
-              tsch_timesync_update(n, since_last_timesync, -estimated_drift);
-              tsch_schedule_keepalive();
-            }
+            uint8_t ret = frame802154_parse(current_input->payload, current_input->len, &frame);
+            is_eb = ret
+                    && frame.fcf.frame_version == FRAME802154_IEEE802154E_2012
+                    && frame.fcf.frame_type == FRAME802154_BEACONFRAME;
+
+#if !GUARD_BEACON /*Inserido Marcos 03/09*/
+                        n = tsch_queue_get_nbr(&source_address);
+
+                        if(n != NULL && n->is_time_source && is_eb) {
+                         int32_t since_last_timesync = TSCH_ASN_DIFF(tsch_current_asn, last_sync_asn);
+
+                          /* Keep track of last sync time */
+                          last_sync_asn = tsch_current_asn;
+                          /* Save estimated drift */
+
+                          drift_correction = -estimated_drift;
+
+                          is_drift_correction_used = 1;
+                          tsch_timesync_update(n, since_last_timesync, -estimated_drift);
+                          tsch_schedule_keepalive();
+                        
+                     }
+
+#else
+                     if(is_gb)
+                     {
+                       uint8_t beaconOrder = *(current_input->payload+current_input->len);
+                        if(beaconOrder==0x11)
+                        {
+                         estimated_drift -= GUARD_BEACON_TIME;
+                        }
+                        else if(beaconOrder==0x22)
+                        {
+                         estimated_drift = estimated_drift;
+                        }
+                        else if(beaconOrder==0x33)
+                        {
+                         etimated_drift += GUARD_BEACON_TIME;
+                        }
+                      }
+
+
+                     n = tsch_queue_get_nbr(&source_address);
+                     if(n != NULL && n->is_time_source && is_gb)
+                     {
+                      int32_t since_last_timesync = TSCH_ASN_DIFF(tsch_current_asn, last_sync_asn);
+
+                       if(since_last_timesync>21)
+                        {
+                       /* Keep track of last sync time */
+                         last_sync_asn = tsch_current_asn;
+                       /* Save estimated drift */
+
+                         drift_correction = -estimated_drift;
+
+                         is_drift_correction_used = 1;
+                         tsch_timesync_update(n, since_last_timesync, -estimated_drift);
+                         tsch_schedule_keepalive();
+                         }
+                       }
+#endif
+
 
             /* Add current input to ringbuf */
             ringbufindex_put(&input_ringbuf);
@@ -902,11 +1092,11 @@ PT_THREAD(tsch_rx_slot(struct pt *pt, struct rtimer *t))
               log->rx.src = TSCH_LOG_ID_FROM_LINKADDR((linkaddr_t*)&frame.src_addr);
               log->rx.is_unicast = frame.fcf.ack_required;
               log->rx.datalen = current_input->len;
-              log->rx.drift = drift_correction;
+              log->rx.drift = RTIMERTICKS_TO_US(drift_correction);
               log->rx.drift_used = is_drift_correction_used;
               log->rx.is_data = frame.fcf.frame_type == FRAME802154_DATAFRAME;
               log->rx.sec_level = frame.aux_hdr.security_control.security_level;
-              log->rx.estimated_drift = estimated_drift;
+              log->rx.estimated_drift = RTIMERTICKS_TO_US(estimated_drift);
             );
           }
 

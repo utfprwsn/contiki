@@ -149,6 +149,9 @@ static struct ctimer keepalive_timer;
 PT_THREAD(tsch_scan(struct pt *pt));
 PROCESS(tsch_process, "TSCH: main process");
 PROCESS(tsch_send_eb_process, "TSCH: send EB process");
+#if GUARD_BEACON
+PROCESS(tsch_send_beacon_process, "TSCH: send Guard Beacon process");
+#endif
 PROCESS(tsch_pending_events_process, "TSCH: pending events process");
 
 /* Other function prototypes */
@@ -311,7 +314,8 @@ eb_input(struct input_packet *current_input)
     if(n != NULL && linkaddr_cmp((linkaddr_t *)&frame.src_addr, &n->addr)) {
       /* Check for ASN drift */
       int32_t asn_diff = TSCH_ASN_DIFF(current_input->rx_asn, eb_ies.ie_asn);
-      if(asn_diff != 0) {
+      //if(asn_diff != 0) {
+      if(asn_diff >14) {   /*Habilitado para enviar mais EB's*/
         /* We disagree with our time source's ASN -- leave the network */
         PRINTF("TSCH:! ASN drifted by %ld, leaving the network\n", asn_diff);
         tsch_disassociate();
@@ -562,7 +566,32 @@ tsch_associate(const struct input_packet *input_eb, rtimer_clock_t timestamp)
       frame802154_set_pan_id(frame.src_pid);
 
       /* Synchronize on EB */
-      tsch_slot_operation_sync(timestamp - tsch_timing[tsch_ts_tx_offset], &tsch_current_asn);
+
+#if !GUARD_BEACON /*Inserido Marcos 03/09*/
+
+            tsch_slot_operation_sync(timestamp - tsch_timing[tsch_ts_tx_offset], &tsch_current_asn); /*Inserido Marcos 03/09*/
+            //PRINTF("Associado sem guard beacon\n");
+
+#else /* !GUARD_BEACON */          /*Inserido Marcos 03/09*/
+            static int32_t associationComp = 0;
+            uint8_t beaconOrder = *(input_eb->payload+input_eb->len);
+            if(beaconOrder==0x11)
+            {
+                associationComp -= GUARD_BEACON_TIME;
+            }
+            else if(beaconOrder==0x22)
+            {
+                associationComp = 0;
+            }
+            else if(beaconOrder==0x33)
+            {
+                associationComp += GUARD_BEACON_TIME;
+            }
+
+            tsch_slot_operation_sync(timestamp - tsch_timing[tsch_ts_tx_offset]-associationComp, &tsch_current_asn);
+            //PRINTF("Associado com guard beacon\n");
+
+#endif               /*Inserido Marcos 03/09*/
 
       /* Update global flags */
       tsch_is_associated = 1;
@@ -763,19 +792,92 @@ PROCESS_THREAD(tsch_send_eb_process, ev, data)
         }
       }
     }
-    if(tsch_current_eb_period > 0) {
-      /* Next EB transmission with a random delay
-       * within [tsch_current_eb_period*0.75, tsch_current_eb_period[ */
-      delay = (tsch_current_eb_period - tsch_current_eb_period / 4)
-        + random_rand() % (tsch_current_eb_period / 4);
-    } else {
-      delay = TSCH_EB_PERIOD;
+    if(tsch_current_eb_period > 0 && tsch_is_coordinator)
+    {
+        /* Next EB transmission with a random delay
+         * within [tsch_current_eb_period*0.75, tsch_current_eb_period[ */
+        /*Alteração EB fixo coordenador */
+        delay = TSCH_EB_PERIOD;
+    }
+    else if(tsch_current_eb_period > 0 && !tsch_is_coordinator)
+    {
+        delay = (tsch_current_eb_period - tsch_current_eb_period /4)
+                          + random_rand() % (tsch_current_eb_period /4);
+    }
+    else
+    {
+        delay = TSCH_EB_PERIOD;
     }
     etimer_set(&eb_timer, delay);
     PROCESS_WAIT_UNTIL(etimer_expired(&eb_timer));
   }
   PROCESS_END();
 }
+#if GUARD_BEACON
+/*---------------------------------------------------------------------------*/
+/* A periodic process to send TSCH Guard Beacons (GB) */
+PROCESS_THREAD(tsch_send_beacon_process, ev, data)
+{
+    static struct etimer gb_timer;
+    static clock_time_t tsch_current_beacon_period = TSCH_GB_PERIOD;
+    uint8_t *buf;
+    struct tsch_packet *p;
+    PROCESS_BEGIN();
+
+    /* Wait until association */
+    etimer_set(&gb_timer, CLOCK_SECOND / 10);
+    while(!tsch_is_associated) {
+        PROCESS_WAIT_UNTIL(etimer_expired(&gb_timer));
+        etimer_reset(&gb_timer);
+    }
+
+    /* Set an initial delay except for coordinator, which should send an EB asap */
+    if(!tsch_is_coordinator) {
+        etimer_set(&gb_timer, random_rand() % TSCH_GB_PERIOD);
+        //etimer_set(&eb_timer, TSCH_EB_PERIOD);
+        PROCESS_WAIT_UNTIL(etimer_expired(&gb_timer));
+    }
+
+    while(1)
+    {
+        unsigned long delay;
+        if(tsch_is_associated && tsch_current_beacon_period > 0) {
+            packetbuf_clear();
+            buf = packetbuf_dataptr();
+            buf[0] = GUARD_BEACON_FRAME;
+
+            packetbuf_set_datalen(0x01);
+            /* Enqueue GB packet */
+            if(!(p = tsch_queue_add_packet(&tsch_broadcast_address, NULL, NULL))) {
+                PRINTF("TSCH:! could not enqueue GB packet\n");
+            } else {
+                PRINTF("TSCH: enqueue GB packet\n");
+            }
+        }
+
+        if(tsch_current_beacon_period > 0 && tsch_is_coordinator)
+        {
+            /* Next EB transmission with a random delay
+             * within [tsch_current_eb_period*0.75, tsch_current_eb_period[ */
+            /*Alteração EB fixo coordenador */
+            delay = TSCH_GB_PERIOD;
+        }
+        else if(tsch_current_beacon_period > 0 && !tsch_is_coordinator)
+        {
+            delay = (tsch_current_beacon_period - tsch_current_beacon_period /4)
+                              + random_rand() % (tsch_current_beacon_period /4);
+        }
+        else
+        {
+            delay = TSCH_GB_PERIOD;
+        }
+        etimer_set(&gb_timer, delay);
+        //etimer_set(&eb_timer, i);
+        PROCESS_WAIT_UNTIL(etimer_expired(&gb_timer));
+    }
+    PROCESS_END();
+}
+#endif
 
 /*---------------------------------------------------------------------------*/
 /* A process that is polled from interrupt and calls tx/rx input
@@ -992,6 +1094,9 @@ turn_on(void)
     process_start(&tsch_pending_events_process, NULL);
     /* periodically send TSCH EBs */
     process_start(&tsch_send_eb_process, NULL);
+#if GUARD_BEACON
+    process_start(&tsch_send_beacon_process, NULL);
+#endif
     /* try to associate to a network or start one if setup as coordinator */
     process_start(&tsch_process, NULL);
     PRINTF("TSCH: starting as %s\n", tsch_is_coordinator ? "coordinator" : "node");
