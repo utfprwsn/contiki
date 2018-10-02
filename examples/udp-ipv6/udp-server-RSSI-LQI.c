@@ -166,23 +166,36 @@ PROCESS_THREAD(udp_server_process, ev, data)
   rpl_dag_t *dag;
 #endif /* UIP_CONF_ROUTER */
 
+  static struct etimer periodic_timer;
+
   PROCESS_BEGIN();
   PRINTF("UDP server started\n");
 
 #if RESOLV_CONF_SUPPORTS_MDNS
-  resolv_set_hostname("contiki-udp-server-nullrdc");
-  PRINTF("Setting hostname to contiki-udp-server-nullrdc\n");
+  resolv_set_hostname("contiki-udp-server");
+  PRINTF("Setting hostname to contiki-udp-server\n");
 #endif
 
-#if UIP_CONF_ROUTER
+#if 0//UIP_CONF_ROUTER
   uip_ip6addr(&ipaddr, UIP_DS6_DEFAULT_PREFIX, 0, 0, 0, 0, 0, 0, 0);
   uip_ds6_set_addr_iid(&ipaddr, &uip_lladdr);
   uip_ds6_addr_add(&ipaddr, 0, ADDR_AUTOCONF);
 #endif /* UIP_CONF_ROUTER */
 
+  etimer_set(&periodic_timer, 2*CLOCK_SECOND);
+  while(uip_ds6_get_global(ADDR_PREFERRED) == NULL)
+  {
+      PROCESS_WAIT_EVENT();
+      if(etimer_expired(&periodic_timer))
+      {
+          PRINTF("Aguardando auto-configuracao de IP\n");
+          etimer_set(&periodic_timer, 2*CLOCK_SECOND);
+      }
+  }
+
   print_local_addresses();
 
-#if 1 //UIP_CONF_ROUTER
+#if 0 //UIP_CONF_ROUTER
   dag = rpl_set_root(RPL_DEFAULT_INSTANCE,
                      &uip_ds6_get_global(ADDR_PREFERRED)->ipaddr);
   if(dag != NULL) {
