@@ -42,6 +42,7 @@
 #include "net/ipv6/uip-ds6-route.h"
 #include "net/mac/tsch/tsch.h"
 #include "net/rpl/rpl-private.h"
+#include "net/mac/tsch/tsch-adaptive-timesync.h"
 #include "powertrace.h"
 #if WITH_ORCHESTRA
 #include "orchestra.h"
@@ -209,6 +210,8 @@ PROCESS_THREAD(node_process, ev, data)
     printf("Beacon Interval (s): %d\n",TSCH_EB_PERIOD/CLOCK_SECOND);
     printf("KA Timeout (s): %d\n", TSCH_KEEPALIVE_TIMEOUT/CLOCK_SECOND);
     printf("Guard Beacon: %d\n", GUARD_BEACON);
+    printf("Adaptive Timesync: %d\n", TSCH_ADAPTIVE_TIMESYNC);
+    printf("Resync with SFD: %d\n", TSCH_RESYNC_WITH_SFD_TIMESTAMPS);
 
   if(coordinator_candidate) {
     if(LLSEC802154_ENABLED) {
