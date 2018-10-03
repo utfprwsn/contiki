@@ -163,10 +163,9 @@ PROCESS_THREAD(udp_client_process, ev, data)
   PROCESS_BEGIN();
   PRINTF("UDP client process started\n");
 
-#if UIP_CONF_ROUTER
-  //set_global_address();
-#endif
-
+#if 0 //UIP_CONF_ROUTER
+  set_global_address();
+#else
   etimer_set(&et, 2*CLOCK_SECOND);
   while(uip_ds6_get_global(ADDR_PREFERRED) == NULL)
   {
@@ -177,24 +176,31 @@ PROCESS_THREAD(udp_client_process, ev, data)
           etimer_set(&et, 2*CLOCK_SECOND);
       }
   }
-
+#endif
 
   print_local_addresses();
 
 #if MDNS
+
+  sprintf(contiki_hostname,"node%02X%02X",linkaddr_node_addr.u8[6], linkaddr_node_addr.u8[7]);
+  resolv_set_hostname(contiki_hostname);
+  PRINTF("Setting hostname to %s\n",contiki_hostname);
+
   static resolv_status_t status = RESOLV_STATUS_UNCACHED;
   while(status != RESOLV_STATUS_CACHED) {
       status = set_connection_address(&ipaddr);
 
       if(status == RESOLV_STATUS_RESOLVING) {
-          PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
+          //PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
+          PROCESS_WAIT_EVENT();
       } else if(status != RESOLV_STATUS_CACHED) {
           PRINTF("Can't get connection address.\n");
-          PROCESS_YIELD();
+          //PROCESS_YIELD();
+          PROCESS_WAIT_EVENT();
       }
   }
 #else
-  //c_onfigures the destination IPv6 address
+  //configures the destination IPv6 address
   uip_ip6addr(&ipaddr, 0xfe80, 0, 0, 0, 0x215, 0x2000, 0x0002, 0x2145);
 #endif
   /* new connection with remote host */
