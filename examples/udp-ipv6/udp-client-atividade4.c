@@ -39,10 +39,10 @@
 #define DEBUG DEBUG_PRINT
 #include "net/ip/uip-debug.h"
 
-#define SEND_INTERVAL		15 * CLOCK_SECOND
-#define MAX_PAYLOAD_LEN		40
-#define CONN_PORT     8802
-#define MDNS 0
+#define SEND_INTERVAL		(15 * CLOCK_SECOND)
+#define MAX_PAYLOAD_LEN		(40)
+#define CONN_PORT     (8802)
+#define MDNS (0)
 
 static char buf[MAX_PAYLOAD_LEN];
 
@@ -181,7 +181,7 @@ PROCESS_THREAD(udp_client_process, ev, data)
   print_local_addresses();
 
 #if MDNS
-
+  char contiki_hostname[16];
   sprintf(contiki_hostname,"node%02X%02X",linkaddr_node_addr.u8[6], linkaddr_node_addr.u8[7]);
   resolv_set_hostname(contiki_hostname);
   PRINTF("Setting hostname to %s\n",contiki_hostname);
