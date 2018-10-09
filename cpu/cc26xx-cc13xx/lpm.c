@@ -140,9 +140,14 @@ lpm_shutdown(uint32_t wakeup_pin, uint32_t io_pull, uint32_t wake_on)
 
   /* Register an aux-ctrl consumer to avoid powercycling AUX twice in a row */
   aux_ctrl_register_consumer(&aux);
-  oscillators_switch_to_hf_xosc();//oscillators_switch_to_hf_rc();
-  oscillators_select_lf_xosc();//oscillators_select_lf_rcosc();
 
+#ifdef CC2650_OSCILLATOR_WORKAROUND__
+  oscillators_switch_to_hf_xosc();
+  oscillators_select_lf_xosc();
+#else
+  oscillators_switch_to_hf_rc();
+  oscillators_select_lf_rcosc();
+#endif
   /* Configure clock sources for MCU: No clock */
   ti_lib_aon_wuc_mcu_power_down_config(AONWUC_NO_CLOCK);
 
@@ -469,7 +474,11 @@ deep_sleep(void)
    *
    * Nevertheless, request the switch to the HF RC explicitly here.
    */
-  oscillators_switch_to_hf_xosc();//oscillators_switch_to_hf_rc();
+#ifdef CC2650_OSCILLATOR_WORKAROUND__
+  oscillators_switch_to_hf_xosc();
+#else
+  oscillators_switch_to_hf_rc();
+#endif
 
   /* Shut Down the AUX if the user application is not using it */
   aux_ctrl_power_down(false);
