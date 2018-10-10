@@ -388,9 +388,11 @@ PROCESS_THREAD(example_mqttsn_process, ev, data)
     status = set_connection_address(&broker_addr);
 
     if(status == RESOLV_STATUS_RESOLVING) {
-      PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
+      //PROCESS_WAIT_EVENT_UNTIL(ev == resolv_event_found);
+      PROCESS_WAIT_EVENT();
     } else if(status != RESOLV_STATUS_CACHED) {
       PRINTF("Can't get connection address.\n");
+      etimer_set(&periodic_timer, 2*CLOCK_SECOND);
       PROCESS_WAIT_EVENT();
     }
   }
