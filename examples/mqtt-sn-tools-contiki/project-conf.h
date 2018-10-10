@@ -2,6 +2,11 @@
 #ifndef PROJECT_CONF_H_
 #define PROJECT_CONF_H_
 
+#define RF_CORE_CONF_CHANNEL (25)
+
+#undef UIP_CONF_ROUTER
+#define UIP_CONF_ROUTER (0)
+#define CC26XX_WEB_DEMO_6LBR_CLIENT (1)
 ////when streaming, the number of frames that will be sent per second
 //#define STREAM_FRAMES_PER_SECOND 2
 ////the number of 16 bit samples in each frame
