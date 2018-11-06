@@ -16,7 +16,7 @@ endif
 
 ###ifeq ($(BOARD),launchpad/cc2650)
 ifneq (,$(findstring cc2650,$(BOARD)))
-  CC2650_OSCILLATOR_WORKAROUND__=1
+  CFLAGS += -DCC2650_OSCILLATOR_WORKAROUND__=1
   ${info using cc2650 oscillator workaround}
 endif
 

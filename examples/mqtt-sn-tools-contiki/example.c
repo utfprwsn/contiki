@@ -46,6 +46,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <inttypes.h>
 #include "dev/leds.h"
 
 #define UDP_PORT 1883
@@ -192,7 +193,8 @@ PROCESS_THREAD(publish_process, ev, data)
   {
 
     reg_topic_msg_id = mqtt_sn_register_try(rreq,&mqtt_sn_c,pub_topic,REPLY_TIMEOUT);
-    PROCESS_WAIT_EVENT_UNTIL(mqtt_sn_request_returned(rreq));
+    //PROCESS_WAIT_EVENT_UNTIL(mqtt_sn_request_returned(rreq));
+    PROCESS_WAIT_EVENT();
     if (mqtt_sn_request_success(rreq)) {
       registration_tries = 4;
       printf("registration acked\n");
@@ -210,8 +212,7 @@ PROCESS_THREAD(publish_process, ev, data)
     while(1)
     {
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&send_timer));
-
-      sprintf(buf, "Message %u", message_number);
+      sprintf(buf, "Message %" PRIu32, message_number); //removendo o warning do GCC para o uint32_t
       printf("publishing at topic: %s -> msg: %s\n", pub_topic, buf);
       message_number++;
       buf_len = strlen(buf);
@@ -243,7 +244,8 @@ PROCESS_THREAD(ctrl_subscription_process, ev, data)
       printf("subscribing... topic: %s\n", ctrl_topic);
       ctrl_topic_msg_id = mqtt_sn_subscribe_try(sreq,&mqtt_sn_c,ctrl_topic,0,REPLY_TIMEOUT);
 
-      PROCESS_WAIT_EVENT_UNTIL(mqtt_sn_request_returned(sreq));
+      //PROCESS_WAIT_EVENT_UNTIL(mqtt_sn_request_returned(sreq));
+      PROCESS_WAIT_EVENT();
       if (mqtt_sn_request_success(sreq)) {
           subscription_tries = 4;
           printf("subscription acked\n");

@@ -67,7 +67,7 @@ void manage_response(struct mqtt_sn_connection *mqc, const uip_ipaddr_t *source_
                  const uint8_t *data, uint16_t datalen);
 static int manage_request(struct mqtt_sn_request *req, struct mqtt_sn_connection *mqc,
                const char* topic_name, uint8_t qos,clock_time_t time_out);
-static void request_timer_callback(void *req);
+//static void request_timer_callback(void *req);
 
 #if 1
 void mqtt_sn_set_debug(uint8_t value)
@@ -784,19 +784,21 @@ manage_response(struct mqtt_sn_connection *mqc, const uip_ipaddr_t *source_addr,
   }
 }
 
-static void request_timer_callback(void *req)
-{
-  struct mqtt_sn_request *req2 = (struct mqtt_sn_request *)req;
-  manage_request(req2,NULL,NULL,0,0);
-}
+//static void request_timer_callback(void *req)
+//{
+//  struct mqtt_sn_request *req2 = (struct mqtt_sn_request *)req;
+//  manage_request(req2,NULL,NULL,0,0);
+//}
 
 static int
 manage_request(struct mqtt_sn_request *req, struct mqtt_sn_connection *mqc,
                const char* topic_name, uint8_t qos,clock_time_t time_out)
 {
+  static struct etimer et;
   PT_BEGIN(&(req->pt));
   list_add(mqc->requests,req);
-  ctimer_set(&(req->t), time_out, request_timer_callback, req);
+  etimer_set(&et, time_out);
+  //ctimer_set(&(req->t), time_out, request_timer_callback, req);
   req->state = MQTTSN_REQUEST_WAITING_ACK;
   if (req->request_type == MQTTSN_REGISTER_REQUEST) {
     req->msg_id = mqtt_sn_send_register(mqc, topic_name);
@@ -805,7 +807,7 @@ manage_request(struct mqtt_sn_request *req, struct mqtt_sn_connection *mqc,
     req->msg_id = mqtt_sn_send_subscribe(mqc, topic_name, qos);
   }
   PT_YIELD(&(req->pt)); /* Wait until timer expired or response received */
-  ctimer_stop(&(req->t));
+  //ctimer_stop(&(req->t));
   process_post(PROCESS_BROADCAST,mqtt_sn_request_event,req);
   list_remove(mqc->requests,req);
   PT_END(&(req->pt));

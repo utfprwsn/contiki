@@ -37,5 +37,6 @@
 
 #undef ENERGEST_CONF_ON
 #define ENERGEST_CONF_ON (0)
+#define CC26XX_WEB_DEMO_6LBR_CLIENT (1)
 
 #endif /* __PROJECT_CONF_H__ */
