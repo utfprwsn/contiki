@@ -36,6 +36,7 @@
 
 #include <string.h>
 
+#define WITH_6L_BORDER_ROUTER (0)
 #define LED_TOGGLE_REQUEST (0x79)
 #define LED_SET_STATE (0x7A)
 #define LED_GET_STATE (0x7B)
@@ -141,20 +142,21 @@ print_local_addresses(void)
 /*---------------------------------------------------------------------------*/
 PROCESS_THREAD(udp_server_process, ev, data)
 {
-#if 1 //UIP_CONF_ROUTER
+#if !WITH_6L_BORDER_ROUTER
   uip_ipaddr_t ipaddr;
   rpl_dag_t *dag;
 #endif /* UIP_CONF_ROUTER */
 
   PROCESS_BEGIN();
   PRINTF("UDP server started\n");
+  NETSTACK_RADIO.set_value(RADIO_PARAM_TXPOWER,5);
 
 #if RESOLV_CONF_SUPPORTS_MDNS
   resolv_set_hostname("contiki-udp-server");
   PRINTF("Setting hostname to contiki-udp-server\n");
 #endif
 
-#if 1 //UIP_CONF_ROUTER
+#if !WITH_6L_BORDER_ROUTER
   uip_ip6addr(&ipaddr, UIP_DS6_DEFAULT_PREFIX, 0, 0, 0, 0, 0, 0, 0);
   uip_ds6_set_addr_iid(&ipaddr, &uip_lladdr);
   uip_ds6_addr_add(&ipaddr, 0, ADDR_AUTOCONF);
@@ -173,7 +175,7 @@ PROCESS_THREAD(udp_server_process, ev, data)
 
   print_local_addresses();
 
-#if 1 //UIP_CONF_ROUTER
+#if !WITH_6L_BORDER_ROUTER
   dag = rpl_set_root(RPL_DEFAULT_INSTANCE,
                      &uip_ds6_get_global(ADDR_PREFERRED)->ipaddr);
   if(dag != NULL) {

@@ -39,10 +39,11 @@
 #define DEBUG DEBUG_PRINT
 #include "net/ip/uip-debug.h"
 
-#define SEND_INTERVAL		(15 * CLOCK_SECOND)
+#define SEND_INTERVAL		(5 * CLOCK_SECOND)
 #define MAX_PAYLOAD_LEN		(40)
 #define CONN_PORT     (8802)
-#define MDNS (0)
+#define MDNS (1)
+#define LED_TOGGLE_REQUEST (0x79)
 
 static char buf[MAX_PAYLOAD_LEN];
 
@@ -70,13 +71,16 @@ tcpip_handler(void)
 static void
 timeout_handler(void)
 {
-    char payload = 0;
+    char payload = LED_TOGGLE_REQUEST;
 
     buf[0] = payload;
     if(uip_ds6_get_global(ADDR_PREFERRED) == NULL) {
       PRINTF("Aguardando auto-configuracao de IP\n");
       return;
     }
+    PRINTF("Enviando LED_TOGGLE_REQUEST para [");
+    PRINT6ADDR(&client_conn->ripaddr);
+    PRINTF("]:%u\n", UIP_HTONS(client_conn->rport));
     uip_udp_packet_send(client_conn, buf, strlen(buf));
 }
 /*---------------------------------------------------------------------------*/
