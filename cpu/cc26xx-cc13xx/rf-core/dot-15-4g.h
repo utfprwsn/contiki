@@ -64,11 +64,11 @@
 #define DOT_15_4G_FREQUENCY_BAND_1427 12 /* 1427–1518 (US and Canada, non-contiguous) - 1427 MHz band */
 #define DOT_15_4G_FREQUENCY_BAND_2450 13 /* 2400–2483.5 2450 MHz band */
 /*---------------------------------------------------------------------------*/
-/* Default band selection to band 4 - 863MHz */
+/* Default band selection to band 7 - 915MHz */
 #ifdef DOT_15_4G_CONF_FREQUENCY_BAND_ID
 #define DOT_15_4G_FREQUENCY_BAND_ID DOT_15_4G_CONF_FREQUENCY_BAND_ID
 #else
-#define DOT_15_4G_FREQUENCY_BAND_ID DOT_15_4G_FREQUENCY_BAND_863
+#define DOT_15_4G_FREQUENCY_BAND_ID DOT_15_4G_FREQUENCY_BAND_915
 #endif
 /*---------------------------------------------------------------------------*/
 /*
